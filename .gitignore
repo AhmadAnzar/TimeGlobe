@@ -12,3 +12,4 @@ pipeline/.cache/
 pipeline/out/
 ignore/
 SCOPE.md
+.neon
