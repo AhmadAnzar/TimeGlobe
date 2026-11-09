@@ -65,3 +65,17 @@ def test_real_config_url_decisions(url, ok):
     else:
         with pytest.raises(DisallowedURL):
             client.get(url)
+
+
+def test_env_value_prefers_the_environment_and_reads_a_file_without_loading_the_rest(
+    tmp_path, monkeypatch
+):
+    env = tmp_path / ".env"
+    env.write_text("ONLY_THIS=from-file\nOTHER_SECRET=do-not-load\n")
+    monkeypatch.delenv("ONLY_THIS", raising=False)
+    monkeypatch.delenv("OTHER_SECRET", raising=False)
+    assert config.env_value("ONLY_THIS", env) == "from-file"
+    assert "OTHER_SECRET" not in config.os.environ and "ONLY_THIS" not in config.os.environ
+    monkeypatch.setenv("ONLY_THIS", "from-env")
+    assert config.env_value("ONLY_THIS", env) == "from-env"
+    assert config.env_value("MISSING", env) == ""

@@ -28,10 +28,10 @@ ALLOWED_PREFIXES: tuple[str, ...] = (
 FORBIDDEN_PREFIXES: tuple[str, ...] = ("https://webtai.bipm.org/ftp/pub/tai/data/",)
 
 
-def load_env(path: Path) -> None:
-    """Load KEY=VALUE lines into os.environ without overriding existing values."""
+def _parse_env(path: Path) -> dict[str, str]:
+    values: dict[str, str] = {}
     if not path.is_file():
-        return
+        return values
     for line in path.read_text(encoding="utf-8").splitlines():
         line = line.strip()
         if not line or line.startswith("#") or "=" not in line:
@@ -39,7 +39,23 @@ def load_env(path: Path) -> None:
         key, _, value = line.partition("=")
         value = value.strip().strip('"').strip("'")
         if value:
-            os.environ.setdefault(key.strip(), value)
+            values[key.strip()] = value
+    return values
+
+
+def load_env(path: Path) -> None:
+    """Load KEY=VALUE lines into os.environ without overriding existing values."""
+    for key, value in _parse_env(path).items():
+        os.environ.setdefault(key, value)
+
+
+def env_value(key: str, path: Path | None = None) -> str:
+    """One setting from the environment, else from .env, without touching os.environ.
+    For code that must read a single secret and not pull the others into the process."""
+    found = os.environ.get(key, "").strip()
+    if found:
+        return found
+    return _parse_env(path or Path(__file__).resolve().parents[3] / ".env").get(key, "")
 
 
 def user_agent() -> str:
