@@ -196,3 +196,38 @@ def test_rapid_values_already_covered_by_circular_t_leave_no_rapid_block(data):
     covered = type(nist)(nist.name, nist.mjd[:100], nist.value_ns[:100], nist.unc_ns[:100])
     out = json.loads(build_snapshot(replace(data, rapid={"NIST": covered}))["labs/NIST.json"])
     assert "rapid" not in out
+
+
+# --- rapid.json and clusters.json -------------------------------------------------------------
+
+
+def test_rapid_json_is_a_frame_of_every_labs_provisional_days(files):
+    rapid = load(files, "rapid.json")
+    labs = load(files, "labs.json")["labs"]
+    assert rapid["labs"] == [lab["code"] for lab in labs]  # the same columns as frames/
+    assert rapid["provisional"] is True and rapid["after_mjd"] == 61309
+    assert rapid["mjd"] == list(range(61310, 61346))
+    nist = labs_detail(files, "NIST")["rapid"]
+    col = rapid["labs"].index("NIST")
+    assert [row[col] for row in rapid["v"]] == nist["v"]
+    others = [v for row in rapid["v"] for i, v in enumerate(row) if i != col]
+    assert others == [None] * len(others)  # only NIST was given rapid data
+
+
+def test_rapid_json_is_present_and_empty_when_there_are_no_rapid_values(data):
+    from dataclasses import replace
+
+    empty = json.loads(build_snapshot(replace(data, rapid={}))["rapid.json"])
+    assert empty["mjd"] == [] and empty["v"] == [] and empty["provisional"] is True
+
+
+def test_clusters_json_has_eight_buckets_that_point_at_real_sites(files):
+    clusters = load(files, "clusters.json")
+    sites = load(files, "labs.json")["sites"]
+    assert clusters["cap_km"] == 500.0 and len(clusters["buckets"]) == 8
+    assert clusters["buckets"][0]["radius_km"] == 500.0 and clusters["buckets"][0]["max_altitude"] is None
+    for bucket in clusters["buckets"]:
+        for cluster in bucket["clusters"]:
+            codes = sorted(code for i in cluster["sites"] for code in sites[i]["labs"])
+            assert codes == cluster["labs"]
+    assert len(clusters["buckets"][0]["clusters"]) == 17

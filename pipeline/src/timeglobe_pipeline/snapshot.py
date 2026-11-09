@@ -7,6 +7,9 @@ Layout (all paths relative to the snapshot folder):
   labs/<code>.json     one lab's full series with uncertainties (loaded when it is picked); a lab
                        with rapid values after the latest Circular T date also has "rapid",
                        always marked provisional so the UI can draw it differently
+  rapid.json           the provisional rapid values after the latest Circular T date, as a
+                       frame (same columns as frames/): one request for every lab's latest days
+  clusters.json        the multi-site clusters for each camera-altitude bucket, precomputed
   gnss.json            the four GNSS offsets from UTC
 
 Values are integers in tenths of a nanosecond (the source resolution is 0.1 ns), so no float noise
@@ -22,6 +25,7 @@ from datetime import date, timedelta
 from timeglobe_pipeline.attribution import ATTRIBUTION
 from timeglobe_pipeline.bipm_api import Series
 from timeglobe_pipeline.clock_list import CLOCK_DEFINITION
+from timeglobe_pipeline.clustering import CAP_KM, precompute
 from timeglobe_pipeline.labs import Lab, group_sites
 from timeglobe_pipeline.rapid import rapid_tail
 
@@ -71,6 +75,7 @@ def build_snapshot(data: SnapshotInput) -> dict[str, bytes]:
     column = {code: i for i, code in enumerate(codes)}
     sites = sorted(group_sites(labs), key=lambda s: s.codes)
     site_of = {code: i for i, site in enumerate(sites) for code in site.codes}
+    site_ids = {site.codes: i for i, site in enumerate(sites)}
     files: dict[str, bytes] = {}
 
     files["labs.json"] = _dump(
@@ -122,15 +127,37 @@ def build_snapshot(data: SnapshotInput) -> dict[str, bytes]:
     latest_published = max(all_mjd)  # the latest Circular T date
     flags = {code: list(f) for code, f in data.flags.items()}
     rapid_labs = 0
+    rapid_rows: dict[int, list[int | None]] = {}
     for code, series in sorted(data.series.items()):
         detail = {"code": code, "source": data.sources.get(code, "api"), **_packed(series)}
         tail = rapid_tail(data.rapid[code], latest_published) if code in data.rapid else None
         if tail is not None and tail.mjd:
             detail["rapid"] = {**_packed(tail), "provisional": True}
             rapid_labs += 1
+            for mjd, value in zip(tail.mjd, tail.value_ns):
+                rapid_rows.setdefault(mjd, [None] * len(codes))[column[code]] = tenths(value)
         files[f"labs/{code}.json"] = _dump(detail)
     for code in sorted(set(data.rapid) - set(data.series)):
         flags.setdefault(code, []).append("rapid values ignored: no published series")
+
+    rapid_dates = sorted(rapid_rows)
+    files["rapid.json"] = _dump(
+        {
+            "provisional": True,
+            "after_mjd": latest_published,
+            "labs": codes,
+            "mjd": rapid_dates,
+            "v": [rapid_rows[d] for d in rapid_dates],
+        }
+    )
+    files["clusters.json"] = _dump(
+        {
+            "unit": "altitude is in globe radii above the surface; use the bucket whose "
+                    "min_altitude <= altitude < max_altitude (no upper bound for the first)",
+            "cap_km": CAP_KM,
+            "buckets": precompute(sites, site_ids),
+        }
+    )
 
     files["gnss.json"] = _dump({system: _packed(s) for system, s in sorted(data.gnss.items())})
 
