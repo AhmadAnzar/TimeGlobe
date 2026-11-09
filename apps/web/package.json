@@ -3,6 +3,20 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "data": "node scripts/copy-snapshot.mjs",
+    "data:local": "node scripts/copy-snapshot.mjs --from-git origin/data",
+    "data:dir": "node scripts/copy-snapshot.mjs --from-dir",
+    "check:data": "node scripts/check-snapshot.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "prebuild": "npm run data && npm run check:data",
+    "build": "tsc --noEmit && vite build",
+    "postbuild": "node scripts/check-bundle.mjs",
+    "build:local": "npm run data:local && npm run check:data && npm run build --ignore-scripts",
+    "preview": "vite preview"
+  },
   "dependencies": {
     "d3-array": "^3.2.5",
     "d3-axis": "^3.0.1",
