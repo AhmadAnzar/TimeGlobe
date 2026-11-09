@@ -32,8 +32,8 @@ def build_parser() -> argparse.ArgumentParser:
     ap.add_argument("--out", type=Path, default=REPO_ROOT / "snapshot")
     ap.add_argument("--date", default=date.today().isoformat())
     ap.add_argument("--force", action="store_true",
-                    help="monthly only: fetch the clock list even if it was fetched within the last "
-                         f"{config.MONTHLY_DAYS} days")
+                    help="weekly and monthly: ignore the recorded windows (labs known to have no rapid "
+                         f"data; the clock list fetched within the last {config.MONTHLY_DAYS} days)")
     return ap
 
 
@@ -44,6 +44,8 @@ def summary(job: str, result: ingest.RunResult) -> str:
     if d.get("skipped"):
         return f"{job}: run {result.run_id} skipped: {d['reason']} (use --force to override)"
     line = f"{job}: run {result.run_id} {result.status}, {result.rows_added} rows added, {result.rows_changed} changed"
+    if d.get("skipped_no_rapid"):
+        line += f" ({len(d['skipped_no_rapid'])} labs with no rapid series skipped; asked again monthly)"
     if d.get("mjd1_ignored"):
         line += "\nwarning: the API sent whole histories although only the tail was requested (mjd1 ignored)"
     return line
@@ -52,8 +54,8 @@ def summary(job: str, result: ingest.RunResult) -> str:
 def main(argv: list[str]) -> int:
     ap = build_parser()
     args = ap.parse_args(argv)
-    if args.force and args.job != "monthly":
-        ap.error("--force only applies to the monthly job")
+    if args.force and args.job not in ("weekly", "monthly"):
+        ap.error("--force only applies to the weekly and monthly jobs")
 
     config.require_db_opt_in()
     config.load_env(REPO_ROOT / ".env")
@@ -81,7 +83,7 @@ def main(argv: list[str]) -> int:
             if args.job == "daily":
                 result = ingest.daily(store, client, labs, today)
             elif args.job == "weekly":
-                result = ingest.weekly(store, client, today)
+                result = ingest.weekly(store, client, today, force=args.force)
             else:
                 result = ingest.monthly(store, client, labs, today, force=args.force)
     print(summary(args.job, result))

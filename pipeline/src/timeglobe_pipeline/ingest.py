@@ -63,8 +63,12 @@ def check_stored_issues(store: Store, client: PoliteClient, index: dict[int, str
     changed: list[int] = []
     for number, stored in sorted(store.stored_issues().items()):
         listed = index.get(number)
-        if not needs_download(stored.md5, listed):
+        if not needs_download(stored.md5, listed, stored.mismatch_confirmed_for):
             store.mark_checked(number, listed)
+            if stored.md5 != listed:  # an index_mismatch already examined: flagged, not downloaded
+                record = run_detail(number, "index_mismatch", stored.md5, listed, None)
+                record["redownloaded"] = False
+                details["issues"][str(number)] = record
             continue
         if listed is None:
             details["issues"][str(number)] = run_detail(number, "missing", stored.md5, None, None)
@@ -73,8 +77,10 @@ def check_stored_issues(store: Store, client: PoliteClient, index: dict[int, str
         body = client.get(issue_url(number))
         kind = classify(stored.md5, listed, body)
         if kind == "index_mismatch":
-            details["issues"][str(number)] = run_detail(number, kind, stored.md5, listed, md5_of(body))
-            store.mark_checked(number, listed)
+            record = run_detail(number, kind, stored.md5, listed, md5_of(body))
+            record["redownloaded"] = True
+            details["issues"][str(number)] = record
+            store.confirm_mismatch(number, listed)  # not downloaded again until the index entry changes
         else:
             text = body.decode("utf-8")
             diff = diff_issues(stored.body, text)
@@ -244,9 +250,12 @@ def daily(store: Store, client: PoliteClient, labs: list[Lab], today: date) -> R
 # --- weekly ----------------------------------------------------------------------------------
 
 
-def weekly(store: Store, client: PoliteClient, today: date) -> RunResult:
+def weekly(store: Store, client: PoliteClient, today: date, force: bool = False) -> RunResult:
     run_id = store.start_run("weekly")
-    details: dict = {"failed": [], "no_rapid": [], "date": today.isoformat()}
+    # rapid_empty: labs whose rapid series does not exist, with the date they were last asked. They
+    # are skipped until MONTHLY_DAYS have passed, then asked again so a lab that gains one is found.
+    details: dict = {"failed": [], "no_rapid": [], "skipped_no_rapid": [], "rapid_empty": {},
+                     "date": today.isoformat()}
     added = returned = kept = 0
     try:
         published = store.load_series("utc")
@@ -255,14 +264,22 @@ def weekly(store: Store, client: PoliteClient, today: date) -> RunResult:
         cutoff = max(rows[-1].mjd for rows in published.values())
         details["after_mjd"] = cutoff
         details["rapid_dropped"] = store.drop_superseded_rapid(cutoff)
+        previous_empty = store.latest_details("weekly").get("rapid_empty", {})
         for lab in sorted(published):
+            last_asked = previous_empty.get(lab)
+            if (not force and last_asked
+                    and (today - date.fromisoformat(last_asked)).days < config.MONTHLY_DAYS):
+                details["skipped_no_rapid"].append(lab)
+                details["rapid_empty"][lab] = last_asked  # the window runs from the real request
+                continue
             try:
                 # Only the days after the latest Circular T date are kept, so only those are asked
                 # for. mjd1 is the cutoff itself, so the request is right whether the API treats
                 # it as inclusive or not; rapid_tail trims the one possible extra day.
                 rapid = bipm_api.fetch_utc(client, lab, "utcr", mjd1=cutoff)
             except bipm_api.ApiError:
-                details["no_rapid"].append(lab)  # e.g. a lab that stopped reporting
+                details["no_rapid"].append(lab)  # no rapid series at all, e.g. a lab that stopped
+                details["rapid_empty"][lab] = today.isoformat()
                 store.replace_rapid(lab, bipm_api.Series(lab, [], [], []))
                 continue
             except FetchError as exc:
@@ -272,7 +289,9 @@ def weekly(store: Store, client: PoliteClient, today: date) -> RunResult:
             returned += len(rapid.mjd)
             kept += len(tail.mjd)
             if not tail.mjd:
-                details["no_rapid"].append(lab)  # nothing after the cutoff to keep
+                # Nothing after the cutoff to keep. Not recorded in rapid_empty: the series exists and
+                # its next days may simply not be published yet, so it is asked again next week.
+                details["no_rapid"].append(lab)
             _, inserted = store.replace_rapid(lab, tail)
             added += inserted
         details["rapid_points"] = {"returned": returned, "kept": kept}

@@ -27,7 +27,9 @@ class FakeBipm:
     """Serves the saved responses and records every request."""
 
     def __init__(self, labs=("nist", "apl", "kebs", "az"), issue_overrides=None, broken=(),
-                 utc_overrides=None, mjd1_mode="inclusive"):
+                 utc_overrides=None, mjd1_mode="inclusive", md5sums=None, rapid_overrides=None):
+        self.md5sums = md5sums  # bytes to serve as MD5SUMS instead of the saved file
+        self.rapid_overrides = rapid_overrides or {}  # lab -> rapid response bytes
         # mjd1_mode: how the API treats &mjd1= on rapid requests: "inclusive", "exclusive",
         # "ignored" (sends the whole history), "empty" (arrays present but empty) or "no_data".
         self.mjd1_mode = mjd1_mode
@@ -44,7 +46,7 @@ class FakeBipm:
         url = str(request.url)
         self.requests.append(url)
         if url == ISSUES + "MD5SUMS":
-            return httpx.Response(200, content=(FIXTURES / "cirt_MD5SUMS").read_bytes())
+            return httpx.Response(200, content=self.md5sums or (FIXTURES / "cirt_MD5SUMS").read_bytes())
         if url.startswith(ISSUES + "cirt."):
             number = int(url.rsplit(".", 1)[1])
             if number in self.issue_overrides:
@@ -65,9 +67,12 @@ class FakeBipm:
             return httpx.Response(200, content=self.utc_overrides[lab])
         name = {"utc": f"bipm_utc_{lab}.json", "utcr": f"bipm_utcr_{lab}.json"}[scale]
         path = FIXTURES / name
-        if not path.exists():
+        if scale == "utcr" and lab in self.rapid_overrides:
+            content = self.rapid_overrides[lab]
+        elif not path.exists():
             return httpx.Response(200, content=NOT_FOUND)
-        content = path.read_bytes()
+        else:
+            content = path.read_bytes()
         mjd1 = p.get("mjd1")
         if scale == "utcr" and mjd1:
             content = self.range_response(content, int(mjd1))
@@ -492,14 +497,16 @@ def test_a_failed_monthly_run_does_not_start_the_window(run):
     assert bipm.count("clocklab.html") == 1
 
 
-def test_force_is_only_accepted_for_the_monthly_job():
+def test_force_is_only_accepted_for_the_weekly_and_monthly_jobs():
     from timeglobe_pipeline import run as runner
 
     assert runner.build_parser().parse_args(["monthly", "--force"]).force is True
+    assert runner.build_parser().parse_args(["weekly", "--force"]).force is True
     assert runner.build_parser().parse_args(["monthly"]).force is False
-    with pytest.raises(SystemExit) as stopped:
-        runner.main(["weekly", "--force"])
-    assert stopped.value.code == 2
+    for job in ("daily", "snapshot"):
+        with pytest.raises(SystemExit) as stopped:
+            runner.main([job, "--force"])
+        assert stopped.value.code == 2
 
 
 def test_the_printed_summary_says_why_a_run_did_nothing_and_warns_about_ignored_mjd1(run):
@@ -521,3 +528,134 @@ def test_the_printed_summary_says_why_a_run_did_nothing_and_warns_about_ignored_
     client3 = make_client(honouring)
     ingest.daily(store3, client3, LABS, TODAY)
     assert "warning" not in runner.summary("weekly", ingest.weekly(store3, client3, TODAY))
+
+
+# --- an examined index_mismatch is capped: no daily re-download of issue 465 ------------------
+
+
+def md5sums_with(issue: int, md5: str) -> bytes:
+    lines = (FIXTURES / "cirt_MD5SUMS").read_text().splitlines()
+    out = [f"{md5}  cirt.{issue}" if line.endswith(f"cirt.{issue}") else line for line in lines]
+    return ("\n".join(out) + "\n").encode()
+
+
+def test_issue_465_is_examined_once_and_then_not_downloaded_again(run):
+    store, bipm, client = run
+    ingest.daily(store, client, LABS, TODAY)
+    assert bipm.count("cirt.465") == 1  # the first download, stored as unverified
+    second = ingest.daily(store, client, LABS, TODAY)
+    assert bipm.count("cirt.465") == 2  # examined: downloaded again, body unchanged
+    assert second.details["issues"]["465"]["kind"] == "index_mismatch"
+    assert second.details["issues"]["465"]["redownloaded"] is True
+    for _ in range(3):
+        again = ingest.daily(store, client, LABS, TODAY)
+        assert again.details["issues"]["465"]["kind"] == "index_mismatch"  # still flagged every day
+        assert again.details["issues"]["465"]["redownloaded"] is False
+        assert again.status == "ok" and again.rows_added == 0
+    assert bipm.count("cirt.465") == 2  # three more daily runs, no more downloads
+    assert store.stored_issues()[465].mismatch_confirmed_for == "83cefa06857c73b1f4468af7091fb00e"
+
+
+def test_the_download_comes_back_when_the_index_entry_changes(run):
+    store, bipm, client = run
+    ingest.daily(store, client, LABS, TODAY)
+    ingest.daily(store, client, LABS, TODAY)  # examined
+    changed_index = FakeBipm(md5sums=md5sums_with(465, "f" * 32))
+    result = ingest.daily(store, make_client(changed_index), LABS, TODAY)
+    assert changed_index.count("cirt.465") == 1  # the entry changed, so it is looked at again
+    assert result.details["issues"]["465"]["redownloaded"] is True
+    again = ingest.daily(store, make_client(changed_index), LABS, TODAY)  # same new entry: settled
+    assert changed_index.count("cirt.465") == 1 and again.details["issues"]["465"]["redownloaded"] is False
+
+
+def test_a_file_that_changes_while_the_index_entry_stays_the_same_is_not_looked_at_again(run):
+    # The documented trade-off of the cap: the index entry is what triggers a re-check.
+    store, bipm, client = run
+    ingest.daily(store, client, LABS, TODAY)
+    ingest.daily(store, client, LABS, TODAY)
+    revised = FakeBipm(issue_overrides={465: revised_465()})
+    result = ingest.daily(store, make_client(revised), LABS, TODAY)
+    assert revised.count("cirt.465") == 0 and result.details["ingested"] is False
+
+
+def test_a_revision_the_index_now_matches_settles_the_issue(run):
+    import hashlib
+
+    store, bipm, client = run
+    ingest.daily(store, client, LABS, TODAY)
+    ingest.daily(store, client, LABS, TODAY)
+    body = revised_465()
+    settled = FakeBipm(issue_overrides={465: body}, md5sums=md5sums_with(465, hashlib.md5(body).hexdigest()))
+    result = ingest.daily(store, make_client(settled), LABS, TODAY)
+    assert result.details["issues"]["465"]["kind"] == "changed"  # re-ingested with its diff
+    assert store.stored_issues()[465].mismatch_confirmed_for is None
+    after = ingest.daily(store, make_client(settled), LABS, TODAY)
+    assert "465" not in after.details["issues"] and settled.count("cirt.465") == 1  # ok: nothing to flag
+
+
+# --- weekly skips labs recorded as having no rapid series, and asks again monthly -------------
+
+
+def test_labs_with_no_rapid_series_are_recorded_with_the_date_they_were_asked(run):
+    store, bipm, client = run
+    ingest.daily(store, client, LABS, TODAY)
+    result = ingest.weekly(store, client, TODAY)
+    assert result.details["rapid_empty"] == {"APL": "2026-11-09", "AZ": "2026-11-09", "KEBS": "2026-11-09"}
+    assert result.details["skipped_no_rapid"] == []
+
+
+def test_the_next_weekly_run_skips_them(run):
+    store, bipm, client = run
+    ingest.daily(store, client, LABS, TODAY)
+    ingest.weekly(store, client, TODAY)
+    before = len(utcr_requests(bipm))
+    result = ingest.weekly(store, client, TODAY + timedelta(days=7))
+    new = utcr_requests(bipm)[before:]
+    assert len(new) == 1 and "lab=nist" in new[0]  # only the lab that has rapid data
+    assert result.details["skipped_no_rapid"] == ["APL", "AZ", "KEBS"]
+    assert result.details["no_rapid"] == []  # nothing was found empty this time, they were not asked
+    assert result.details["rapid_empty"]["APL"] == "2026-11-09"  # the window runs from the real request
+    assert len(store.load_series("utcr")["NIST"]) == 36
+
+
+def test_after_a_month_they_are_asked_again_and_a_new_rapid_series_is_picked_up(run):
+    store, bipm, client = run
+    ingest.daily(store, client, LABS, TODAY)
+    ingest.weekly(store, client, TODAY)
+    ingest.weekly(store, client, TODAY + timedelta(days=21))  # still inside the window: skipped
+    nist_rapid = (FIXTURES / "bipm_utcr_nist.json").read_bytes()
+    gaining = FakeBipm(rapid_overrides={"apl": nist_rapid})  # APL gains a rapid series
+    later = ingest.weekly(store, make_client(gaining), TODAY + timedelta(days=31))
+    assert len(utcr_requests(gaining)) == 4  # all four labs asked again
+    assert later.details["skipped_no_rapid"] == []
+    assert "APL" not in later.details["rapid_empty"]
+    assert len(store.load_series("utcr")["APL"]) == 36  # picked up
+    assert later.details["rapid_empty"]["AZ"] == (TODAY + timedelta(days=31)).isoformat()
+
+
+def test_force_asks_every_lab_again(run):
+    store, bipm, client = run
+    ingest.daily(store, client, LABS, TODAY)
+    ingest.weekly(store, client, TODAY)
+    before = len(utcr_requests(bipm))
+    ingest.weekly(store, client, TODAY + timedelta(days=1), force=True)
+    assert len(utcr_requests(bipm)) - before == 4
+
+
+def test_a_series_that_exists_but_has_nothing_new_is_not_recorded_as_having_no_rapid_data():
+    store, bipm = MemoryStore(), FakeBipm(mjd1_mode="empty")
+    client = make_client(bipm)
+    ingest.daily(store, client, LABS, TODAY)
+    result = ingest.weekly(store, client, TODAY)
+    assert "NIST" in result.details["no_rapid"]  # nothing to keep this week
+    assert "NIST" not in result.details["rapid_empty"]  # but it is asked again next week
+
+
+def test_the_summary_mentions_the_skipped_labs(run):
+    from timeglobe_pipeline import run as runner
+
+    store, bipm, client = run
+    ingest.daily(store, client, LABS, TODAY)
+    ingest.weekly(store, client, TODAY)
+    result = ingest.weekly(store, client, TODAY + timedelta(days=7))
+    assert "3 labs with no rapid series skipped" in runner.summary("weekly", result)
