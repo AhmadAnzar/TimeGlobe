@@ -7,8 +7,8 @@ snapshot the globe reads is built from the database after each run and published
 | Job | When it does anything | What it writes |
 |---|---|---|
 | `daily` | when Circular T has a new issue, or a stored issue was revised | the 5-day UTC-UTC(k) series (rebuilt from Circular T where the API series is broken), GNSS offsets, stored issues |
-| `weekly` | always | each lab's rapid (UTCr) values after the latest Circular T date, replacing the previous ones |
-| `monthly` | always | the clock list's per-lab counts, and the total computed from the page |
+| `weekly` | always | each lab's rapid (UTCr) values after the latest Circular T date, replacing the previous ones; only that date range is requested (`mjd1`), not the whole daily history |
+| `monthly` | when the clock list was last fetched 30 or more days ago | the clock list's per-lab counts, and the total computed from the page |
 
 ## Daily: index first, then integrity
 
@@ -24,6 +24,23 @@ then classified (`issue_integrity.py`):
 
 A series whose dates repeat or run backwards is rebuilt from the published Circular T issues; any
 other failing series is excluded. Failures are flagged, never repaired.
+
+## Being a considerate client
+
+- **Rapid values by date range.** The API accepts `mjd1`/`mjd2`, so the weekly job asks for the days
+  after the latest Circular T date instead of downloading each lab's whole history (about 150 KB
+  each) to keep roughly 35 days. The request uses the cutoff date itself, which is right whether the
+  API treats `mjd1` as inclusive or not, and the job still trims the result, so it stays correct even
+  if the API ignored the parameter. It records how many points came back against how many were kept
+  (`rapid_points`) and flags `mjd1_ignored` if the saving did not happen.
+- **Scraped pages at most monthly.** The clock list, the lab table and the NTP Pool zone pages are
+  HTML pages, not APIs. The HTTP client serves a saved copy younger than 30 days instead of fetching
+  again, and the monthly job records when it last fetched in the database (a CI runner starts with no
+  saved copies), skips itself inside the window and carries its totals forward. `--force` overrides
+  it for one run.
+- **robots.txt.** `ntppool.org` allows the zone pages for generic clients (only `/dns.html` and
+  `/monitor/` are disallowed, and there is no crawl delay for us). `webtai.bipm.org` has no
+  `robots.txt`; its HTML database pages carry `noindex, nofollow`, which is about search indexing.
 
 ## Revisions and retraction
 
