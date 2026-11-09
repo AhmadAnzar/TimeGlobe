@@ -1,13 +1,14 @@
 # The ingest jobs
 
-Three jobs keep the database current, each recorded as one row in `ingest_runs`. They are run by
-hand from a GitHub Actions workflow (`workflow_dispatch`); there is no schedule yet. The static
+Three jobs keep the database current, each recorded as one row in `ingest_runs`. The `daily` job runs
+from a GitHub Actions cron once a day (off the hour); `weekly` and `monthly` are started by hand
+(`workflow_dispatch`). The static
 snapshot the globe reads is built from the database after each run and published to a `data` branch.
 
 | Job | When it does anything | What it writes |
 |---|---|---|
 | `daily` | when Circular T has a new issue, or a stored issue was revised | the 5-day UTC-UTC(k) series (rebuilt from Circular T where the API series is broken), GNSS offsets, stored issues |
-| `weekly` | always | each lab's rapid (UTCr) values after the latest Circular T date, replacing the previous ones; only that date range is requested (`mjd1`), not the whole daily history |
+| `weekly` | always (labs with no rapid series are skipped and asked again monthly) | each lab's rapid (UTCr) values after the latest Circular T date, replacing the previous ones; only that date range is requested (`mjd1`), not the whole daily history |
 | `monthly` | when the clock list was last fetched 30 or more days ago | the clock list's per-lab counts, and the total computed from the page |
 
 ## Daily: index first, then integrity
@@ -19,7 +20,9 @@ then classified (`issue_integrity.py`):
 - **changed**: the downloaded file differs from the stored copy. The values taken from it are
   re-ingested and the diff (changed values, labs added or removed) goes into `ingest_runs.details`.
 - **index_mismatch**: the file is byte-identical to the stored copy but the index lists another
-  checksum (observed for issue 465). It is flagged and never blocks the run.
+  checksum (observed for issue 465). It is flagged and never blocks the run. Once examined, the
+  issue is not downloaded again for as long as the index keeps listing the same checksum; it is
+  still flagged every day, and a different index entry brings the re-check back.
 - **missing**: the index no longer lists the issue. Flagged.
 
 A series whose dates repeat or run backwards is rebuilt from the published Circular T issues; any
@@ -41,6 +44,13 @@ other failing series is excluded. Failures are flagged, never repaired.
 - **robots.txt.** `ntppool.org` allows the zone pages for generic clients (only `/dns.html` and
   `/monitor/` are disallowed, and there is no crawl delay for us). `webtai.bipm.org` has no
   `robots.txt`; its HTML database pages carry `noindex, nofollow`, which is about search indexing.
+
+- **Labs with no rapid series.** A lab whose rapid series does not exist (it stopped reporting, or
+  joined recently) is recorded with the date it was asked and skipped by the weekly job, then asked
+  again after 30 days so a lab that gains a series is found. A lab whose series exists but has
+  nothing new yet is not recorded this way and is asked every week.
+- **One failure issue per job.** If a scheduled job keeps failing, the workflow comments on the open
+  issue instead of opening a new one every day.
 
 ## Revisions and retraction
 
