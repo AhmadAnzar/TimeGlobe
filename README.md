@@ -3,7 +3,7 @@
 An interactive 3D globe of the UTC timekeeping network: national labs, their clocks, the flow
 of data to BIPM near Paris, and 28 years of drift. Live at time.anzarahmad.me (not yet).
 
-Status: phase 1 (data spike). See the scope PDF in this repo for the plan.
+Status: phase 1 (data spike).
 
 ## Layout
 
@@ -12,7 +12,7 @@ Status: phase 1 (data spike). See the scope PDF in this repo for the plan.
 - `pipeline/` - Python ingestion: BIPM API, Circular T, GNSS, labs (spike in phase 1)
 - `infra/`, `.github/workflows/` - deployment and the scheduled ingest
 - `tests/` - pytest; parsers are tested against real saved files in `tests/fixtures/`
-- `docs/` - working notes
+- `docs/` - data findings per phase
 
 ## Development
 
