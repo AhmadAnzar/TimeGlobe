@@ -55,6 +55,15 @@ def test_retraction_migration_adds_a_nullable_timestamp_and_never_deletes():
     assert "delete" not in sql and "drop" not in sql
 
 
+def test_mismatch_confirmation_migration_is_one_nullable_column():
+    migrations = discover(MIGRATIONS_DIR)
+    assert migrations[3].name == "mismatch_confirmed"
+    sql = " ".join(
+        line for line in migrations[3].sql.lower().splitlines() if not line.strip().startswith("--")
+    )
+    assert "alter table circular_t_issues add column mismatch_confirmed_for char(32);" in sql
+
+
 def test_discover_sorts_and_rejects_gaps_and_odd_names(tmp_path):
     ordered = discover(make_dir(tmp_path, "ok", "0002_b.sql", "0001_a.sql"))
     assert [m.version for m in ordered] == [1, 2]

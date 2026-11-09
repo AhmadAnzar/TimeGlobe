@@ -28,9 +28,14 @@ def md5_of(body: bytes) -> str:
     return hashlib.md5(body).hexdigest()
 
 
-def needs_download(stored_md5: str, listed_md5: str | None) -> bool:
-    """A stored issue is downloaded again only when the index disagrees with it (or lost it)."""
-    return listed_md5 is None or stored_md5 != listed_md5
+def needs_download(stored_md5: str, listed_md5: str | None, confirmed_for: str | None = None) -> bool:
+    """A stored issue is downloaded again only when the index disagrees with it (or lost it), and
+    not when that very disagreement was already examined: confirmed_for is the listed checksum for
+    which a download found the body unchanged (index_mismatch). The index entry changing is what
+    brings the re-download back."""
+    if listed_md5 is None:
+        return True
+    return stored_md5 != listed_md5 and confirmed_for != listed_md5
 
 
 def classify(stored_md5: str, listed_md5: str | None, downloaded: bytes | None) -> str:

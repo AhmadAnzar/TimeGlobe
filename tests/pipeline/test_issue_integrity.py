@@ -143,3 +143,23 @@ def test_run_detail_without_a_diff_has_just_the_checksums():
         "kind": "index_mismatch", "stored_md5": "a" * 32, "listed_md5": "b" * 32,
         "downloaded_md5": "a" * 32,
     }
+
+
+# --- an examined index_mismatch is not downloaded again until the index entry changes ---------
+
+
+def test_a_confirmed_mismatch_is_not_downloaded_again_while_the_index_entry_is_unchanged():
+    stored, listed = "a" * 32, "b" * 32
+    assert needs_download(stored, listed)  # not yet examined
+    assert needs_download(stored, listed, confirmed_for=None)
+    assert not needs_download(stored, listed, confirmed_for=listed)  # examined: body unchanged
+
+
+def test_a_changed_index_entry_brings_the_download_back():
+    stored = "a" * 32
+    assert needs_download(stored, "c" * 32, confirmed_for="b" * 32)
+
+
+def test_a_missing_entry_and_a_matching_entry_are_unaffected_by_the_confirmation():
+    assert needs_download("a" * 32, None, confirmed_for="b" * 32)
+    assert not needs_download("a" * 32, "a" * 32, confirmed_for="b" * 32)

@@ -33,6 +33,8 @@ class StoredIssue:
     md5: str  # of the body as downloaded
     listed_md5: str | None  # what MD5SUMS listed when last checked
     body: str
+    # the listed checksum for which a download found this body unchanged (index_mismatch)
+    mismatch_confirmed_for: str | None = None
 
 
 @dataclass(frozen=True)
@@ -111,6 +113,7 @@ class Store(Protocol):
     def stored_issues(self) -> dict[int, StoredIssue]: ...
     def save_issue(self, issue: StoredIssue) -> None: ...
     def mark_checked(self, issue: int, listed_md5: str | None) -> None: ...
+    def confirm_mismatch(self, issue: int, listed_md5: str) -> None: ...
     def last_ingested_issue(self) -> int | None: ...
     def start_run(self, source: str) -> int: ...
     def finish_run(
@@ -207,7 +210,13 @@ class MemoryStore:
 
     def mark_checked(self, issue, listed_md5):
         old = self.issues[issue]
-        self.issues[issue] = StoredIssue(old.issue, old.md5, listed_md5, old.body)
+        self.issues[issue] = StoredIssue(
+            old.issue, old.md5, listed_md5, old.body, old.mismatch_confirmed_for
+        )
+
+    def confirm_mismatch(self, issue, listed_md5):
+        old = self.issues[issue]
+        self.issues[issue] = StoredIssue(old.issue, old.md5, listed_md5, old.body, listed_md5)
 
     def last_ingested_issue(self):
         done = [
@@ -393,18 +402,19 @@ class PostgresStore:
 
     def stored_issues(self):
         return {
-            r[0]: StoredIssue(r[0], r[1], r[2], r[3]) for r in self.conn.execute(
-                "select issue, md5, listed_md5, body from circular_t_issues"
+            r[0]: StoredIssue(r[0], r[1], r[2], r[3], r[4]) for r in self.conn.execute(
+                "select issue, md5, listed_md5, body, mismatch_confirmed_for from circular_t_issues"
             )
         }
 
     def save_issue(self, issue):
         with self.conn.transaction():
             self.conn.execute(
-                "insert into circular_t_issues (issue, md5, listed_md5, body) values (%s,%s,%s,%s) "
-                "on conflict (issue) do update set md5=excluded.md5, listed_md5=excluded.listed_md5, "
-                "body=excluded.body, fetched_at=now(), checked_at=now()",
-                (issue.issue, issue.md5, issue.listed_md5, issue.body),
+                "insert into circular_t_issues (issue, md5, listed_md5, body, mismatch_confirmed_for) "
+                "values (%s,%s,%s,%s,%s) on conflict (issue) do update set md5=excluded.md5, "
+                "listed_md5=excluded.listed_md5, body=excluded.body, "
+                "mismatch_confirmed_for=excluded.mismatch_confirmed_for, fetched_at=now(), checked_at=now()",
+                (issue.issue, issue.md5, issue.listed_md5, issue.body, issue.mismatch_confirmed_for),
             )
 
     def mark_checked(self, issue, listed_md5):
@@ -412,6 +422,14 @@ class PostgresStore:
             self.conn.execute(
                 "update circular_t_issues set listed_md5=%s, checked_at=now() where issue=%s",
                 (listed_md5, issue),
+            )
+
+    def confirm_mismatch(self, issue, listed_md5):
+        with self.conn.transaction():
+            self.conn.execute(
+                "update circular_t_issues set listed_md5=%s, mismatch_confirmed_for=%s, checked_at=now() "
+                "where issue=%s",
+                (listed_md5, listed_md5, issue),
             )
 
     def last_ingested_issue(self):

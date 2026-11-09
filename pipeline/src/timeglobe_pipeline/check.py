@@ -51,10 +51,11 @@ def db_report(conn) -> list[str]:
         out.append(f"  {status:<20}{n:>10}")
 
     row = conn.execute(
-        "select count(*), count(*) filter (where md5 = listed_md5), min(issue), max(issue) "
-        "from circular_t_issues"
+        "select count(*), count(*) filter (where md5 = listed_md5), min(issue), max(issue), "
+        "count(*) filter (where mismatch_confirmed_for is not null) from circular_t_issues"
     ).fetchone()
-    out.append(f"stored issues: {row[0]} (checksum matches the index for {row[1]}), {row[2]} to {row[3]}")
+    out.append(f"stored issues: {row[0]} (checksum matches the index for {row[1]}; "
+               f"index mismatch confirmed for {row[4]}), {row[2]} to {row[3]}")
 
     row = conn.execute(
         "select count(*), max(month) from clock_counts where month = (select max(month) from clock_counts)"

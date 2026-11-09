@@ -258,3 +258,18 @@ def test_the_database_report_runs_and_counts_retracted_rows_separately(store):
     assert "labs" in report and "offsets by scale (active / retracted)" in report
     assert "1 / 1" in report  # one active, one retracted
     assert "migrations: 1 core, 2 circular_t_issues, 3 retraction" in report
+
+
+# --- the examined-mismatch record -------------------------------------------------------------
+
+
+def test_confirm_mismatch_is_kept_until_the_body_changes(store):
+    store.save_issue(StoredIssue(465, "a" * 32, "b" * 32, "body"))
+    assert store.stored_issues()[465].mismatch_confirmed_for is None
+    store.confirm_mismatch(465, "b" * 32)
+    kept = store.stored_issues()[465]
+    assert (kept.listed_md5, kept.mismatch_confirmed_for) == ("b" * 32, "b" * 32)
+    store.mark_checked(465, "b" * 32)  # a daily check must not erase it
+    assert store.stored_issues()[465].mismatch_confirmed_for == "b" * 32
+    store.save_issue(StoredIssue(465, "c" * 32, "b" * 32, "revised body"))  # a new body resets it
+    assert store.stored_issues()[465].mismatch_confirmed_for is None
