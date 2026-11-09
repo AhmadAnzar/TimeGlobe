@@ -121,6 +121,7 @@ class Store(Protocol):
         circular_t_no: int | None, details: dict, error: str | None = None,
     ) -> None: ...
     def latest_details(self, source: str) -> dict: ...
+    def last_data_change_date(self) -> str | None: ...
     def load_series(self, scale: str) -> dict[str, list[OffsetRow]]: ...  # never retracted rows
     def load_retracted(self, scale: str) -> dict[str, list[OffsetRow]]: ...
     def load_gnss(self) -> dict[str, Series]: ...
@@ -239,6 +240,21 @@ class MemoryStore:
     def latest_details(self, source):
         ok = [r["details"] for r in self.runs if r["source"] == source and r["status"] == "ok"]
         return ok[-1] if ok else {}
+
+    def last_data_change_date(self):
+        """ISO date of the last ok run that changed data: its data_changed flag when it has one,
+        otherwise (runs from before the flag existed) whether it added or changed rows."""
+        dates = []
+        for run in self.runs:
+            if run["status"] != "ok" or not run["details"].get("date"):
+                continue
+            details = run["details"]
+            changed = details["data_changed"] if "data_changed" in details else (
+                run["rows_added"] > 0 or run["rows_changed"] > 0
+            )
+            if changed:
+                dates.append(details["date"])
+        return max(dates) if dates else None
 
     def load_series(self, scale):
         return self._load(scale, retracted=False)
@@ -461,6 +477,15 @@ class PostgresStore:
             (source,),
         ).fetchone()
         return row[0] if row else {}
+
+    def last_data_change_date(self):
+        row = self.conn.execute(
+            "select max(details->>'date') from ingest_runs where status = 'ok' "
+            "and details->>'date' is not null and ("
+            "(details->>'data_changed' is not null and (details->>'data_changed')::boolean) "
+            "or (details->>'data_changed' is null and (rows_added > 0 or rows_changed > 0)))"
+        ).fetchone()
+        return row[0] if row else None
 
     def load_series(self, scale):
         return self._load(scale, "is null")

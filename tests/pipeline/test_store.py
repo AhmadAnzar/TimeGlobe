@@ -273,3 +273,26 @@ def test_confirm_mismatch_is_kept_until_the_body_changes(store):
     assert store.stored_issues()[465].mismatch_confirmed_for == "b" * 32
     store.save_issue(StoredIssue(465, "c" * 32, "b" * 32, "revised body"))  # a new body resets it
     assert store.stored_issues()[465].mismatch_confirmed_for is None
+
+
+# --- the date of the last data-changing run (meta.json's generated_at) ------------------------
+
+
+def finished(store, source, status, details, added=0, changed=0):
+    run = store.start_run(source)
+    store.finish_run(run, status=status, rows_added=added, rows_changed=changed,
+                     circular_t_no=None, details=details)
+
+
+def test_last_data_change_date_follows_the_flag_and_falls_back_to_row_counts(store):
+    assert store.last_data_change_date() is None
+    finished(store, "daily", "ok", {"date": "2026-11-01"}, added=5)  # before the flag existed: counts
+    assert store.last_data_change_date() == "2026-11-01"
+    finished(store, "weekly", "ok", {"date": "2026-11-02", "data_changed": False})
+    assert store.last_data_change_date() == "2026-11-01"  # a run that changed nothing does not move it
+    finished(store, "daily", "failed", {"date": "2026-11-03", "data_changed": True}, added=9)
+    assert store.last_data_change_date() == "2026-11-01"  # a failed run does not count
+    finished(store, "weekly", "ok", {"date": "2026-11-05", "data_changed": True})  # rows 0, flag wins
+    assert store.last_data_change_date() == "2026-11-05"
+    finished(store, "monthly", "ok", {"date": "2026-11-08", "data_changed": False}, added=3)
+    assert store.last_data_change_date() == "2026-11-05"  # the flag wins over the row counts
