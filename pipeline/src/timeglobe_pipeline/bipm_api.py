@@ -23,9 +23,12 @@ class Series:
     unc_unparsed: tuple[tuple[int, str], ...] = ()
 
 
-def _unc(raw: str | None) -> tuple[float | None, bool]:
-    """Return (value, parsed_ok). Uncertainties arrive as strings; null (before Dec 2006) and
-    "-" (not published, e.g. Circular T's NC) mean none. Other non-numeric text is junk."""
+def _unc(raw: str | float | None) -> tuple[float | None, bool]:
+    """Return (value, parsed_ok). UTC-UTC(k) uncertainties arrive as strings, GNSS ones as strings
+    or numbers; null (before Dec 2006) and "-" (not published, e.g. Circular T's NC) mean none.
+    Other non-numeric text is junk."""
+    if isinstance(raw, (int, float)):
+        return float(raw), True
     if raw is None or raw.strip() in ("", "-"):
         return None, True
     try:
@@ -64,8 +67,32 @@ def parse_series(body: bytes) -> list[Series]:
     return series
 
 
+# Series names in a scale=gnss response. The metadata fields (xmin, ymax, ...) of that response are
+# scrambled for some systems, so nothing here reads them: ranges come from the arrays.
+GNSS_NAMES = {
+    "UTC-GPS_Time": "gps",
+    "UTC-GLONASS_Time": "glonass",
+    "UTC-Galileo_Time": "galileo",
+    "UTC-Beidou_Time": "beidou",
+}
+
+
+def parse_gnss(body: bytes) -> dict[str, Series]:
+    """Parse a scale=gnss response into {system: Series}; an unknown series name is an error."""
+    out = {}
+    for series in parse_series(body):
+        if series.name not in GNSS_NAMES:
+            raise ApiError(f"unexpected GNSS series {series.name!r}")
+        out[GNSS_NAMES[series.name]] = series
+    return out
+
+
 def fetch_labs(client: PoliteClient) -> list[str]:
     return parse_labs(client.get(API_URL, {"list": "", "outfile": "json"}))
+
+
+def fetch_gnss(client: PoliteClient) -> dict[str, Series]:
+    return parse_gnss(client.get(API_URL, {"scale": "gnss", "outfile": "json"}))
 
 
 def fetch_utc(client: PoliteClient, lab: str, scale: str = "utc") -> Series:

@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from timeglobe_pipeline.bipm_api import ApiError, parse_labs, parse_series
+from timeglobe_pipeline.bipm_api import ApiError, parse_gnss, parse_labs, parse_series
 
 FIXTURES = Path(__file__).resolve().parents[1] / "fixtures"
 
@@ -73,3 +73,42 @@ def test_ragged_series_rejected():
     ).encode()
     with pytest.raises(ApiError, match="ragged"):
         parse_series(body)
+
+
+def test_gnss_response_has_four_daily_systems_with_numeric_uncertainties():
+    gnss = parse_gnss((FIXTURES / "bipm_gnss.json").read_bytes())
+    assert sorted(gnss) == ["beidou", "galileo", "glonass", "gps"]
+    gps = gnss["gps"]
+    assert (gps.mjd[0], gps.mjd[-1], len(gps.mjd)) == (55559, 61309, 5751)  # one value per day
+    assert gps.unc_ns[:2] == [1.4, 1.4] and gps.unc_ns[-1] == 5.0
+    assert (gnss["galileo"].mjd[0], gnss["beidou"].mjd[0]) == (60430, 60430)
+    assert all(not s.unc_unparsed for s in gnss.values())
+
+
+def test_gnss_metadata_is_scrambled_so_ranges_come_from_the_arrays():
+    import json
+
+    raw = json.loads((FIXTURES / "bipm_gnss.json").read_bytes())
+    glonass = next(s for s in raw["data"] if s["name"] == "UTC-GLONASS_Time")
+    assert glonass["xmax"] == 5 and glonass["ymax"] == 61309  # swapped in the source
+    parsed = parse_gnss((FIXTURES / "bipm_gnss.json").read_bytes())["glonass"]
+    assert (parsed.mjd[0], parsed.mjd[-1]) == (55559, 61309)
+
+
+def test_unexpected_gnss_series_name_is_an_error():
+    body = json.dumps(
+        {"success": True, "data": [{"name": "UTC-Other", "x": [1], "y": [1.0], "unc": [None]}]}
+    ).encode()
+    with pytest.raises(ApiError, match="unexpected GNSS series"):
+        parse_gnss(body)
+
+
+def test_rapid_utc_is_daily_with_no_uncertainties_and_keeps_its_gap():
+    (nist,) = parse_series((FIXTURES / "bipm_utcr_nist.json").read_bytes())
+    assert nist.name == "UTCR-UTC(NIST)"
+    assert (nist.mjd[0], nist.mjd[-1], len(nist.mjd)) == (56467, 61345, 4878)
+    assert all(u is None for u in nist.unc_ns)
+    steps = {b - a for a, b in zip(nist.mjd, nist.mjd[1:])}
+    assert steps == {1, 2}  # one missing day stays missing
+    (uz,) = parse_series((FIXTURES / "bipm_utcr_uz.json").read_bytes())
+    assert uz.mjd[0] == 60289 and len(uz.mjd) == 1056
