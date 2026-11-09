@@ -1,0 +1,99 @@
+code,name,city,country,iso2,lat,lon,year_start,year_stop,status,notes
+AGGO,Argentinian-German Geodetic Observatory,La Plata,Argentina,AR,-34.92,-57.95,2002,,current,
+AOS,"Astrogeodynamical Observatory, Space Research Centre P.A.S.",Borowiec,Poland,PL,52.28,17.07,1988,,current,
+APL,Applied Physics Laboratory,Laurel,United States,US,39.10,-76.85,1978,,current,
+AUS,National Measurement Institute,Sydney,Australia,AU,-33.87,151.21,1973,,current,
+AZ,Azerbaijan Metrology Institute,Baku,Azerbaijan,AZ,40.41,49.87,2025,,current,
+BEV,Bundesamt für Eich- und Vermessungswesen,Wien,Austria,AT,48.21,16.37,1975,,current,
+BFKH,"Government Office of Capital City of Budapest, Metrology and Technical Supervisory Department",Budapest,Hungary,HU,47.50,19.04,1974,,current,
+BIM,Bulgarian Institute of Metrology,Sofiya,Bulgaria,BG,42.70,23.32,1991,,current,
+BIRM,Beijing Institute of Radio Metrology and Measurement,Beijing,China,CN,39.90,116.40,1995,,current,shares city point with NIM
+BOM,Bureau of Metrology of Macedonia,Skopje,North Macedonia,MK,41.99,21.43,2017,2023,former,not in Circular T 465 Section 1; coordinates entered by hand
+BSJ,Bureau of Standards Jamaica,Kingston,Jamaica,JM,18.00,-76.79,2024,,current,
+BY,Belarussian State Institute of Metrology,Minsk,Belarus,BY,53.90,27.57,2007,,current,
+CAO,Stazione Astronomica di Cagliari (Cagliari Astronomical Observatory),Cagliari,Italy,IT,39.22,9.12,1982,,current,
+CH,Federal Institute of Metrology (METAS),Bern-Wabern,Switzerland,CH,46.93,7.46,1972,,current,
+CNES,Centre National d'Etudes Spatiales,Toulouse,France,FR,43.60,1.44,2016,,current,
+CNM,Centro Nacional de Metrologia,Queretaro,Mexico,MX,20.59,-100.39,1996,,current,
+CNMP,Centro Nacional de Metrología de Panamá (CENAMEP),Panama,Panama,PA,8.98,-79.52,2003,,current,
+DFM,Dansk Fundamental Metrologi (DFM A/S),Horsholm,Denmark,DK,55.88,12.50,2022,,current,
+DFNT,Metrology Laboratory of the Ministry of National Defence,Tunis,Tunisia,TN,36.81,10.18,2014,,current,
+DLR,Deutsches Zentrum für Luft - und Raumfahrt (German Aerospace Centre),Oberpfaffenhofen,Germany,DE,48.08,11.28,1996,,current,
+DMDM,Directorate of Measures and Precious Metals,Belgrade,Serbia,RS,44.79,20.45,1983,,current,
+DTAG,Deutsche Telekom AG,Frankfurt/M,Germany,DE,50.11,8.68,1981,,current,
+EE,Central Office of Metrology,Tallinn,Estonia,EE,59.44,24.75,2026,,not_in_issue,not in Circular T 465 Section 1; coordinates entered by hand
+EIM,Hellenic Institute of Metrology,Thessaloniki,Greece,GR,40.64,22.94,2007,2023,former,not in Circular T 465 Section 1; coordinates entered by hand
+ESA,European Space Agency,Noordwijk,Netherlands,NL,52.24,4.44,2012,,current,
+HKO,Hong Kong Observatory,Hong Kong,Hong Kong (China),HK,22.30,114.17,2004,,current,shares city point with SCL
+IBM,Instituto Boliviano De Metrologia,La Paz,Bolivia,BO,-16.50,-68.15,2023,,current,
+ICE,Laboratorio Costarricense de Metrologia,San Jose,Costa Rica,CR,9.93,-84.08,2017,,current,
+IDN,Standardization Agency of Indonesia,Serpong-Tangerang,Indonesia,ID,-6.35,106.67,2008,,current,
+IFAG,Bundesamt für Kartographie und Geodäsie (Federal Agency for Cartography and Geodesy),Wettzell,Germany,DE,49.14,12.88,1988,,current,
+IFZG,Institut za fiziku (Institute of Physics),Zagreb,Croatia,HR,45.81,15.98,2024,,current,
+IGNA,Instituto Geográfico Nacional,Buenos Aires,Argentina,AR,-34.6,-58.38,1969,2025,former,not in Circular T 465 Section 1; coordinates entered by hand
+IMBH,Institute of Metrology of Bosnia and Herzegovina,Sarajevo,Bosnia and Herzegovina,BA,43.86,18.41,2015,,current,
+INCP,Instituto Nacional de Calidad (INACAL) of Peru,Lima,Peru,PE,-12.05,-77.04,2016,,current,
+INM,Instituto Nacional de Metrología of Colombia,Bogota D.C.,Colombia,CO,4.71,-74.07,2017,,current,
+INPL,National Physical Laboratory of Israel,Jerusalem,Israel,IL,31.77,35.21,1988,,current,
+INTI,Instituto Nacional de Tecnología Industrial,Buenos Aires,Argentina,AR,-34.60,-58.38,2008,,current,shares city point with ONBA
+INXE,"National Institute for Metrology, Quality and Technology (INMETRO)",Rio de Janeiro,Brazil,BR,-22.91,-43.17,2012,,current,shares city point with ONRJ
+IPQ,Instituto Portugues da Qualidade,Caparica,Portugal,PT,38.66,-9.20,1995,,current,
+IT,Istituto Nazionale di Ricerca Metrologica (INRIM),Torino,Italy,IT,45.07,7.69,1970,,current,
+JATC,Joint Atomic Time Commission,Lintong,China,CN,34.37,109.21,1988,,current,shares city point with NTSC
+JV,Justervesenet,Kjeller,Norway,NO,59.97,11.04,2003,,current,
+KEBS,Kenya Bureau of Standards,Nairobi,Kenya,KE,-1.29,36.82,2012,2019,former,not in Circular T 465 Section 1; coordinates entered by hand
+KRIS,"Korea Research Institute of Standards and Science (KRISS),",Daejeon,South Korea,KR,36.35,127.38,1988,,current,
+KZ,Kazakhstan Institute of Standardization and Metrology,Astana,Kazakhstan,KZ,51.17,71.43,2008,,current,
+LDS,University of Leeds,Leeds,United Kingdom,GB,53.8,-1.55,1991,2009,former,not in Circular T 465 Section 1; coordinates entered by hand
+LRTE,Laboratório de Referência de Tempo e Espaço,Sao Carlos,Brazil,BR,-22.02,-47.89,2018,,current,
+LT,Center for Physical Sciences and Technology (FTMC),Vilnius,Lithuania,LT,54.69,25.28,2001,,current,
+LUX,Bureau Luxembourgeois de Métrologie (ILNAS),Belvaux,Luxembourg,LU,49.51,5.93,2018,,current,
+LV,Latvian National Metrology Centre,Riga,Latvia,LV,56.95,24.11,2007,2021,former,not in Circular T 465 Section 1; coordinates entered by hand
+MASM,Mongolian Agency for Standardization and Metrology,Ulaanbaatar,Mongolia,MN,47.89,106.91,2013,,not_in_issue,not in Circular T 465 Section 1; coordinates entered by hand
+MBM,Bureau of Metrology - Laboratory for time and frequency,Podgorica,Montenegro,ME,42.44,19.26,2014,,current,
+MIKE,"VTT Technical Research Centre of Finland Ltd, Centre for Metrology",Espoo,Finland,FI,60.20,24.66,1978,,current,
+MSL,Measurement Standards Laboratory,Lower Hutt,New Zealand,NZ,-41.21,174.91,1984,,current,
+MTC,MAKKAH Time Centre - King Abdulah Centre for Crescent Observations and Astronomy,Makkah,Saudi Arabia,SA,21.39,39.86,2012,,current,
+NAO,National Astronomical Observatory,Mizusawa,Japan,JP,39.14,141.13,1969,,current,
+NICT,National Institute of Information and Communications Technology,Tokyo,Japan,JP,35.71,139.49,1969,,current,
+NIM,National Institute of Metrology,Beijing,China,CN,39.90,116.40,1980,,current,shares city point with BIRM
+NIMB,National Institute of Metrology,Bucharest,Romania,RO,44.43,26.10,2002,,current,
+NIMT,National Institute of Metrology (Thailand),Pathumthani,Thailand,TH,14.02,100.53,2001,,current,
+NIS,National Institute for Standards,Cairo,Egypt,EG,30.04,31.24,1972,,current,
+NIST,National Institute of Standards and Technology,Boulder,United States,US,40.01,-105.27,1969,,current,
+NMIJ,National Metrology Institute of Japan,Tsukuba,Japan,JP,36.08,140.08,1980,,current,
+NMLS,National Metrology Laboratory of SIRIM Berhad,Sepang,Malaysia,MY,2.69,101.75,2002,,current,
+NPL,National Physical Laboratory,Teddington,United Kingdom,GB,51.42,-0.34,1969,,current,
+NPLI,National Physical Laboratory,New-Delhi,India,IN,28.61,77.21,1988,,current,
+NRC,National Research Council of Canada,Ottawa,Canada,CA,45.42,-75.70,1969,,current,
+NRL,U.S. Naval Research Laboratory,Washington DC,United States,US,38.92,-77.07,2007,,current,no values in recent issues; shares city point with USNO; point aligned with the other lab in this city
+NSAI,National Standards Authority of Ireland's National Metrology Laboratory (NSAI NML),Dublin,Ireland,IE,53.35,-6.26,2020,,current,no values in recent issues
+NTSC,National Time Service Center of China,Lintong,China,CN,34.37,109.21,1980,,current,shares city point with JATC
+ONBA,Observatorio Naval,Buenos Aires,Argentina,AR,-34.60,-58.38,1970,,current,shares city point with INTI
+ONRJ,Observatório Nacional,Rio de Janeiro,Brazil,BR,-22.91,-43.17,1972,,current,shares city point with INXE
+OP,Observatoire de Paris/Laboratoire Temps Espace,Paris,France,FR,48.84,2.34,1968,,current,
+ORB,Observatoire Royal de Belgique,Bruxelles,Belgium,BE,50.85,4.35,1972,,current,point aligned with the other lab in this city
+PL,Consortium of laboratories in Poland,Warszawa,Poland,PL,52.23,21.01,1977,,current,
+PTB,Physikalisch-Technische Bundesanstalt,Braunschweig,Germany,DE,52.30,10.46,1968,,current,
+ROA,Real Instituto y Observatorio de la Armada,San Fernando,Spain,ES,36.46,-6.20,1989,,current,
+SASO,"Saudi Standards, Metrology and Quality Organization",Riyadh,Saudi Arabia,SA,24.71,46.68,2013,,current,
+SCL,Standards and Calibration Laboratory,Hong Kong,Hong Kong (China),HK,22.30,114.17,1996,,current,shares city point with HKO
+SG,"National Metrology Centre - Agency for Science, Technology and Research (A*STAR)",Singapore,Singapore,SG,1.35,103.82,1981,,current,
+SIQ,Slovenian Institute of Quality and Metrology,Ljubljana,Slovenia,SI,46.06,14.51,2007,,current,
+SL,"Measurement Units, Standards and Services Department (MUSSD)",Colombo,Sri Lanka,LK,6.93,79.86,2018,2023,former,not in Circular T 465 Section 1; coordinates entered by hand
+SMD,Metrology Division of the Quality and Safety Department - Scientific Metrology,Bruxelles,Belgium,BE,50.85,4.35,2009,,current,
+SMU,Slovenský Metrologický Ústav (Slovak Institute of Metrology),Bratislava,Slovakia,SK,48.15,17.11,1998,,current,
+SP,Research Institutes of Sweden AB (RISE),Boras,Sweden,SE,57.72,12.94,1978,,current,
+SU,"Russian metrological institute of technical physics and radio engineering (FSUE ""VNIIFTRI"")",Moskva,Russia,RU,55.75,37.62,1969,,current,
+TL,Telecommunication Laboratories,Chung-Li,Taiwan,TW,24.96,121.22,1972,,current,
+TP,"Institute of Photonics and Electronics, Czech Academy of Sciences (IPE/ASCR)",Praha,Czechia,CZ,50.08,14.43,1968,,current,
+TUG,Technische Universität,Graz,Austria,AT,47.07,15.44,1977,2000,former,not in Circular T 465 Section 1; coordinates entered by hand
+UA,"National Scientific Centre ""Institute of Metrology""",Kharkiv,Ukraine,UA,49.99,36.23,2006,,current,
+UAE,Emirates Metrology Institute (EMI/UAE),Abu Dhabi,United Arab Emirates,AE,24.45,54.38,2017,,current,
+UME,"Ulusai Metroloji Enstitüsü, Marmara Research Centre, (National Metrology Institute)",Gebze-Kocaeli,Turkey,TR,40.80,29.43,1994,,current,
+USNO,U.S. Naval Observatory,Washington DC,United States,US,38.92,-77.07,1968,,current,
+UTE,Administración Nacional de Usinas y Transmisiones,Montevideo,Uruguay,UY,-34.9,-56.16,2023,2024,former,not in Circular T 465 Section 1; coordinates entered by hand
+UZ,Uzbek National Institute of Metrology of Uzstandard Agency,Tashkent,Uzbekistan,UZ,41.30,69.24,2023,,current,
+VMI,Vietnam Metrology Institute,Ha Noi,Vietnam,VN,21.03,105.85,2008,,current,
+VSL,"VSL, National Metrology Institute",Delft,Netherlands,NL,52.01,4.36,1973,,current,
+ZA,National Metrology Institute of South Africa (NMISA),Pretoria,South Africa,ZA,-25.75,28.19,1972,,current,
