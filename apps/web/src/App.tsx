@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { mjdToIso } from "./data/dates";
 import { createLoader, type CoreData, type Loader } from "./data/loader";
+import { GlobeView } from "./globe/GlobeView";
 
 const defaultLoader = createLoader();
 
@@ -9,7 +10,8 @@ type State =
   | { status: "error"; message: string }
   | { status: "ready"; core: CoreData };
 
-export default function App({ loader = defaultLoader }: { loader?: Loader }) {
+/** showGlobe is false in tests: they run without WebGL. */
+export default function App({ loader = defaultLoader, showGlobe = true }: { loader?: Loader; showGlobe?: boolean }) {
   const [state, setState] = useState<State>({ status: "loading" });
 
   useEffect(() => {
@@ -37,12 +39,12 @@ export default function App({ loader = defaultLoader }: { loader?: Loader }) {
           Could not load the data: {state.message}
         </p>
       )}
-      {state.status === "ready" && <Snapshot core={state.core} />}
+      {state.status === "ready" && <Snapshot core={state.core} showGlobe={showGlobe} />}
     </main>
   );
 }
 
-function Snapshot({ core }: { core: CoreData }) {
+function Snapshot({ core, showGlobe }: { core: CoreData; showGlobe: boolean }) {
   const { meta, labs, rapid } = core;
   const [filter, setFilter] = useState("");
 
@@ -56,6 +58,8 @@ function Snapshot({ core }: { core: CoreData }) {
 
   return (
     <>
+      {showGlobe && <GlobeView labs={labs} />}
+
       <dl className="summary">
         <div>
           <dt>Latest Circular T</dt>

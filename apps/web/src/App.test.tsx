@@ -24,7 +24,7 @@ afterEach(() => {
 async function render(files: Record<string, unknown>) {
   const loader = createLoader("/data", fakeFetch(files).fetchImpl);
   await act(async () => {
-    root.render(<App loader={loader} />);
+    root.render(<App loader={loader} showGlobe={false} />);
   });
 }
 

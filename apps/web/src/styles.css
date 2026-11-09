@@ -139,3 +139,47 @@ footer {
   color: var(--muted);
   font-size: 0.8rem;
 }
+
+.globe-panel {
+  position: relative;
+  margin: 0 0 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.globe {
+  width: 100%;
+  height: min(70vh, 40rem);
+  min-height: 20rem;
+  cursor: grab;
+}
+
+.globe:active {
+  cursor: grabbing;
+}
+
+.globe-note {
+  position: absolute;
+  inset: auto 0 0.75rem 0;
+  margin: 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.globe-tip {
+  padding: 0.35rem 0.5rem;
+  background: rgba(11, 16, 32, 0.92);
+  border: 1px solid var(--line);
+  border-radius: 0.4rem;
+  font: 0.8rem/1.4 system-ui, sans-serif;
+  color: var(--text);
+}
+
+.globe-tip strong {
+  display: block;
+  margin-bottom: 0.15rem;
+}
+
