@@ -25,7 +25,7 @@ Copy `.env.example` to `.env` and fill it in.
 
 ## Contact
 
-timeglobe@anzarahmad.me
+<a href="https://mail.google.com/mail/?view=cm&to=timeglobe@anzarahmad.me" target="_blank"><img src="https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white" alt="Email"></a>
 
 ## Data rules
 
