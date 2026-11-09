@@ -43,3 +43,6 @@ map of the European sites.
    a city are always one site and follow the same display rule.
 4. **Arcs to Sèvres fade with distance**, for example full opacity beyond ~2,000 km, falling to
    ~15% inside ~300 km, so the last stretch does not saturate. Arcs are drawn per lab, not per cluster.
+5. **Lab points are neutral and sized by clock count; colour means drift only.** There is no
+   region colouring. The continent, derived from a lab's ISO country code, is used only for search
+   and filtering.

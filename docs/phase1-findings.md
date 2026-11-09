@@ -50,8 +50,12 @@ only; names, cities, countries and years come from the Time Database table.
 - The lab-list response has no `success` field; data responses do.
 - **Circular T and the API agree on AZ.** AZ first appears in issue **454** (issue 453 has no AZ row).
   The 70 distinct AZ dates in issues 454-465 (MJD 60949-61294) all appear in the API with identical
-  values. Six API-only dates (MJD 60919-60944, September 2025) precede AZ's first Circular T row and
-  have no published counterpart.
+  values and uncertainties. Six API-only dates (MJD 60919-60944, September 2025) precede AZ's first
+  Circular T row and have no published counterpart; each carries a plausible value (212-232 ns) and
+  three also carry `0.0` placeholders.
+- **How the pipeline handles it:** a series whose dates repeat or run backwards is rebuilt from the
+  published Circular T issues (`reconcile.rebuild_from_circular_t`). For AZ that is 70 values from
+  issues 454-465; the six unpublished API-only points are excluded and flagged.
 - **Circular T layout details:** issue 454 has 8 date columns instead of 7, a row can carry a
   multi-note marker such as `(1,2)`, and consecutive issues share their boundary date with the same
   value (for example 2025-11-30 in issues 455 and 456).
@@ -80,9 +84,11 @@ per second): the median distance is 1 km, and 94 of 98 labs are within 50 km. Fo
 | CNM | 58 km | Querétaro city centre against the municipality centre |
 | TL | 105 km | It picked a place in Taichung; Chung-Li is in Taoyuan |
 
-HKO and SCL differ in country code (HK against OpenStreetMap's CN); BIPM lists Hong Kong as its own
-country and that wording is used. Seven cities host more than one lab (six pairs and one trio,
-Buenos Aires), so they share one point. See [the clustering analysis](phase1-clustering.md).
+Countries are stored exactly as BIPM's lab table writes them ("P.R. China", "Chinese Taipei",
+"Russian Federation"...) next to an ISO code, and a test checks every row against the table. BIPM
+lists Hong Kong as its own country, so HKO and SCL are `HK` although OpenStreetMap files Hong Kong
+under CN. Seven cities host more than one lab (six pairs and one trio, Buenos Aires), so they share
+one point. See [the clustering analysis](phase1-clustering.md).
 
 ## NTP Pool
 
