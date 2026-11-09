@@ -62,6 +62,9 @@ def db_report(conn) -> list[str]:
     ).fetchone()
     out.append(f"clock counts: {row[0]} labs in the latest month ({row[1]})")
 
+    from timeglobe_pipeline.store import PostgresStore
+
+    out.append(f"last data-changing run (the snapshot's generated_at): {PostgresStore(conn).last_data_change_date()}")
     out.append("migrations: " + ", ".join(
         f"{v} {n}" for v, n in conn.execute("select version, name from schema_migrations order by version")
     ))
@@ -74,6 +77,29 @@ def db_report(conn) -> list[str]:
         out.append(f"  #{run[0]:<4}{run[1]:<9}{run[2]:<8}added {run[3]:>7,}  changed {run[4]:>5,}  "
                    f"issue {run[5] or '-'}  failed labs {run[6]}")
     return out
+
+
+def _clusters_ok(clusters: dict, labs: dict) -> bool:
+    buckets = clusters["buckets"]
+    site_of = {lab["code"]: lab["site"] for lab in labs["labs"]}
+    radii = [b["radius_km"] for b in buckets]
+    altitudes = [b["altitude"] for b in buckets]
+    if len(buckets) != 8 or radii != sorted(radii, reverse=True) or altitudes != sorted(altitudes, reverse=True):
+        return False
+    if max(radii) > clusters["cap_km"]:
+        return False
+    for bucket in buckets:
+        seen: set[str] = set()
+        for cluster in bucket["clusters"]:
+            members = cluster["labs"]
+            if len(cluster["sites"]) < 2 or seen & set(members):
+                return False
+            if any(code not in site_of for code in members):
+                return False
+            if sorted({site_of[code] for code in members}) != sorted(cluster["sites"]):
+                return False
+            seen |= set(members)
+    return True
 
 
 def snapshot_report(directory: Path) -> tuple[list[str], bool]:
@@ -89,12 +115,13 @@ def snapshot_report(directory: Path) -> tuple[list[str], bool]:
     def load(rel: str):
         return json.loads((directory / rel).read_text(encoding="utf-8"))
 
-    for name in ("meta.json", "labs.json", "gnss.json"):
+    for name in ("meta.json", "labs.json", "gnss.json", "rapid.json", "clusters.json"):
         check(f"{name} exists", (directory / name).is_file())
     if not ok:
         return lines, False
 
     meta, labs, gnss = load("meta.json"), load("labs.json"), load("gnss.json")
+    rapid_file, clusters = load("rapid.json"), load("clusters.json")
     lab_files = sorted((directory / "labs").glob("*.json"))
     frame_files = sorted((directory / "frames").glob("*.json"))
     details = {p.stem: json.loads(p.read_text(encoding="utf-8")) for p in lab_files}
@@ -123,6 +150,14 @@ def snapshot_report(directory: Path) -> tuple[list[str], bool]:
           len(rapid) == meta["rapid"]["labs"]
           and all(r["provisional"] is True and min(r["mjd"]) > meta["rapid"]["after_mjd"] for r in rapid.values())
           and meta["rapid"]["after_mjd"] == meta["mjd_last"])
+    rapid_cells = sum(v is not None for row in rapid_file["v"] for v in row)
+    check("rapid.json holds exactly the lab files' rapid values, after the cutoff, marked provisional",
+          rapid_file["provisional"] is True and rapid_file["after_mjd"] == meta["rapid"]["after_mjd"]
+          and rapid_cells == sum(len(r["mjd"]) for r in rapid.values())
+          and all(m > rapid_file["after_mjd"] for m in rapid_file["mjd"])
+          and rapid_file["labs"] == [lab["code"] for lab in labs["labs"]])
+    check("clusters.json: eight falling buckets, only multi-site clusters, no lab in two of them",
+          _clusters_ok(clusters, labs))
     check("gnss has the four systems", sorted(gnss) == ["beidou", "galileo", "glonass", "gps"])
     needed = [directory / "meta.json", directory / "labs.json", frame_files[-1]]
     size = sum(len(gzip.compress(p.read_bytes(), 9, mtime=0)) for p in needed)

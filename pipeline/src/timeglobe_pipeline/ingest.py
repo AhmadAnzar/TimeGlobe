@@ -234,6 +234,7 @@ def daily(store: Store, client: PoliteClient, labs: list[Lab], today: date) -> R
         else:
             # Nothing new: keep the data flags from the last full run so snapshots still carry them.
             details["flags"] = store.latest_details("daily").get("flags", {})
+        details["data_changed"] = bool(counts.added or counts.changed or details.get("rapid_dropped"))
         status = "failed" if details["failed"] else "ok"
         error = "; ".join(details["failed"])[:2000] or None
     except Exception as exc:
@@ -250,12 +251,22 @@ def daily(store: Store, client: PoliteClient, labs: list[Lab], today: date) -> R
 # --- weekly ----------------------------------------------------------------------------------
 
 
+def _set_rapid(store: Store, existing: dict, lab: str, tail: bipm_api.Series) -> tuple[bool, int]:
+    """Replace a lab's rapid tail only if it differs from what is stored. Returns (changed, rows
+    inserted), so a week with no new days writes nothing and does not count as a data change."""
+    stored = [(r.mjd, r.value_ns) for r in existing.get(lab, [])]
+    if stored == list(zip(tail.mjd, tail.value_ns)):
+        return False, 0
+    _, inserted = store.replace_rapid(lab, tail)
+    return True, inserted
+
+
 def weekly(store: Store, client: PoliteClient, today: date, force: bool = False) -> RunResult:
     run_id = store.start_run("weekly")
     # rapid_empty: labs whose rapid series does not exist, with the date they were last asked. They
     # are skipped until MONTHLY_DAYS have passed, then asked again so a lab that gains one is found.
     details: dict = {"failed": [], "no_rapid": [], "skipped_no_rapid": [], "rapid_empty": {},
-                     "date": today.isoformat()}
+                     "rapid_changed": 0, "date": today.isoformat()}
     added = returned = kept = 0
     try:
         published = store.load_series("utc")
@@ -264,6 +275,7 @@ def weekly(store: Store, client: PoliteClient, today: date, force: bool = False)
         cutoff = max(rows[-1].mjd for rows in published.values())
         details["after_mjd"] = cutoff
         details["rapid_dropped"] = store.drop_superseded_rapid(cutoff)
+        existing_rapid = store.load_series("utcr")  # after the drop, so the comparison is like for like
         previous_empty = store.latest_details("weekly").get("rapid_empty", {})
         for lab in sorted(published):
             last_asked = previous_empty.get(lab)
@@ -280,7 +292,8 @@ def weekly(store: Store, client: PoliteClient, today: date, force: bool = False)
             except bipm_api.ApiError:
                 details["no_rapid"].append(lab)  # no rapid series at all, e.g. a lab that stopped
                 details["rapid_empty"][lab] = today.isoformat()
-                store.replace_rapid(lab, bipm_api.Series(lab, [], [], []))
+                changed, _ = _set_rapid(store, existing_rapid, lab, bipm_api.Series(lab, [], [], []))
+                details["rapid_changed"] += changed
                 continue
             except FetchError as exc:
                 details["failed"].append(f"{lab}: {exc}")
@@ -292,8 +305,10 @@ def weekly(store: Store, client: PoliteClient, today: date, force: bool = False)
                 # Nothing after the cutoff to keep. Not recorded in rapid_empty: the series exists and
                 # its next days may simply not be published yet, so it is asked again next week.
                 details["no_rapid"].append(lab)
-            _, inserted = store.replace_rapid(lab, tail)
+            changed, inserted = _set_rapid(store, existing_rapid, lab, tail)
+            details["rapid_changed"] += changed
             added += inserted
+        details["data_changed"] = bool(details["rapid_changed"] or details["rapid_dropped"])
         details["rapid_points"] = {"returned": returned, "kept": kept}
         # If the API ignored mjd1 it sent whole histories: still correct, but not the saving intended.
         details["mjd1_ignored"] = returned > 1000 and returned > 5 * max(kept, 1)
@@ -323,7 +338,7 @@ def _monthly_skip(store: Store, today: date) -> dict | None:
     if not fetched or (today - date.fromisoformat(fetched)).days >= config.MONTHLY_DAYS:
         return None
     return {
-        "date": today.isoformat(), "skipped": True, "fetched_on": fetched,
+        "date": today.isoformat(), "skipped": True, "fetched_on": fetched, "data_changed": False,
         "clocks": previous.get("clocks", {}),
         "reason": f"the clock list was fetched on {fetched}; it is fetched at most every "
                   f"{config.MONTHLY_DAYS} days",
@@ -346,6 +361,7 @@ def monthly(store: Store, client: PoliteClient, labs: list[Lab], today: date, fo
         per_lab, _ = active_counts(clocks, known)
         store.upsert_labs(labs)
         counts = store.save_clock_counts(today.replace(day=1), {lab.code: per_lab.get(lab.code, 0) for lab in labs})
+        details["data_changed"] = bool(counts.added or counts.changed)
         details["clocks"] = {
             "definition": CLOCK_DEFINITION,
             "total": totals.total,
@@ -363,6 +379,13 @@ def monthly(store: Store, client: PoliteClient, labs: list[Lab], today: date, fo
 
 
 # --- snapshot (reads the database, no network) -----------------------------------------------
+
+
+def snapshot_date(store: Store, today: date) -> str:
+    """meta.json's generated_at: the date of the last run that changed data, not today. A day with
+    nothing new therefore leaves the snapshot byte-identical and nothing is published. An empty
+    store falls back to today."""
+    return store.last_data_change_date() or today.isoformat()
 
 
 def snapshot_files(store: Store, labs: list[Lab], generated_at: str) -> dict[str, bytes]:

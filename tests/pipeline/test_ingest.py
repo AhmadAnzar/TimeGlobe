@@ -346,7 +346,7 @@ def written_snapshot(run, tmp_path):
 def test_a_snapshot_built_from_the_store_passes_every_check(run, tmp_path):
     lines, ok = check.snapshot_report(written_snapshot(run, tmp_path))
     assert ok, " | ".join(lines)
-    assert sum(line.startswith("PASS") for line in lines) == 13  # 3 files + 10 invariants
+    assert sum(line.startswith("PASS") for line in lines) == 17  # 5 files + 12 invariants
     assert not any(line.startswith("FAIL") for line in lines)
     assert any("labs built from Circular T: ['AZ']" in line for line in lines)
 
@@ -659,3 +659,94 @@ def test_the_summary_mentions_the_skipped_labs(run):
     ingest.weekly(store, client, TODAY)
     result = ingest.weekly(store, client, TODAY + timedelta(days=7))
     assert "3 labs with no rapid series skipped" in runner.summary("weekly", result)
+
+
+# --- generated_at is the last data-changing run, not today ------------------------------------
+
+
+def extended_nist_rapid() -> bytes:
+    doc = json.loads((FIXTURES / "bipm_utcr_nist.json").read_bytes())
+    item = doc["data"][0]
+    item["x"].append(item["x"][-1] + 1)  # one more rapid day than the fixture has
+    item["y"].append(0.5)
+    item["unc"].append(None)
+    return json.dumps(doc).encode()
+
+
+def test_a_run_that_changes_nothing_does_not_count_as_a_data_change(run):
+    store, bipm, client = run
+    assert ingest.daily(store, client, LABS, TODAY).details["data_changed"] is True
+    assert ingest.daily(store, client, LABS, TODAY + timedelta(days=1)).details["data_changed"] is False
+
+
+def test_an_unchanged_weekly_run_writes_nothing_and_is_not_a_data_change(run):
+    store, bipm, client = run
+    ingest.daily(store, client, LABS, TODAY)
+    first = ingest.weekly(store, client, TODAY)
+    assert first.details["data_changed"] is True and first.rows_added == 36
+    again = ingest.weekly(store, client, TODAY + timedelta(days=7))
+    assert (again.rows_added, again.details["rapid_changed"], again.details["data_changed"]) == (0, 0, False)
+    assert len(store.load_series("utcr")["NIST"]) == 36
+
+
+def test_a_weekly_run_that_brings_a_new_rapid_day_is_a_data_change(run):
+    store, bipm, client = run
+    ingest.daily(store, client, LABS, TODAY)
+    ingest.weekly(store, client, TODAY)
+    more = FakeBipm(rapid_overrides={"nist": extended_nist_rapid()})
+    result = ingest.weekly(store, make_client(more), TODAY + timedelta(days=7))
+    assert result.details["data_changed"] is True and result.rows_added == 37
+    assert len(store.load_series("utcr")["NIST"]) == 37
+
+
+def test_the_snapshot_date_is_the_last_data_changing_run_not_today(run):
+    store, bipm, client = run
+    day = lambda n: TODAY + timedelta(days=n)  # noqa: E731
+    ingest.daily(store, client, LABS, day(0))
+    assert ingest.snapshot_date(store, day(30)) == "2026-11-09"
+    ingest.daily(store, client, LABS, day(1))  # nothing new
+    assert ingest.snapshot_date(store, day(1)) == "2026-11-09"
+    ingest.weekly(store, client, day(2))  # first rapid tail: a change
+    assert ingest.snapshot_date(store, day(2)) == day(2).isoformat()
+    ingest.weekly(store, client, day(3))  # identical: not a change
+    assert ingest.snapshot_date(store, day(3)) == day(2).isoformat()
+    ingest.monthly(store, client, LABS, day(4))  # clock counts: a change
+    assert ingest.snapshot_date(store, day(5)) == day(4).isoformat()
+    ingest.monthly(store, client, LABS, day(10))  # inside the window: skipped
+    assert ingest.snapshot_date(store, day(20)) == day(4).isoformat()
+
+
+def test_a_day_with_nothing_new_leaves_the_snapshot_byte_identical(run):
+    store, bipm, client = run
+    ingest.daily(store, client, LABS, TODAY)
+    ingest.weekly(store, client, TODAY)
+    ingest.monthly(store, client, LABS, TODAY)
+    before = ingest.snapshot_files(store, LABS, ingest.snapshot_date(store, TODAY))
+    ingest.daily(store, client, LABS, TODAY + timedelta(days=1))
+    after = ingest.snapshot_files(store, LABS, ingest.snapshot_date(store, TODAY + timedelta(days=1)))
+    assert before == after  # so the workflow commits nothing and no deploy is triggered
+
+
+def test_an_empty_store_falls_back_to_today():
+    assert ingest.snapshot_date(MemoryStore(), TODAY) == "2026-11-09"
+
+
+def test_the_checks_catch_a_rapid_file_that_disagrees_with_the_lab_files(run, tmp_path):
+    directory = written_snapshot(run, tmp_path)
+    path = directory / "rapid.json"
+    doc = json.loads(path.read_text())
+    doc["after_mjd"] = 1
+    path.write_text(json.dumps(doc))
+    lines, ok = check.snapshot_report(directory)
+    assert not ok and any(l.startswith("FAIL  rapid.json holds exactly") for l in lines)
+
+
+def test_the_checks_catch_a_lab_in_two_clusters(run, tmp_path):
+    directory = written_snapshot(run, tmp_path)
+    path = directory / "clusters.json"
+    doc = json.loads(path.read_text())
+    bucket = doc["buckets"][0]
+    bucket["clusters"].append(bucket["clusters"][0])  # the same labs twice
+    path.write_text(json.dumps(doc))
+    lines, ok = check.snapshot_report(directory)
+    assert not ok and any(l.startswith("FAIL  clusters.json") for l in lines)

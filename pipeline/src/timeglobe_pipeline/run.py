@@ -70,7 +70,7 @@ def main(argv: list[str]) -> int:
     with psycopg.connect(url, autocommit=True) as conn:
         store = PostgresStore(conn)
         if args.job == "snapshot":
-            files = ingest.snapshot_files(store, labs, today.isoformat())
+            files = ingest.snapshot_files(store, labs, ingest.snapshot_date(store, today))
             write_files(files, args.out)
             print(f"wrote {len(files)} files to {args.out}; first-frame payload "
                   f"{initial_payload_gzip(files) / 1024:.0f} KB gzip")
