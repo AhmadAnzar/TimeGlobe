@@ -22,6 +22,20 @@ MAX_KM = 50.0
 # BIPM lists Hong Kong as its own country; OpenStreetMap files it under CN. BIPM wins.
 ACCEPTED_OSM_COUNTRY = {"HK": {"CN"}}
 
+# BIPM's country text -> the wording Nominatim understands (labs.csv stores BIPM's text verbatim).
+QUERY_COUNTRY = {
+    "United States of America": "United States",
+    "P.R. China": "China",
+    "Macedonia": "North Macedonia",
+    "The Netherlands": "Netherlands",
+    "Rep. of Korea": "South Korea",
+    "Russian Federation": "Russia",
+    "Chinese Taipei": "Taiwan",
+    "Czech Republic": "Czechia",
+    "The United Arab Emirates": "United Arab Emirates",
+    "Türkiye": "Turkey",
+}
+
 # Circular T city spellings Nominatim cannot resolve as written.
 QUERY_CITY = {"Frankfurt/M": "Frankfurt am Main"}
 
@@ -46,7 +60,7 @@ def haversine_km(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
 def query_for(lab: Lab) -> str:
     city = QUERY_CITY.get(lab.city, lab.city)
     # "China (Hong Kong)" is not a place name Nominatim understands.
-    return city if "(" in lab.country else f"{city}, {lab.country}"
+    return city if "(" in lab.country else f"{city}, {QUERY_COUNTRY.get(lab.country, lab.country)}"
 
 
 def parse_result(body: bytes) -> Hit | None:

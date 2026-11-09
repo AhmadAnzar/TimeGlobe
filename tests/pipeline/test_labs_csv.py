@@ -66,11 +66,15 @@ def test_sites_list_every_lab_at_a_shared_point(labs):
     assert len({code for site in sites.values() for code in site.codes}) == len(labs)
 
 
-def test_hong_kong_labs_carry_bipms_country_wording(labs):
+def test_every_country_matches_the_bipm_table_exactly(labs):
     db = {
         lab.code: lab
         for lab in parse_time_database((FIXTURES / "bipm_showlab.html").read_bytes().decode())
     }
+    assert [lab.code for lab in labs if lab.country != db[lab.code].country] == []
+
+
+def test_hong_kong_is_its_own_country_as_in_the_bipm_table(labs):
     hk = [lab for lab in labs if lab.iso2 == "HK"]
     assert {lab.code for lab in hk} == {"HKO", "SCL"}
-    assert all(lab.country == db[lab.code].country == "Hong Kong (China)" for lab in hk)
+    assert all(lab.country == "Hong Kong (China)" for lab in hk)

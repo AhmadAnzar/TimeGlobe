@@ -40,7 +40,10 @@ def test_haversine_known_distances():
 def test_query_for_uses_city_and_country_with_special_cases():
     assert query_for(lab()) == "Paris, France"
     assert query_for(lab(city="Frankfurt/M", country="Germany")) == "Frankfurt am Main, Germany"
-    assert query_for(lab(city="Hong Kong", country="China (Hong Kong)")) == "Hong Kong"
+    assert query_for(lab(city="Hong Kong", country="Hong Kong (China)")) == "Hong Kong"
+    # labs.csv keeps BIPM's wording; the query uses the wording Nominatim understands
+    assert query_for(lab(city="Beijing", country="P.R. China")) == "Beijing, China"
+    assert query_for(lab(city="Tokyo", country="Japan")) == "Tokyo, Japan"
 
 
 def test_flags_far_point_and_country_mismatch_and_no_result():
