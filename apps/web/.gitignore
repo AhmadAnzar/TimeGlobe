@@ -1,2 +1,7 @@
 .vercel
 .env*
+# the raw Natural Earth download and the snapshot copied in at build time are never committed
+.raw/
+public/data/
+# a throwaway bundle-size measurement folder: delete it, never commit it
+.measure/
