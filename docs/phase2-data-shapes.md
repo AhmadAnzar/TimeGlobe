@@ -67,10 +67,12 @@ The globe reads static JSON built by the pipeline (`python -m timeglobe_pipeline
 
 | File | Content |
 |---|---|
-| `meta.json` | newest Circular T number, build date, counts, computed clock totals, rapid-data cutoff, attribution, data flags |
+| `meta.json` | newest Circular T number, `generated_at` (the date of the last run that changed data, not the build date), counts, computed clock totals, rapid-data cutoff, attribution, data flags |
 | `labs.json` | every lab (BIPM text verbatim, ISO code, coordinates, clock count) and the map sites |
 | `frames/<year>.json` | one row per date, one column per lab, `null` where a lab has no value |
 | `labs/<code>.json` | one lab's whole series with uncertainties, loaded when the lab is picked; plus its provisional rapid values after the latest Circular T date, if any |
+| `rapid.json` | every lab's provisional rapid days after the latest Circular T date, as a frame with the same columns as `frames/`, so one request colours all labs for those days |
+| `clusters.json` | the multi-site clusters for 8 camera-altitude buckets, precomputed (greedy by lab count, radius about 300 km x altitude, capped at 500 km); a site in no cluster is drawn on its own, and a shared-city site is always one point |
 | `gnss.json` | the four GNSS offsets |
 
 Values are integers in tenths of a nanosecond (all 236,288 values and uncertainties of the 5-day series
@@ -85,7 +87,10 @@ Measured on the full build (97 labs, 133,809 values, AZ rebuilt from Circular T)
 | First frame: `meta` + `labs` + the latest year of frames | 17 KB |
 | All 29 yearly frame files | 327 KB (8-13 KB each) |
 | All 97 lab detail files | 554 KB (about 6 KB each) |
+| `rapid.json` | 5.2 KB |
+| `clusters.json` | 1.3 KB |
 | `gnss.json` | 45 KB |
+| First load: `meta` + `labs` + latest year of frames + `rapid` + `clusters` | 23.2 KB |
 
 Series are validated before they are published: duplicate or backward dates, zeros on such dates,
 dates off the expected grid, absurd values and unknown lab codes are blocking problems; a junk
