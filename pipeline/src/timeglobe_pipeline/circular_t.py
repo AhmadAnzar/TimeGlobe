@@ -11,7 +11,7 @@ from dataclasses import dataclass
 from timeglobe_pipeline.bipm_api import Series
 
 _ROW = re.compile(r"^(?P<code>[A-Z0-9]+)\s+\((?P<city>[^)]*)\)\s*(?P<rest>.*)$")
-_NOTE = re.compile(r"^\((\d+)\)$")
+_NOTE = re.compile(r"^\((\d+(?:,\d+)*)\)$")
 
 
 class ParseError(Exception):
@@ -67,7 +67,7 @@ def parse_section1(text: str) -> Section1:
         if not match:
             continue
         tokens = match["rest"].split()
-        notes = tuple(int(m[1]) for t in tokens if (m := _NOTE.match(t)))
+        notes = tuple(int(n) for t in tokens if (m := _NOTE.match(t)) for n in m[1].split(","))
         tokens = [t for t in tokens if not _NOTE.match(t)]
         if len(tokens) not in (len(mjd), len(mjd) + 3):
             raise ParseError(f"{match['code']}: unexpected column count {len(tokens)}")
@@ -83,13 +83,14 @@ def series_for_lab(sections: list[Section1], code: str) -> Series:
     """Build one lab's UTC-UTC(k) series from several issues' Section 1.
 
     Dates with no value ("-") are skipped, never turned into zero. Each date carries the issue's
-    total uncertainty u for that lab (None when it is not computed). Issues must not overlap: a
-    repeated date means the same issue was passed twice or BIPM revised a date, and the caller
-    has to decide, so it raises instead of picking one.
+    total uncertainty u for that lab (None when it is not computed).
+
+    Consecutive issues share their boundary date (the last column of one issue is the first of
+    the next). If both give the same value the date is kept once, with the earlier issue's row,
+    which is where it was first published. Two issues giving different values for one date is a
+    revision the caller has to decide on, so it raises instead of picking one.
     """
-    mjd: list[int] = []
-    value_ns: list[float] = []
-    unc_ns: list[float | None] = []
+    by_mjd: dict[int, tuple[float, float | None]] = {}
     for section in sorted(sections, key=lambda sec: sec.issue):
         row = next((lab for lab in section.labs if lab.code == code), None)
         if row is None:
@@ -97,9 +98,13 @@ def series_for_lab(sections: list[Section1], code: str) -> Series:
         for date, value in zip(section.mjd, row.values_ns):
             if value is None:
                 continue
-            mjd.append(date)
-            value_ns.append(value)
-            unc_ns.append(row.u)
-    if len(set(mjd)) != len(mjd) or mjd != sorted(mjd):
-        raise ParseError(f"{code}: issues overlap or are out of order")
-    return Series(f"UTC-UTC({code})", mjd, value_ns, unc_ns)
+            if date in by_mjd:
+                if by_mjd[date][0] != value:
+                    raise ParseError(
+                        f"{code}: issue {section.issue} gives {value} for MJD {date}, "
+                        f"earlier issue gave {by_mjd[date][0]}"
+                    )
+                continue
+            by_mjd[date] = (value, row.u)
+    mjd = sorted(by_mjd)
+    return Series(f"UTC-UTC({code})", mjd, [by_mjd[m][0] for m in mjd], [by_mjd[m][1] for m in mjd])

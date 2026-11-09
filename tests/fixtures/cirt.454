@@ -1,0 +1,343 @@
+CIRCULAR T 454                                                                          ISSN 1143-1393                                  
+2025 NOVEMBER 07, 16h UTC                                                                                                               
+                                 BUREAU INTERNATIONAL DES POIDS ET MESURES                                                              
+                    THE INTERGOVERNMENTAL ORGANIZATION ESTABLISHED BY THE METRE CONVENTION                                              
+                PAVILLON DE BRETEUIL F-92312 SEVRES CEDEX  TEL. +33 1 45 07 70 70 tai@bipm.org                                          
+                                                                                                                                        
+                                                                                                                                        
+The contents of the sections of BIPM Circular T are fully described in the document "Explanatory supplement to BIPM Circular T"         
+available at https://webtai.bipm.org/ftp/pub/tai/other-products/notes/explanatory_supplement_v0.8.pdf                                   
+                                                                                                                                        
+                                                                                                                                        
+1 - Difference between UTC and its local realizations UTC(k) and corresponding uncertainties.                                           
+    From 2017 January 1, 0h UTC, TAI-UTC = 37 s.                                                                                        
+                                                                                                                                        
+Date 2025    0h UTC         SEP 26   OCT  1   OCT  6   OCT 11   OCT 16   OCT 21   OCT 26   OCT 31    Uncertainty/ns Notes               
+       MJD                   60944    60949    60954    60959    60964    60969    60974    60979     uA    uB    u                     
+Laboratory k                                         [UTC-UTC(k)]/ns                                                                    
+                                                                                                                                        
+AGGO (La Plata)              142.6    154.4    155.1    167.5    172.8    181.7    182.8    186.8    0.7   3.1   3.2     
+AOS  (Borowiec)               -1.1     -0.9     -1.2     -1.1     -1.0     -1.1     -0.7     -0.3    0.2   2.8   2.8     
+APL  (Laurel)                  2.4      2.5      2.3      1.3     -0.8     -0.6     -0.8     -1.5    0.2    NC     -     
+AUS  (Sydney)                 13.6      2.7     -8.9    -10.2     12.2      9.1     -6.0    -20.6    0.2   3.1   3.1     
+AZ   (Baku)                      -    239.9    255.7    248.1    262.3    271.7    287.6    298.9    0.2   7.1   7.1 (1,2) 
+BEV  (Wien)                   -0.1      1.9     10.0     13.9      8.5     14.7     16.3     17.2    0.2   3.1   3.1     
+BFKH (Budapest)             3673.5   3715.3   3754.8   3803.2   3848.1   3903.0   3952.1   4008.2    1.5   7.3   7.4     
+BIM  (Sofiya)               5323.8   5369.1   5411.0   5456.9   5495.8   5545.3   5590.6   5640.2    0.2   2.8   2.8     
+BIRM (Beijing)                -0.7      0.7     -0.1     -0.8      0.0     -0.8     -0.8     -0.6    0.2   3.6   3.6     
+BSJ  (Kingston)               28.3     20.5     12.5     30.6     21.7     18.1     19.2     32.4    7.0   7.1  10.0     
+                                                                                                                                        
+BY   (Minsk)                  -2.4     -1.9     -0.6     -1.4     -1.6     -1.7     -1.9     -1.2    1.5   3.2   3.5     
+CAO  (Cagliari)           -23938.5 -24483.3 -24632.7        -        -        -        -        -    0.7    NC     -     
+CH   (Bern-Wabern)             1.6      2.5      2.4      1.6      0.9      0.1     -0.5     -0.7    0.2   1.1   1.1     
+CNES (Toulouse)                0.6     -0.6     -0.8      0.8      4.5      2.0     -0.4     -2.3    0.2   2.8   2.8 (3) 
+CNM  (Queretaro)               0.5     -3.7     -2.2     -3.2     -4.3     -4.4     -3.4     -1.6    3.0   4.5   5.4     
+CNMP (Panama)                 -0.5      2.8      2.5     -2.9      1.5      6.7      1.4      3.1    0.2   5.6   5.6     
+DFM  (Horsholm)               -8.1    -10.1    -11.6    -13.1    -15.0    -17.3     -6.8     -8.5    0.2   2.9   2.9     
+DFNT (Tunis)               -1573.8  -1634.1  -1688.0  -1743.9  -1806.7  -1848.9  -1911.0  -1969.4    0.7   2.8   2.9     
+DLR  (Oberpfaffenhofen)        1.0     -0.2     -0.6     -0.8     -0.7     -0.6     -0.5      0.2    0.7   2.8   2.9     
+DMDM (Belgrade)               14.6     -2.4     -9.8    -14.5     -5.9     -0.4     12.1     16.4    0.2   7.5   7.5     
+                                                                                                                                        
+DTAG (Frankfurt/M)            12.9      3.6     -6.3    -13.5    -17.0    -11.6    -14.6    -16.9    0.2   2.8   2.8     
+ESA  (Noordwijk)               0.2      1.1      1.0      0.9      0.7      0.2     -0.4     -0.8    0.2   2.8   2.8     
+HKO  (Hong Kong)             435.2    447.6    468.1    494.3    515.0    523.4    535.7    549.9    0.2   3.8   3.8     
+IBM  (La Paz)                    -        -    205.5    207.3    208.7    193.6    190.2    182.8    4.0   7.7   8.7     
+ICE  (San Jose)             -232.6   -194.8   -158.8   -133.6    -92.7    -41.9      3.8     32.8    0.2   7.1   7.1     
+IDN  (Serpong-Tangerang)    1953.4   2109.9   2263.9   2416.1   2560.4   2705.0   2854.2   2995.8    0.2    NC     -     
+IFAG (Wettzell)             -720.9   -717.8   -727.3   -735.2   -739.2   -750.3   -759.7   -770.3    0.2   2.8   2.8     
+IFZG (Zagreb)                252.2    245.3    243.0    245.2    241.1    237.3    236.3    241.8    0.2   2.8   2.8     
+IMBH (Sarajevo)                2.4      0.3     -0.8     -0.7      4.0     -0.9      0.5     -0.7    0.2   3.0   3.0     
+INCP (Lima)                 -129.7   -147.8   -141.9   -151.0   -155.2   -171.6   -164.9   -149.9    5.0    NC     -     
+                                                                                                                                        
+INM  (Bogota D.C.)           -72.0    -55.7    -45.9    -48.6    -32.0    -25.6    -26.0    -26.1    3.0    NC     -     
+INPL (Jerusalem)            -198.3   -197.8   -189.6   -202.7   -206.5   -196.3   -200.6   -209.6    0.2   7.7   7.7     
+INTI (Buenos Aires)          -77.3    -91.9    -78.4    -89.4    -94.1   -109.9   -116.1   -123.8    0.2   3.3   3.3     
+INXE (Rio de Janeiro)            -      2.8     -7.2     -3.0      1.0      5.6     -9.4     -6.3    0.7   3.4   3.5     
+IPQ  (Caparica)                  -   1682.8   1681.1   1682.4   1619.2   1607.1   1597.9   1489.1    0.7   3.1   3.2     
+IT   (Torino)                  1.2      1.5      1.7      1.5      1.6      1.8      2.0      2.0    0.2   1.1   1.1     
+JATC (Lintong)                 0.1      0.3     -0.3     -0.2     -0.4     -0.6     -0.6     -0.5    0.2   3.8   3.8     
+JV   (Kjeller)                 1.0     -0.7      0.4      2.0      2.8      2.3      3.2      2.6    0.2   4.9   4.9     
+KRIS (Daejeon)                 2.6      2.2      2.4      2.9      3.7      4.1      3.7      2.9    0.2   3.1   3.1     
+KZ   (Astana)                 -0.6     -0.7     -0.9     -1.7     -2.1     -2.7     -3.3     -2.8    0.7   4.4   4.5     
+                                                                                                                                        
+LRTE (Sao Carlos)              1.9      3.7     -2.3        -        -      0.6     -1.6     -1.8    0.7    NC     -     
+LT   (Vilnius)              1153.8   1160.2   1154.2   1144.8   1150.9   1146.6   1157.8   1173.3    0.2   2.8   2.8     
+LUX  (Belvaux)                19.2     17.0      4.7    -10.3    -12.1    -14.1    -23.4    -33.1    0.5   2.8   2.8 (4) 
+MASM (Bayanzurkh)                -        -        -        -        -        -        -        -                                       
+MBM  (Podgorica)            3771.4   3796.7   3809.8   3830.3   3847.4   3873.1   3889.1   3897.0    0.2   3.0   3.0     
+MIKE (Espoo)                   6.6      6.0      6.6      7.9      8.9      5.6      2.0      0.3    0.2   2.8   2.8     
+MSL  (Lower Hutt)            -19.5    -20.8    -21.8    -20.5    -27.0    -24.1    -22.1    -26.0    0.7   3.1   3.2     
+MTC  (Makkah)                -70.1    -91.6   -116.8   -148.1   -165.0   -193.4   -215.3   -236.9    4.0  63.1  63.2     
+NAO  (Mizusawa)             3020.5   3045.2   3072.2   3100.3   3125.2   3151.0   3178.9   3206.0    2.0   3.8   4.3     
+NICT (Tokyo)                   2.6      3.2      3.7      4.4      4.3      3.6      2.5      2.8    0.2   2.0   2.0     
+                                                                                                                                        
+NIM  (Beijing)                -0.4     -0.1     -0.6     -0.8     -0.7     -0.8     -1.0     -0.8    0.2   2.1   2.1     
+NIMB (Bucharest)                 -        -        -        -        -        -        -        -                                       
+NIMT (Pathumthani)            -6.1    -10.4     -6.3      5.5      5.2     15.5      8.9      5.3    0.7   2.9   3.0     
+NIS  (Cairo)                  43.6     44.7     42.7     47.0     43.0        -        -     38.4    0.7   7.3   7.3     
+NIST (Boulder)                 0.5      1.0      1.3      1.9      2.4      1.8      1.0      0.6    0.2   2.0   2.0     
+NMIJ (Tsukuba)                 7.2      7.6      6.6      5.7      4.9      4.9      6.0      7.0    0.2   3.0   3.0     
+NMLS (Sepang)                117.3    139.0     87.0     19.2    -54.1   -128.3   -197.2   -258.2    0.2   2.8   2.8     
+NPL  (Teddington)             -0.3     -0.3     -0.6     -0.1      0.3      1.3      2.5      1.6    0.2   1.1   1.1     
+NPLI (New-Delhi)               1.9      2.1      2.0      1.5      1.6      1.0      0.7      0.2    0.2   2.8   2.8     
+NRC  (Ottawa)                 -0.1      0.0      0.2      0.5      0.8      1.2      1.3      1.4    0.2   2.8   2.8     
+                                                                                                                                        
+NRL  (Washington DC)           3.5      4.2      4.8      6.5      7.8      6.0      2.0     -0.3    0.2   2.8   2.8     
+NSAI (Dublin)                -92.5    -85.0    -30.4    -40.2    -58.7    -20.4     -6.0    -41.2    0.7   7.5   7.5     
+NTSC (Lintong)                -0.0      0.0      0.2      0.3      0.4      0.1      0.3      0.2    0.2   3.6   3.6     
+ONBA (Buenos Aires)         2641.5   2673.5   2727.4   2766.0   2789.5   2831.4   2850.3   2873.5    2.0   3.4   3.9     
+ONRJ (Rio de Janeiro)         -1.8     -1.8     -2.6     -0.3      1.3      0.9     -4.1      1.3    0.2   3.3   3.3     
+OP   (Paris)                   0.4      0.4      0.6      0.4      0.5      1.1      0.9      0.7    0.2   1.1   1.1     
+ORB  (Bruxelles)               0.4     -0.4     -0.9     -0.8      0.4      1.4      2.0      2.3    0.2   2.8   2.8     
+PL   (Warszawa)                5.3      6.1      6.3      6.2      6.1      5.5      4.7      4.0    0.2   2.8   2.8     
+PTB  (Braunschweig)           -1.2     -0.8     -0.7     -0.5     -0.3     -0.0      0.1      0.2    0.2   1.1   1.1     
+ROA  (San Fernando)            1.2      1.0      2.2      2.2      1.1      1.5      1.6      0.7    0.2   1.1   1.1     
+                                                                                                                                        
+SASO (Riyadh)               1004.0   1032.0   1033.5   1023.2   1015.9   1000.4    983.8    973.0    0.7   3.8   3.9     
+SCL  (Hong Kong)              16.5      8.8     -1.7     -9.6    -13.1    -10.2     -6.0      0.8    0.7   3.8   3.9     
+SG   (Singapore)               1.4      0.1     -5.4      2.7      3.2     -0.4     -8.3      3.5    0.2   2.8   2.8     
+SIQ  (Ljubljana)            1389.9   1411.3   1417.2   1455.9   1482.2   1512.3   1536.1   1573.2    0.2   4.2   4.2     
+SMD  (Bruxelles)               4.0      4.3      4.4      4.4      4.1      3.9      3.6      3.3    0.2   4.5   4.5     
+SMU  (Bratislava)            267.9    325.8    335.3    292.6    303.5    368.0    359.2    360.4    1.5   6.2   6.4     
+SP   (Boras)                   0.4      0.4      0.1     -0.2     -0.3     -0.4     -0.8     -1.1    0.2   1.1   1.1     
+SU   (Moskva)                  1.6      1.7      1.6      1.6      1.6      1.8      1.8      1.7    0.2   2.5   2.5     
+TL   (Chung-Li)               -1.2     -1.0      0.0     -0.7     -0.8     -0.5     -0.8     -0.0    0.2   2.0   2.0     
+TP   (Praha)                  12.9     11.9     12.3      8.8      3.9      3.1      2.5     14.0    0.2   3.1   3.1     
+                                                                                                                                        
+UA   (Kharkiv)                -3.2     -7.2    -14.3        -        -     -9.9        -        -    3.0   7.5   8.1     
+UAE  (Abu Dhabi)           -6443.9  -6541.8  -6690.2  -6833.5  -6981.2  -7122.5  -7271.9  -7414.1    0.2   2.8   2.8 (5) 
+UME  (Gebze-Kocaeli)        -242.0   -254.4   -265.9   -277.4   -292.1   -319.6   -469.6   -601.4    0.2   4.1   4.1     
+USNO (Washington DC)           1.2      0.3      0.2      0.0      0.1     -0.1     -0.0      0.6    0.2   2.3   2.3     
+UZ   (Tashkent)               76.3     84.9     97.8     83.8     82.6     83.9     82.0     77.6    0.2   7.1   7.1     
+VMI  (Ha Noi)                  4.9     24.7     42.2     59.3     53.5     48.0     37.1     15.3    0.7   3.0   3.1     
+VSL  (Delft)                   0.5      1.5      2.4      2.8      2.1      1.7      0.9     -0.0    0.2   1.2   1.2     
+ZA   (Pretoria)               -7.1     -8.3     -9.2     -8.0     -3.7      2.2      0.6     -0.1    7.0   3.7   7.9     
+                                                                                                                                        
+- Notes on section 1:                                                                                                                   
+(1) AZ   : Azerbaijan Metrology Institute, Baku, Azerbaijan.                                                                            
+(2) AZ   : Time step of UTC(AZ) of +20.3 ns on MJD 60958.                                                                               
+(3) CNES : Time step of UTC(CNES) of +0.9 ns on MJD 60947 due to calibration.                                                           
+(4) LUX  : Time step of UTC(LUX) of -0.6 ns on MJD 60946 due to calibration.                                                            
+(5) UAE  : Time step of UTC(UAE) of -42.4 ns on MJD 60949 due to calibration.                                                           
+                                                                                                                                        
+                                                                                                                                        
+                                                                                                                                        
+2 - Difference between the normalized frequencies of EAL and TAI.                                                                       
+                                                                                                                                        
+                               Interval of validity       f(EAL)-f(TAI)                                                                 
+                                                                                                                                        
+     Steering correction          60944 - 60979           6.498x10**-13     (2025 SEP 26 - 2025 OCT 31)                                 
+     New correction               60979 - 61009           6.498x10**-13     (2025 OCT 31 - 2025 NOV 30)                                 
+     New correction foreseen      61009 - 61039           6.498x10**-13     (2025 NOV 30 - 2025 DEC 30)                                 
+                                                                                                                                        
+3 - Duration of the TAI scale interval d.                                                                                               
+                                                                                                                                        
+Table 1: Estimate of d by individual PSFS measurements and corresponding uncertainty.                                                   
+All values are expressed in 10**-15 and are valid only for the stated period of estimation.                                             
+                                                                                                                                        
+ Standard    Period of     d     uA     uB  uA/Lab uB/Lab ul/Tai    u     uSrep Ref(uS) Ref(uB) uB(Ref) Uptime LastRep Nrep3y Steer Note
+             Estimation                                                                                    %                            
+                                                                                                                                        
+ PTB-CS1    60944 60979  -2.97   8.00   8.00  0.00  0.00   0.11   11.31   PFS/NA         T148    8.00    100.0  T453     36    Y    (1) 
+ PTB-CS2    60944 60979  -0.96   5.00  12.00  0.00  0.00   0.11   13.00   PFS/NA         T148   12.00    100.0  T453     36    Y    (1) 
+ METAS-FOC2 60944 60969  -1.02   0.12   1.83  0.39  0.06   0.15    1.88   PFS/NA         T371    1.99     72.6  T453     11    Y    (2) 
+ NIM5       60914 60944   0.42   0.36   0.68  0.10  0.01   0.13    0.79   PFS/NA         T340    1.40     99.9  T452     25    Y    (3) 
+ NIM5       60944 60979   0.13   0.30   0.68  0.10  0.01   0.11    0.76   PFS/NA         T340    1.40     94.4  T452     25    Y    (3) 
+ NIM6       60464 60489   0.16   0.25   0.22  0.10  0.01   0.31    0.46   PFS/NA          [2]    0.22     99.4  N/A       0    Y    (4) 
+ NIM6       60494 60519  -0.40   0.25   0.23  0.10  0.01   0.15    0.39   PFS/NA          [2]    0.22     98.7  N/A       0    Y    (4) 
+ NIM6       60519 60549  -0.46   0.23   0.23  0.10  0.01   0.13    0.36   PFS/NA          [2]    0.22     99.1  N/A       0    Y    (4) 
+ NIM6       60579 60614   0.16   0.21   0.24  0.10  0.01   0.11    0.35   PFS/NA          [2]    0.22     99.9  N/A       0    Y    (4) 
+ NIM6       60674 60704  -0.05   0.23   0.24  0.10  0.01   0.13    0.37   PFS/NA          [2]    0.22     99.0  N/A       0    Y    (4) 
+ NIM6       60704 60734  -0.48   0.25   0.23  0.10  0.01   0.13    0.38   PFS/NA          [2]    0.22     86.4  N/A       0    Y    (4) 
+ NIM6       60734 60764   0.20   0.23   0.24  0.10  0.01   0.13    0.37   PFS/NA          [2]    0.22     99.4  N/A       0    Y    (4) 
+ NIM6       60764 60794  -0.35   0.23   0.23  0.10  0.01   0.17    0.38   PFS/NA          [2]    0.22     99.9  N/A       0    Y    (4) 
+ NIM6       60794 60824  -0.38   0.23   0.23  0.10  0.01   0.17    0.38   PFS/NA          [2]    0.22     96.6  N/A       0    Y    (4) 
+ NIM-Sr1    59999 60034   0.17   0.01   0.03  0.21  0.06   0.17    0.28   0.19   [1]      [3]    0.04     12.8  N/A       0    Y    (5) 
+ NIM-Sr1    60034 60064   0.89   0.01   0.03  0.23  0.06   0.20    0.31   0.19   [1]      [3]    0.04     21.0  N/A       0    Y    (5) 
+ NIM-Sr1    60064 60094   0.33   0.01   0.03  0.32  0.06   0.20    0.38   0.19   [1]      [3]    0.04     12.4  N/A       0    Y    (5) 
+ NIM-Sr1    60094 60124  -0.06   0.01   0.03  0.19  0.06   0.20    0.28   0.19   [1]      [3]    0.04     16.3  N/A       0    Y    (5) 
+ NIM-Sr1    60139 60154   0.40   0.01   0.03  0.42  0.06   0.61    0.74   0.19   [1]      [3]    0.04      7.9  N/A       0    Y    (5) 
+ NIM-Sr1    60154 60184  -0.40   0.01   0.03  0.28  0.06   0.33    0.44   0.19   [1]      [3]    0.04     11.4  N/A       0    Y    (5) 
+ NIM-Sr1    60184 60214  -0.14   0.01   0.03  0.31  0.06   0.33    0.46   0.19   [1]      [3]    0.04     14.0  N/A       0    Y    (5) 
+ NIM-Sr1    60644 60674   0.11   0.01   0.03  0.30  0.06   0.13    0.33   0.19   [1]      [3]    0.04     12.5  N/A       0    Y    (5) 
+ NIM-Sr1    60674 60704   0.03   0.01   0.03  0.24  0.06   0.13    0.28   0.19   [1]      [3]    0.04     17.8  N/A       0    Y    (5) 
+ NIM-Sr1    60704 60734   0.24   0.01   0.03  0.25  0.06   0.13    0.29   0.19   [1]      [3]    0.04     20.4  N/A       0    Y    (5) 
+ NPL-E3Yb+3 60944 60969  -0.04   0.00   0.00  0.06  0.04   0.15    0.17   0.19   [1]     T449    0.00     94.2  T449      8    Y    (6) 
+ NRC-FCs2   60944 60979  -0.45   0.12   0.13  0.12  0.00   0.11    0.24   PFS/NA         T448    0.11     90.1  T453     36    Y    (7) 
+ NTSC-CsF2  60944 60979  -0.52   0.46   0.34  0.10  0.00   0.11    0.59   PFS/NA         T435    0.43     98.4  T453     36    Y    (8) 
+ LNEOP-FO2  60944 60979  -0.17   0.20   0.21  0.08  0.00   0.11    0.32   PFS/NA         T301    0.23     77.6  T453     32    Y    (9) 
+ LNEOP-FORb 60944 60979   0.28   0.20   0.24  0.06  0.00   0.11    0.34   0.34   [1]     T328    0.34     85.3  T453     31    Y    (9) 
+ LNEOP-SrB  60944 60979  -0.26   0.00   0.05  0.10  0.00   0.11    0.16   0.19   [1]     T350    0.05     66.7  T453      6    Y    (9) 
+ PTB-CSF2   60944 60979  -0.12   0.11   0.17  0.02  0.00   0.11    0.23   PFS/NA         T370    0.17     92.1  T453     40    Y   (10) 
+ SU-CsFO2   60944 60979  -0.12   0.15   0.22  0.11  0.00   0.11    0.31   PFS/NA         T315    0.50     76.8  T453     36    Y   (11) 
+                                                                                                                                        
+Notes:                                                                                                                                  
+(1) Continuously operating as a clock participating to TAI                                                                              
+(2) Report dated 04 NOV. 2025 by CH                                                                                                     
+(3) Report dated 04 NOV. 2025 by NIM                                                                                                    
+(4) Report dated 05 NOV. 2025 by NIM                                                                                                    
+(5) Report dated 23 OCT. 2025 by NIM                                                                                                    
+(6) Report dated 04 NOV. 2025 by NPL                                                                                                    
+(7) Report dated 31 OCT. 2025 by NRC                                                                                                    
+(8) Report dated 03 NOV. 2025 by NTSC                                                                                                   
+(9) Report dated 05 NOV. 2025 by LNE-OP                                                                                                 
+(10) Report dated 03 NOV. 2025 by PTB                                                                                                   
+(11) Report dated 01 NOV. 2025 by SU                                                                                                    
+[1] CCTF Recommendation PSFS-2 (2021),22nd meeting (session II online),                                                                 
+    available at https://www.bipm.org/en/committees/cc/cctf/22-_2-2021                                                                  
+[2] Fa-Song Zheng et al, "Uncertainty Evaluation of the Caesium Fountain Primary Frequency Standard NIM6", Metrologia, 62, 035005, 2025.
+[3] Y. Lin, Q. Wang, et al. "A 87Sr optical lattice clock with 2.9 x 10-17 uncertainty and its absolute frequency measurement",         
+    Metrologia, 58, 035010, 2021.                                                                                                       
+                                                                                                                                        
+                                                                                                                                        
+Table 2: Estimate of d by the BIPM based on all PSFS measurements identified to be used for TAI steering                                
+over the period MJD 60584-60979, and corresponding uncertainties.                                                                       
+                                                                                                                                        
+           Period of estimation        d             u                                                                                  
+                60944-60979      -0.19x10**-15   0.10x10**-15     (2025 SEP 26 - 2025 OCT 31)                                           
+                                                                                                                                        
+                                                                                                                                        
+4 - Relations of UTC with predictions of UTC broadcast by GNSS.                                                                         
+                                                                                                                                        
+For this edition of Circular T:                                                                                                         
+  sigma_GPS = 5 ns                                                                                                                      
+  sigma_GLO = 7 ns                                                                                                                      
+  sigma_GAL = 5 ns                                                                                                                      
+  sigma_BDS = 5 ns                                                                                                                      
+                                                                                                                                        
+                                                                                                                                        
+DATE 0h UTC   MJD          UTC-bUTC_GNSS /ns                                                                                            
+                       GPS      GLO      GAL      BDS                                                                                   
+2025-09-26  60944     -0.3     -2.2      3.5      0.1                                                                                   
+2025-09-27  60945     -0.3     -4.0      3.7      0.2                                                                                   
+2025-09-28  60946      0.3     -3.2      2.7      0.0                                                                                   
+2025-09-29  60947     -0.5     -2.1      2.6      0.1                                                                                   
+2025-09-30  60948     -0.7     -1.8      2.6      0.0                                                                                   
+2025-10-01  60949     -0.6     -4.6      2.5      0.5                                                                                   
+2025-10-02  60950     -0.6     -3.1      2.4      0.3                                                                                   
+2025-10-03  60951      1.6     -3.5      2.3      0.5                                                                                   
+2025-10-04  60952      0.3     -6.3      2.8      0.3                                                                                   
+2025-10-05  60953      0.4     -7.1      2.6      0.0                                                                                   
+2025-10-06  60954      0.9     -5.3      2.9      0.4                                                                                   
+2025-10-07  60955      0.5     -7.3      4.3      0.2                                                                                   
+2025-10-08  60956      0.3     -5.7      4.4      0.3                                                                                   
+2025-10-09  60957     -0.3     -7.2      3.3      0.0                                                                                   
+2025-10-10  60958     -0.8     -5.4      3.7      0.4                                                                                   
+2025-10-11  60959      0.9     -2.3      4.8      0.6                                                                                   
+2025-10-12  60960      0.6     -3.2      3.6      0.8                                                                                   
+2025-10-13  60961      0.6     -5.0      3.0     -0.0                                                                                   
+2025-10-14  60962      0.2     -3.8      3.5      0.3                                                                                   
+2025-10-15  60963      0.8     -5.8      3.3     -0.2                                                                                   
+2025-10-16  60964     -0.1     -3.9      2.0      0.4                                                                                   
+2025-10-17  60965     -0.1     -4.0      2.6      0.5                                                                                   
+2025-10-18  60966      1.8     -6.9      2.3      0.0                                                                                   
+2025-10-19  60967      4.5     -7.1      2.3     -0.0                                                                                   
+2025-10-20  60968      0.5     -7.6      2.1     -0.2                                                                                   
+2025-10-21  60969      0.1     -5.2      3.2      0.3                                                                                   
+2025-10-22  60970     -0.6     -3.3      2.4      0.3                                                                                   
+2025-10-23  60971      1.8     -3.1      3.3     -0.1                                                                                   
+2025-10-24  60972      3.3     -3.9      2.5     -0.5                                                                                   
+2025-10-25  60973      1.5     -2.8      2.5     -0.2                                                                                   
+2025-10-26  60974      0.5     -5.0      2.5      0.2                                                                                   
+2025-10-27  60975     -0.2     -4.2      2.7      0.5                                                                                   
+2025-10-28  60976     -1.0     -4.9      2.4      0.4                                                                                   
+2025-10-29  60977      0.9     -2.0      2.2     -0.8                                                                                   
+2025-10-30  60978      1.4     -2.3      2.2     -0.6                                                                                   
+2025-10-31  60979     -0.4     -0.3      1.9      0.1                                                                                   
+                                                                                                                                        
+                                                                                                                                        
+5 - Time links used for the computation of TAI, calibrations information and corresponding uncertainties.                               
+                                                                                                                                        
+                                                                                                                                        
+  Link     Type      Equipment     Cal_ID1/Cal_ID2   uStb/ns uCal/ns uAg/ns  Al/ns YYMM
+                                                                                                                                        
+AGGO/PTB  GPS P3   TC_2  /PT13   1014-2021/1001-2022    0.7      3.1   1.8             
+AOS /PTB  GPSPPP   AO_5  /PT13   1012-2024/1001-2022    0.3      2.8   1.2             
+APL /PTB  GPSPPP   AP04  /PT13   NC       /1001-2022    0.3       NC                   
+AUS /PTB  GPSPPP   AU04  /PT13   1015-2021/1001-2022    0.3      3.1   1.8             
+AZ  /PTB  GPSPPP   AZ01  /PT13   2002-2024/1001-2022    0.3      7.1   1.2             
+BEV /PTB  GPSPPP   BE1_  /PT13   1016-2021/1001-2022    0.3      3.1   1.8             
+BFKH/PTB  GPS MC   MK01  /PT13   NA_Al    /1001-2022    1.5      7.3   1.6  -193.2 2406
+BIM /PTB  GPSPPP   BM51  /PT13   1016-2023/1001-2022    0.3      2.8   1.2             
+BIRM/PTB  GPSPPP   BI41  /PT13   1016-2018/1001-2022    0.3      3.6   2.6             
+BSJ /PTB  GPS MC   JM__  /PT13   2001-2024/1001-2022    7.0      7.1   1.2             
+BY  /PTB  GPS MC   BY46  /PT13   1020-2021/1001-2022    1.5      3.2   1.8             
+CAO /PTB  GPS P3   CA__  /PT13   NC       /1001-2022    0.7       NC                   
+CNES/PTB  GPSPPP   CS24  /PT13   1011-2025/1001-2022    0.3      2.8   1.2             
+CNM /PTB  GPS MC   CN00  /PT13   NA_Al    /1001-2022    3.0      4.5   3.1   -27.3 0804
+CNMP/PTB  GPSPPP   MP1_  /PT13   1011-2017/1001-2022    0.3      5.6   3.0             
+DFM /PTB  GPSPPP   DK01  /PT13   1017-2022/1001-2022    0.3      2.9   1.4             
+DFNT/PTB  GPS P3   DN__  /PT13   1015-2024/1001-2022    0.7      2.8   1.2             
+DLR /PTB  GAL P3   DL11  /PT13   1016-2024/1001-2022    0.7      2.8   1.2             
+DMDM/PTB  GPSPPP   ZM01  /PT13   2002-2018/1001-2022    0.3      7.5   2.7             
+DTAG/PTB  GPSPPP   DT05  /PT13   1016-2024/1001-2022    0.3      2.8   1.2             
+ESA /PTB  GPSPPP   ES07  /PT13   1017-2024/1001-2022    0.3      2.8   1.2             
+HKO /PTB  GPSPPP   HKO1  /PT13   1011-2018/1001-2022    0.3      3.8   2.8             
+IBM /PTB  GPS MC   BO__  /PT13   2005-2016/1001-2022    4.0      7.7   3.1             
+ICE /PTB  GPSPPP   CE__  /PT13   2001-2023/1001-2022    0.3      7.1   1.2             
+IDN /PTB  GPSPPP   KI03  /PT13   NC       /1001-2022    0.3       NC                   
+IFAG/PTB  GPSPPP   IF20  /PT13   1016-2024/1001-2022    0.3      2.8   1.2             
+IFZG/PTB  GPSPPP   HR01  /PT13   1016-2023/1001-2022    0.3      2.8   1.2             
+IMBH/PTB  GPSPPP   BH02  /PT13   1013-2022/1001-2022    0.3      3.0   1.6             
+INCP/PTB  GPS MC   CP__  /PT13   NC       /1001-2022    5.0       NC                   
+INM /PTB  GPS MC   IC__  /PT13   NC       /1001-2022    3.0       NC                   
+INPL/PTB  GPSPPP   IL06  /PT13   2003-2016/1001-2022    0.3      7.7   3.2             
+INTI/PTB  GPSPPP   INTI  /PT13   1014-2021/1001-2022    0.3      3.3   1.6             
+INXE/PTB  GPSPPP   NXRA  /PT13   1012-2020/1001-2022    0.7      3.4   2.3             
+IPQ /PTB  GPS P3   IP05  /PT13   1017-2021/1001-2022    0.7      3.1   1.9             
+JATC/PTB  GPSPPP   JA02  /PT13   1201-2018/1001-2022    0.3      3.8   2.7             
+JV  /PTB  GPSPPP   JV02  /PT13   1101-2017/1001-2022    0.3      4.9   2.9             
+KRIS/PTB  GPSPPP   KRP1  /PT13   1015-2021/1001-2022    0.3      3.1   1.8             
+KZ  /PTB  GPS P3   KZ04  /PT13   1202-2021/1001-2022    0.7      4.4   1.7             
+LRTE/PTB  GPS P3   LRR2  /PT13   NC       /1001-2022    0.7       NC                   
+LT  /PTB  GPSPPP   LT03  /PT13   1020-2023/1001-2022    0.3      2.8   1.2             
+LUX /PTB  GPSPPP   LU01  /PT13   1011-2025/1001-2022    0.5      2.8   1.2             
+MASM          NL                                                                                                                        
+MBM /PTB  GPSPPP   ME01  /PT13   1021-2021/1001-2022    0.3      3.0   1.6             
+MIKE/PTB  GPSPPP   MI04  /PT13   1019-2023/1001-2022    0.3      2.8   1.2             
+MSL /PTB  GPS P3   MS01  /PT13   1015-2021/1001-2022    0.7      3.1   1.7             
+MTC /PTB  GPS MC   MC02  /PT13   2001-2013/1001-2022    4.0     63.1  62.7             
+NAO /PTB  GPS MC   NAT2  /PT13   1012-2022/1001-2022    2.0      3.8   1.7             
+NICT/PTB  GPSPPP   NC5S  /PT13   1001-2022/1001-2022    0.3      2.0   1.4             
+NIM /PTB  GPSPPP   IM02  /PT13   1001-2022/1001-2022    0.3      2.1   1.4             
+NIMB          NL                                                                                                                        
+NIMT/PTB  GPS P3   MTTI  /PT13   1016-2022/1001-2022    0.7      2.9   1.4             
+NIS /PTB  GPS P3   IS_5  /PT13   2001-2021/1001-2022    0.7      7.3   1.9             
+NMIJ/PTB  GPSPPP   NM0D  /PT13   1015-2022/1001-2022    0.3      3.0   1.6             
+NMLS/PTB  GPSPPP   LSM2  /PT13   1011-2023/1001-2022    0.3      2.8   1.2             
+NPLI/PTB  GPSPPP   LIAA  /PT13   1011-2024/1001-2022    0.3      2.8   1.2             
+NRC /PTB  GPSPPP   NRCC  /PT13   1015-2023/1001-2022    0.3      2.8   1.2             
+NRL /PTB  GPSPPP   RL5B  /PT13   1201-2024/1001-2022    0.3      2.8   1.2             
+NSAI/PTB  GAL P3   IE01  /PT13   NA_Al    /1001-2022    0.7      7.5   2.4   -38.8 2304
+NTSC/PTB  GPSPPP   NT05  /PT13   1016-2018/1001-2022    0.3      3.6   2.6             
+ONBA/PTB  GPS MC   ON__  /PT13   1014-2021/1001-2022    2.0      3.4   1.7             
+ONRJ/PTB  GPSPPP   RJ04  /PT13   1012-2020/1001-2022    0.3      3.3   2.2             
+ORB /PTB  GPSPPP   OR5Z  /PT13   1017-2023/1001-2022    0.3      2.8   1.2             
+PL  /PTB  GPSPPP   PL_5  /PT13   1012-2024/1001-2022    0.3      2.8   1.2             
+SASO/PTB  GPS P3   SAS0  /PT13   1020-2017/1001-2022    0.7      3.8   2.9             
+SCL /PTB  GPS P3   SC05  /PT13   1011-2018/1001-2022    0.7      3.8   2.8             
+SG  /PTB  GPSPPP   SG02  /PT13   1018-2023/1001-2022    0.3      2.8   1.2             
+SIQ /PTB  GPSPPP   SI01  /PT13   1013-2019/1001-2022    0.3      4.2   2.3             
+SMD /PTB  GPSPPP   SD31  /PT13   1201-2020/1001-2022    0.3      4.5   2.1             
+SMU /PTB  GPS MC   SM00  /PT13   1202-2024/1001-2022    1.5      6.2   1.2             
+TL  /PTB  GPSPPP   TLT5  /PT13   1001-2022/1001-2022    0.3      2.0   1.3             
+TP  /PTB  GPSPPP   TP02  /PT13   1013-2021/1001-2022    0.3      3.1   1.9             
+UA  /PTB  GPS MC   UA05  /PT13   2003-2018/1001-2022    3.0      7.5   2.7             
+UAE /PTB  GPSPPP   AE01  /PT13   1012-2025/1001-2022    0.3      2.8   1.2             
+UME /PTB  GPSPPP   UM01  /PT13   1011-2016/1001-2022    0.3      4.1   3.3             
+UZ  /PTB  GPSPPP   UZ__  /PT13   2005-2022/1001-2022    0.3      7.1   1.5             
+VMI /PTB  GPS P3   VM12  /PT13   1011-2022/1001-2022    0.7      3.0   1.6             
+ZA  /PTB  GPS P3   ZA02  /PT13   1018-2018/1001-2022    7.0      3.7   2.7             
+                                                                                                                                        
+  Link     Type      Equipment     Cal_ID            uStb/ns uCal/ns uAg/ns  Al/ns YYMM
+                                                                                                                                        
+CH  /PTB  TWGPPP   CH01  /PTB05  0623-2024              0.3      1.1   0.5             
+IT  /PTB  TWGPPP   IT01  /PTB05  0622-2024              0.3      1.1   0.5             
+NIST/PTB  TWGPPP   NIST01/PTB05  0593-2024              0.3      2.0   0.2             
+NPL /PTB  TWGPPP   NPL02 /PTB05  0620-2024              0.3      1.1   0.5             
+OP  /PTB  TWSDRR   OP51  /PTB55  0624-2024              0.3      1.1   0.5             
+ROA /PTB  TWGPPP   ROA01 /PTB05  0618-2024              0.3      1.1   0.5             
+SP  /PTB  TWGPPP   SP01  /PTB05  0621-2024              0.3      1.1   0.5             
+SU  /PTB  TWSDRR   SU51  /PTB53  NA_Al    /1001-2022    0.3      2.5   1.7    -8.5 2506
+USNO/PTB  TWGPPP   USNO01/PTB05  0534-2021              0.3      2.3   2.1             
+VSL /PTB  TWGPPP   VSL01 /PTB05  0616-2024              0.3      1.2   0.5             
