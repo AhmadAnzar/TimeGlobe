@@ -1,0 +1,24 @@
+[project]
+name = "timeglobe-pipeline"
+version = "0.1.0"
+description = "Ingestion pipeline for Time Globe"
+requires-python = ">=3.11"
+dependencies = [
+    "httpx",
+    "pandas",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+spike = ["matplotlib"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["../tests/pipeline"]
+pythonpath = ["src"]
