@@ -26,12 +26,34 @@ def write_files(files: dict[str, bytes], out: Path) -> None:
         target.write_bytes(body)
 
 
-def main(argv: list[str]) -> int:
+def build_parser() -> argparse.ArgumentParser:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("job", choices=["daily", "weekly", "monthly", "snapshot"])
     ap.add_argument("--out", type=Path, default=REPO_ROOT / "snapshot")
     ap.add_argument("--date", default=date.today().isoformat())
+    ap.add_argument("--force", action="store_true",
+                    help="monthly only: fetch the clock list even if it was fetched within the last "
+                         f"{config.MONTHLY_DAYS} days")
+    return ap
+
+
+def summary(job: str, result: ingest.RunResult) -> str:
+    """The one line a job prints. It says why a run did nothing, and warns about a weekly run whose
+    requests did not shrink (the API ignoring mjd1)."""
+    d = result.details
+    if d.get("skipped"):
+        return f"{job}: run {result.run_id} skipped: {d['reason']} (use --force to override)"
+    line = f"{job}: run {result.run_id} {result.status}, {result.rows_added} rows added, {result.rows_changed} changed"
+    if d.get("mjd1_ignored"):
+        line += "\nwarning: the API sent whole histories although only the tail was requested (mjd1 ignored)"
+    return line
+
+
+def main(argv: list[str]) -> int:
+    ap = build_parser()
     args = ap.parse_args(argv)
+    if args.force and args.job != "monthly":
+        ap.error("--force only applies to the monthly job")
 
     config.require_db_opt_in()
     config.load_env(REPO_ROOT / ".env")
@@ -53,16 +75,16 @@ def main(argv: list[str]) -> int:
             return 0
         with PoliteClient(
             config.user_agent(), config.ALLOWED_PREFIXES,
-            forbidden_prefixes=config.FORBIDDEN_PREFIXES, cache_dir=None,
+            forbidden_prefixes=config.FORBIDDEN_PREFIXES,
+            monthly_prefixes=config.MONTHLY_PAGES, monthly_days=config.MONTHLY_DAYS, cache_dir=None,
         ) as client:
             if args.job == "daily":
                 result = ingest.daily(store, client, labs, today)
             elif args.job == "weekly":
                 result = ingest.weekly(store, client, today)
             else:
-                result = ingest.monthly(store, client, labs, today)
-    print(f"{args.job}: run {result.run_id} {result.status}, {result.rows_added} rows added, "
-          f"{result.rows_changed} changed")
+                result = ingest.monthly(store, client, labs, today, force=args.force)
+    print(summary(args.job, result))
     return 0
 
 

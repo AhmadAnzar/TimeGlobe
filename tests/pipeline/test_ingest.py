@@ -4,7 +4,7 @@ Nothing here touches a database or the network.
 """
 
 import json
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 
 import httpx
@@ -27,7 +27,10 @@ class FakeBipm:
     """Serves the saved responses and records every request."""
 
     def __init__(self, labs=("nist", "apl", "kebs", "az"), issue_overrides=None, broken=(),
-                 utc_overrides=None):
+                 utc_overrides=None, mjd1_mode="inclusive"):
+        # mjd1_mode: how the API treats &mjd1= on rapid requests: "inclusive", "exclusive",
+        # "ignored" (sends the whole history), "empty" (arrays present but empty) or "no_data".
+        self.mjd1_mode = mjd1_mode
         self.labs = list(labs)
         self.utc_overrides = utc_overrides or {}
         self.issue_overrides = issue_overrides or {}
@@ -62,7 +65,26 @@ class FakeBipm:
             return httpx.Response(200, content=self.utc_overrides[lab])
         name = {"utc": f"bipm_utc_{lab}.json", "utcr": f"bipm_utcr_{lab}.json"}[scale]
         path = FIXTURES / name
-        return httpx.Response(200, content=path.read_bytes() if path.exists() else NOT_FOUND)
+        if not path.exists():
+            return httpx.Response(200, content=NOT_FOUND)
+        content = path.read_bytes()
+        mjd1 = p.get("mjd1")
+        if scale == "utcr" and mjd1:
+            content = self.range_response(content, int(mjd1))
+        return httpx.Response(200, content=content)
+
+    def range_response(self, content: bytes, mjd1: int) -> bytes:
+        if self.mjd1_mode == "ignored":
+            return content
+        if self.mjd1_mode == "no_data":
+            return json.dumps({"success": True, "errorcode": 0, "message": "ok", "data": []}).encode()
+        doc = json.loads(content)
+        item = doc["data"][0]
+        keep = [i for i, x in enumerate(item["x"])
+                if self.mjd1_mode != "empty" and (x >= mjd1 if self.mjd1_mode == "inclusive" else x > mjd1)]
+        for key in ("x", "y", "unc"):
+            item[key] = [item[key][i] for i in keep]
+        return json.dumps(doc).encode()
 
 
 def make_client(bipm: FakeBipm) -> PoliteClient:
@@ -359,3 +381,143 @@ def test_the_snapshot_command_needs_no_database_and_the_db_command_needs_the_opt
     monkeypatch.delenv("TIMEGLOBE_ALLOW_DB", raising=False)
     with pytest.raises(SystemExit, match="refusing to connect"):
         check.main(["db"])
+
+
+# --- weekly asks only for the tail (mjd1) -----------------------------------------------------
+
+
+def utcr_requests(bipm: FakeBipm) -> list[str]:
+    return [r for r in bipm.requests if "scale=utcr" in r]
+
+
+def test_weekly_asks_only_for_the_days_after_the_latest_circular_t_date(run):
+    store, bipm, client = run
+    ingest.daily(store, client, LABS, TODAY)
+    result = ingest.weekly(store, client, TODAY)
+    asked = utcr_requests(bipm)
+    assert len(asked) == 4 and all("mjd1=61309" in r for r in asked)  # no full-history request
+    assert result.details["rapid_points"] == {"returned": 37, "kept": 36}  # the cutoff day comes back too
+    assert result.details["mjd1_ignored"] is False
+    assert len(store.load_series("utcr")["NIST"]) == 36
+
+
+def test_weekly_is_correct_when_the_api_treats_mjd1_as_exclusive():
+    store, bipm = MemoryStore(), FakeBipm(mjd1_mode="exclusive")
+    client = make_client(bipm)
+    ingest.daily(store, client, LABS, TODAY)
+    result = ingest.weekly(store, client, TODAY)
+    assert result.details["rapid_points"] == {"returned": 36, "kept": 36}
+    nist = store.load_series("utcr")["NIST"]
+    assert (nist[0].mjd, len(nist)) == (61310, 36)  # the first day is not lost
+
+
+def test_weekly_stays_correct_but_flags_it_when_the_api_ignores_mjd1():
+    store, bipm = MemoryStore(), FakeBipm(mjd1_mode="ignored")
+    client = make_client(bipm)
+    ingest.daily(store, client, LABS, TODAY)
+    result = ingest.weekly(store, client, TODAY)
+    assert len(store.load_series("utcr")["NIST"]) == 36  # rapid_tail still trims to the tail
+    assert result.details["rapid_points"]["returned"] > 4000
+    assert result.details["mjd1_ignored"] is True
+
+
+@pytest.mark.parametrize("mode", ["empty", "no_data"])
+def test_an_empty_answer_for_the_range_is_recorded_not_failed(mode):
+    store, bipm = MemoryStore(), FakeBipm(mjd1_mode=mode)
+    client = make_client(bipm)
+    ingest.daily(store, client, LABS, TODAY)
+    result = ingest.weekly(store, client, TODAY)
+    assert result.status == "ok" and result.details["failed"] == []
+    assert "NIST" in result.details["no_rapid"] and result.rows_added == 0
+    assert "NIST" not in store.load_series("utcr")
+
+
+# --- the monthly guard ------------------------------------------------------------------------
+
+
+def test_the_clock_list_is_not_fetched_again_within_30_days(run):
+    store, bipm, client = run
+    ingest.monthly(store, client, LABS, TODAY)
+    result = ingest.monthly(store, client, LABS, TODAY + timedelta(days=10))
+    assert bipm.count("clocklab.html") == 1  # the second run made no request
+    assert result.status == "ok" and result.details["skipped"] is True
+    assert (result.rows_added, result.rows_changed) == (0, 0)
+    assert result.details["fetched_on"] == "2026-11-09" and "fetched at most every 30 days" in result.details["reason"]
+
+
+def test_a_skipped_run_carries_the_clock_totals_so_the_snapshot_keeps_them(run):
+    store, bipm, client = run
+    ingest.daily(store, client, LABS, TODAY)
+    first = ingest.monthly(store, client, LABS, TODAY)
+    ingest.monthly(store, client, LABS, TODAY + timedelta(days=5))  # skipped
+    assert store.latest_details("monthly")["clocks"] == first.details["clocks"]
+    meta = json.loads(ingest.snapshot_files(store, LABS, "2026-11-14")["meta.json"])
+    assert meta["clocks"]["unmapped"] == {"F": 26}
+
+
+def test_the_window_is_measured_from_the_real_fetch_not_from_a_skipped_run(run):
+    store, bipm, client = run
+    ingest.monthly(store, client, LABS, TODAY)
+    ingest.monthly(store, client, LABS, TODAY + timedelta(days=10))  # skipped
+    ingest.monthly(store, client, LABS, TODAY + timedelta(days=20))  # skipped
+    assert bipm.count("clocklab.html") == 1
+    result = ingest.monthly(store, client, LABS, TODAY + timedelta(days=31))  # 31 days after the fetch
+    assert bipm.count("clocklab.html") == 2 and "skipped" not in result.details
+    assert result.details["fetched_on"] == (TODAY + timedelta(days=31)).isoformat()
+
+
+def test_force_fetches_the_clock_list_inside_the_window(run):
+    store, bipm, client = run
+    ingest.monthly(store, client, LABS, TODAY)
+    result = ingest.monthly(store, client, LABS, TODAY + timedelta(days=1), force=True)
+    assert bipm.count("clocklab.html") == 2 and "skipped" not in result.details
+
+
+def test_a_monthly_run_recorded_before_the_guard_existed_still_counts(run):
+    store, bipm, client = run
+    old = store.start_run("monthly")  # the form dev run 3 left: "date" but no "fetched_on"
+    store.finish_run(old, status="ok", rows_added=98, rows_changed=0, circular_t_no=None,
+                     details={"date": "2026-11-09", "clocks": {"total": 683}})
+    result = ingest.monthly(store, client, LABS, TODAY + timedelta(days=3))
+    assert bipm.count("clocklab.html") == 0 and result.details["skipped"] is True
+    assert result.details["clocks"] == {"total": 683}
+
+
+def test_a_failed_monthly_run_does_not_start_the_window(run):
+    store, bipm, client = run
+    failed = store.start_run("monthly")
+    store.finish_run(failed, status="failed", rows_added=0, rows_changed=0, circular_t_no=None,
+                     details={"date": "2026-11-09", "fetched_on": "2026-11-09"}, error="x")
+    ingest.monthly(store, client, LABS, TODAY + timedelta(days=1))
+    assert bipm.count("clocklab.html") == 1
+
+
+def test_force_is_only_accepted_for_the_monthly_job():
+    from timeglobe_pipeline import run as runner
+
+    assert runner.build_parser().parse_args(["monthly", "--force"]).force is True
+    assert runner.build_parser().parse_args(["monthly"]).force is False
+    with pytest.raises(SystemExit) as stopped:
+        runner.main(["weekly", "--force"])
+    assert stopped.value.code == 2
+
+
+def test_the_printed_summary_says_why_a_run_did_nothing_and_warns_about_ignored_mjd1(run):
+    from timeglobe_pipeline import run as runner
+
+    store, bipm, client = run
+    ingest.monthly(store, client, LABS, TODAY)
+    skipped = ingest.monthly(store, client, LABS, TODAY + timedelta(days=2))
+    assert "skipped: the clock list was fetched on 2026-11-09" in runner.summary("monthly", skipped)
+    assert "--force" in runner.summary("monthly", skipped)
+
+    store2, ignoring = MemoryStore(), FakeBipm(mjd1_mode="ignored")
+    client2 = make_client(ignoring)
+    ingest.daily(store2, client2, LABS, TODAY)
+    weekly = ingest.weekly(store2, client2, TODAY)
+    assert "mjd1 ignored" in runner.summary("weekly", weekly)
+
+    store3, honouring = MemoryStore(), FakeBipm()
+    client3 = make_client(honouring)
+    ingest.daily(store3, client3, LABS, TODAY)
+    assert "warning" not in runner.summary("weekly", ingest.weekly(store3, client3, TODAY))

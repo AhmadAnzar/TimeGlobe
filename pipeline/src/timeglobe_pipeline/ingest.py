@@ -12,7 +12,7 @@ checksum, as with issue 465) never blocks anything: it is flagged in the run's d
 from dataclasses import dataclass
 from datetime import date
 
-from timeglobe_pipeline import bipm_api, circular_t_index
+from timeglobe_pipeline import bipm_api, circular_t_index, config
 from timeglobe_pipeline.circular_t import ParseError, Section1, issue_by_mjd, parse_section1
 from timeglobe_pipeline.clock_list import (
     CLOCK_DEFINITION,
@@ -247,7 +247,7 @@ def daily(store: Store, client: PoliteClient, labs: list[Lab], today: date) -> R
 def weekly(store: Store, client: PoliteClient, today: date) -> RunResult:
     run_id = store.start_run("weekly")
     details: dict = {"failed": [], "no_rapid": [], "date": today.isoformat()}
-    added = 0
+    added = returned = kept = 0
     try:
         published = store.load_series("utc")
         if not published:
@@ -257,7 +257,10 @@ def weekly(store: Store, client: PoliteClient, today: date) -> RunResult:
         details["rapid_dropped"] = store.drop_superseded_rapid(cutoff)
         for lab in sorted(published):
             try:
-                rapid = bipm_api.fetch_utc(client, lab, "utcr")
+                # Only the days after the latest Circular T date are kept, so only those are asked
+                # for. mjd1 is the cutoff itself, so the request is right whether the API treats
+                # it as inclusive or not; rapid_tail trims the one possible extra day.
+                rapid = bipm_api.fetch_utc(client, lab, "utcr", mjd1=cutoff)
             except bipm_api.ApiError:
                 details["no_rapid"].append(lab)  # e.g. a lab that stopped reporting
                 store.replace_rapid(lab, bipm_api.Series(lab, [], [], []))
@@ -265,8 +268,16 @@ def weekly(store: Store, client: PoliteClient, today: date) -> RunResult:
             except FetchError as exc:
                 details["failed"].append(f"{lab}: {exc}")
                 continue
-            _, inserted = store.replace_rapid(lab, rapid_tail(rapid, cutoff))
+            tail = rapid_tail(rapid, cutoff)
+            returned += len(rapid.mjd)
+            kept += len(tail.mjd)
+            if not tail.mjd:
+                details["no_rapid"].append(lab)  # nothing after the cutoff to keep
+            _, inserted = store.replace_rapid(lab, tail)
             added += inserted
+        details["rapid_points"] = {"returned": returned, "kept": kept}
+        # If the API ignored mjd1 it sent whole histories: still correct, but not the saving intended.
+        details["mjd1_ignored"] = returned > 1000 and returned > 5 * max(kept, 1)
         status = "failed" if details["failed"] else "ok"
         error = "; ".join(details["failed"])[:2000] or None
     except Exception as exc:
@@ -283,9 +294,31 @@ def weekly(store: Store, client: PoliteClient, today: date) -> RunResult:
 # --- monthly ---------------------------------------------------------------------------------
 
 
-def monthly(store: Store, client: PoliteClient, labs: list[Lab], today: date) -> RunResult:
+def _monthly_skip(store: Store, today: date) -> dict | None:
+    """Details for a skipped run if the clock list was fetched less than MONTHLY_DAYS days ago.
+    The record of that fetch is the previous successful run's own details, so it survives a CI
+    runner that starts without any saved pages; a skipped run carries it (and the clock totals)
+    forward, which keeps the window measured from the real fetch."""
+    previous = store.latest_details("monthly")
+    fetched = previous.get("fetched_on") or previous.get("date")  # older runs only had "date"
+    if not fetched or (today - date.fromisoformat(fetched)).days >= config.MONTHLY_DAYS:
+        return None
+    return {
+        "date": today.isoformat(), "skipped": True, "fetched_on": fetched,
+        "clocks": previous.get("clocks", {}),
+        "reason": f"the clock list was fetched on {fetched}; it is fetched at most every "
+                  f"{config.MONTHLY_DAYS} days",
+    }
+
+
+def monthly(store: Store, client: PoliteClient, labs: list[Lab], today: date, force: bool = False) -> RunResult:
+    skip = None if force else _monthly_skip(store, today)
     run_id = store.start_run("monthly")
-    details: dict = {"date": today.isoformat()}
+    if skip is not None:
+        store.finish_run(run_id, status="ok", rows_added=0, rows_changed=0,
+                         circular_t_no=None, details=skip)
+        return RunResult(run_id, "ok", 0, 0, skip)
+    details: dict = {"date": today.isoformat(), "fetched_on": today.isoformat()}
     counts = Counts()
     try:
         known = {lab.code for lab in labs}
