@@ -1,7 +1,7 @@
 # Time Globe
 
 An interactive 3D globe of the UTC timekeeping network: national labs, their clocks, the flow
-of data to BIPM near Paris, and 28 years of drift. Live at time.anzarahmad.me (not yet).
+of data to BIPM near Paris, and 28 years of drift.
 
 Status: phase 1 (data spike).
 
@@ -21,8 +21,7 @@ cd pipeline
 python -m pytest
 ```
 
-Copy `.env.example` to `.env` and fill it in. Secrets live only in `.env` locally and in GitHub
-Actions secrets in CI.
+Copy `.env.example` to `.env` and fill it in.
 
 ## Contact
 
