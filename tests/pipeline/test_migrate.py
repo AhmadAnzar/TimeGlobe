@@ -45,6 +45,16 @@ def test_issue_table_migration_stores_checksums_and_links_offsets_to_issues():
     assert "foreign key (circular_t_no) references circular_t_issues (issue)" in sql
 
 
+def test_retraction_migration_adds_a_nullable_timestamp_and_never_deletes():
+    migrations = discover(MIGRATIONS_DIR)
+    assert migrations[2].name == "retraction"
+    sql = " ".join(
+        line for line in migrations[2].sql.lower().splitlines() if not line.strip().startswith("--")
+    )  # the statements, not the comments
+    assert "add column retracted_at timestamptz;" in sql  # nullable: no constraint on the column
+    assert "delete" not in sql and "drop" not in sql
+
+
 def test_discover_sorts_and_rejects_gaps_and_odd_names(tmp_path):
     ordered = discover(make_dir(tmp_path, "ok", "0002_b.sql", "0001_a.sql"))
     assert [m.version for m in ordered] == [1, 2]
