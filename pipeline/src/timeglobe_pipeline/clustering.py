@@ -61,3 +61,58 @@ def radius_km_for_altitude(altitude: float, marker_px: float = 40.0, canvas_px: 
     `altitude` globe radii above the surface. Assumptions are stated so phase 3 can tune them."""
     visible_radii = 2 * altitude * math.tan(math.radians(fov_deg / 2))
     return 6371.0 * visible_radii * marker_px / canvas_px
+
+
+# --- precomputed buckets: the web app only reads these, it does not cluster ---------------------
+
+CAP_KM = 500.0  # a cluster radius never exceeds this, so Europe cannot collapse into one blob
+# Camera altitudes (globe radii above the surface) the clusters are computed for; globe.gl's
+# default view is 2.5. Chosen so every bucket has a different radius under the cap.
+ALTITUDE_BUCKETS = (2.5, 1.4, 1.0, 0.7, 0.5, 0.3, 0.2, 0.1)
+
+
+def bucket_radius_km(altitude: float) -> float:
+    return min(radius_km_for_altitude(altitude), CAP_KM)
+
+
+def bucket_ranges() -> list[tuple[float, float, float | None]]:
+    """(altitude, min_altitude, max_altitude) per bucket, largest altitude first. A bucket serves
+    the altitudes between the midpoints to its neighbours: the first has no upper bound and the
+    last runs down to 0."""
+    alts = list(ALTITUDE_BUCKETS)
+    out = []
+    for i, alt in enumerate(alts):
+        upper = None if i == 0 else round((alts[i - 1] + alt) / 2, 3)
+        lower = 0.0 if i == len(alts) - 1 else round((alt + alts[i + 1]) / 2, 3)
+        out.append((alt, lower, upper))
+    return out
+
+
+def precompute(sites: list[Site], site_ids: dict[tuple[str, ...], int]) -> list[dict]:
+    """The clusters for every altitude bucket as JSON-ready dicts. Only clusters of two or more
+    sites are listed: a site that is in none is drawn on its own, and a shared-city site is always
+    one point, never a cluster. site_ids maps a site's lab codes to its id in labs.json."""
+    buckets = []
+    for altitude, lower, upper in bucket_ranges():
+        radius = bucket_radius_km(altitude)
+        clusters = [
+            {
+                "lat": round(c.lat, 4),
+                "lon": round(c.lon, 4),
+                "labs": list(c.codes),
+                "sites": sorted(site_ids[s.codes] for s in c.sites),
+            }
+            for c in cluster_sites(sites, radius)
+            if len(c.sites) > 1
+        ]
+        clusters.sort(key=lambda c: c["labs"])
+        buckets.append(
+            {
+                "altitude": altitude,
+                "radius_km": round(radius, 1),
+                "min_altitude": lower,
+                "max_altitude": upper,
+                "clusters": clusters,
+            }
+        )
+    return buckets
