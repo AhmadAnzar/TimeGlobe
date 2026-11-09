@@ -64,6 +64,11 @@ def test_discover_sorts_and_rejects_gaps_and_odd_names(tmp_path):
         discover(make_dir(tmp_path, "odd", "0001_a.sql", "notes.txt"))
 
 
+def test_a_missing_migrations_folder_explains_the_editable_install(tmp_path):
+    with pytest.raises(MigrationError, match="pip install -e"):
+        discover(tmp_path / "nowhere")
+
+
 def test_pending_returns_only_unapplied_migrations():
     a, b = Migration(1, "a", "select 1"), Migration(2, "b", "select 2")
     assert pending([a, b], {}) == [a, b]

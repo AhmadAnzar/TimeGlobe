@@ -46,6 +46,11 @@ class Migration:
 
 def discover(directory: Path = MIGRATIONS_DIR) -> list[Migration]:
     """Read the migration files; numbering must start at 1 and have no gaps or duplicates."""
+    if not directory.is_dir():
+        raise MigrationError(
+            f"migrations folder not found: {directory} "
+            "(the package must be installed with pip install -e so paths resolve inside the checkout)"
+        )
     found = []
     for path in sorted(directory.iterdir()):
         match = _NAME.match(path.name)

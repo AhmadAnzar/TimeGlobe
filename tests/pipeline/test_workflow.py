@@ -82,3 +82,8 @@ def test_dependabot_keeps_the_pinned_actions_current_weekly():
     (update,) = config["updates"]
     assert update["package-ecosystem"] == "github-actions" and update["directory"] == "/"
     assert update["schedule"] == {"interval": "weekly"}
+
+
+def test_the_package_is_installed_editable_because_its_data_paths_are_relative_to_the_checkout():
+    install = STEPS[step_index("Install the pipeline")]["run"]
+    assert install == "pip install -e ./pipeline"  # a plain install loses migrations/ and labs.csv

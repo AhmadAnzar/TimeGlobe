@@ -39,8 +39,9 @@ jobs:
           cache: pip
           cache-dependency-path: pipeline/pyproject.toml
 
+      # Editable on purpose: the migrations folder and labs.csv are found relative to the checkout.
       - name: Install the pipeline
-        run: pip install ./pipeline
+        run: pip install -e ./pipeline
 
       - name: Apply pending migrations
         run: python -m timeglobe_pipeline.migrate
