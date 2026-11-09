@@ -3,7 +3,17 @@ from pathlib import Path
 
 import pytest
 
-from timeglobe_pipeline.bipm_api import ApiError, parse_gnss, parse_labs, parse_series
+import httpx
+
+from timeglobe_pipeline import config
+from timeglobe_pipeline.bipm_api import (
+    ApiError,
+    fetch_utc,
+    parse_gnss,
+    parse_labs,
+    parse_series,
+)
+from timeglobe_pipeline.http import PoliteClient
 
 FIXTURES = Path(__file__).resolve().parents[1] / "fixtures"
 
@@ -112,3 +122,52 @@ def test_rapid_utc_is_daily_with_no_uncertainties_and_keeps_its_gap():
     assert steps == {1, 2}  # one missing day stays missing
     (uz,) = parse_series((FIXTURES / "bipm_utcr_uz.json").read_bytes())
     assert uz.mjd[0] == 60289 and len(uz.mjd) == 1056
+
+
+def recording_client(body: bytes):
+    seen: list[httpx.URL] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        seen.append(request.url)
+        return httpx.Response(200, content=body)
+
+    client = PoliteClient(
+        "test", config.ALLOWED_PREFIXES, transport=httpx.MockTransport(handler),
+        min_interval=0, sleep=lambda s: None,
+    )
+    return client, seen
+
+
+def test_fetch_utc_asks_for_a_date_range_only_when_given():
+    body = (FIXTURES / "bipm_utcr_uz.json").read_bytes()
+    client, seen = recording_client(body)
+    fetch_utc(client, "UZ", "utcr")
+    fetch_utc(client, "UZ", "utcr", mjd1=61309)
+    fetch_utc(client, "UZ", "utcr", mjd1=61000, mjd2=61100)
+    assert "mjd1" not in seen[0].params and "mjd2" not in seen[0].params
+    assert seen[1].params["mjd1"] == "61309" and "mjd2" not in seen[1].params
+    assert (seen[2].params["mjd1"], seen[2].params["mjd2"]) == ("61000", "61100")
+    assert seen[1].params["scale"] == "utcr" and seen[1].params["lab"] == "uz"
+
+
+def test_a_range_with_no_data_is_an_empty_series_in_every_shape_it_may_come_back():
+    shapes = [
+        {"success": True, "data": []},
+        {"success": True, "data": [{"name": "UTCR-UTC(UZ)", "x": [], "y": [], "unc": []}]},
+        {"success": True, "data": [{"name": "UTCR-UTC(UZ)"}]},  # keys absent altogether
+    ]
+    for shape in shapes:
+        client, _ = recording_client(json.dumps(shape).encode())
+        series = fetch_utc(client, "UZ", "utcr", mjd1=61309)
+        assert (series.mjd, series.value_ns, series.unc_ns) == ([], [], [])
+
+
+def test_a_range_response_that_is_a_slice_of_a_real_series_parses():
+    full = json.loads((FIXTURES / "bipm_utcr_nist.json").read_bytes())
+    item = full["data"][0]
+    start = item["x"].index(61310)
+    for key in ("x", "y", "unc"):
+        item[key] = item[key][start:]
+    client, _ = recording_client(json.dumps(full).encode())
+    tail = fetch_utc(client, "NIST", "utcr", mjd1=61309)
+    assert (tail.mjd[0], tail.mjd[-1], len(tail.mjd)) == (61310, 61345, 36)

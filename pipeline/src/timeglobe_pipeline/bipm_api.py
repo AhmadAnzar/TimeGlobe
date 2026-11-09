@@ -54,16 +54,16 @@ def parse_series(body: bytes) -> list[Series]:
     unpublished (before MJD 54074 for UTC-UTC(k)), so they are converted here."""
     series = []
     for item in _load(body)["data"]:
-        parsed = [_unc(u) for u in item["unc"]]
+        # A date-range request can come back with empty arrays, and then the keys may be absent.
+        xs = item.get("x") or []
+        ys = item.get("y") or []
+        raw_unc = item.get("unc") or [None] * len(xs)
+        parsed = [_unc(u) for u in raw_unc]
         unc = [value for value, _ in parsed]
-        unparsed = tuple(
-            (mjd, raw) for mjd, raw, (_, ok) in zip(item["x"], item["unc"], parsed) if not ok
-        )
-        if not (len(item["x"]) == len(item["y"]) == len(unc)):
-            raise ApiError(f"ragged series {item['name']}")
-        series.append(
-            Series(item["name"], item["x"], [float(y) for y in item["y"]], unc, unparsed)
-        )
+        unparsed = tuple((mjd, raw) for mjd, raw, (_, ok) in zip(xs, raw_unc, parsed) if not ok)
+        if not (len(xs) == len(ys) == len(unc)):
+            raise ApiError(f"ragged series {item.get('name')}")
+        series.append(Series(item.get("name", ""), xs, [float(y) for y in ys], unc, unparsed))
     return series
 
 
@@ -95,8 +95,19 @@ def fetch_gnss(client: PoliteClient) -> dict[str, Series]:
     return parse_gnss(client.get(API_URL, {"scale": "gnss", "outfile": "json"}))
 
 
-def fetch_utc(client: PoliteClient, lab: str, scale: str = "utc") -> Series:
-    (series,) = parse_series(
-        client.get(API_URL, {"scale": scale, "lab": lab.lower(), "outfile": "json"})
-    )
+def fetch_utc(
+    client: PoliteClient, lab: str, scale: str = "utc",
+    mjd1: int | None = None, mjd2: int | None = None,
+) -> Series:
+    """One lab's series. mjd1/mjd2 ask the API for a date range only (documented as
+    &mjd1=..&mjd2=..); a response with no data in the range is an empty Series."""
+    params = {"scale": scale, "lab": lab.lower(), "outfile": "json"}
+    if mjd1 is not None:
+        params["mjd1"] = str(mjd1)
+    if mjd2 is not None:
+        params["mjd2"] = str(mjd2)
+    found = parse_series(client.get(API_URL, params))
+    if not found:
+        return Series(f"{scale}-{lab}", [], [], [])
+    (series,) = found
     return series
