@@ -79,3 +79,25 @@ def test_env_value_prefers_the_environment_and_reads_a_file_without_loading_the_
     monkeypatch.setenv("ONLY_THIS", "from-env")
     assert config.env_value("ONLY_THIS", env) == "from-env"
     assert config.env_value("MISSING", env) == ""
+
+
+def test_database_access_needs_an_explicit_opt_in_in_the_process_environment(monkeypatch):
+    monkeypatch.delenv("TIMEGLOBE_ALLOW_DB", raising=False)
+    with pytest.raises(SystemExit, match="refusing to connect"):
+        config.require_db_opt_in()
+    monkeypatch.setenv("TIMEGLOBE_ALLOW_DB", "yes")  # only exactly "1" counts
+    with pytest.raises(SystemExit):
+        config.require_db_opt_in()
+    monkeypatch.setenv("TIMEGLOBE_ALLOW_DB", "1")
+    config.require_db_opt_in()
+
+
+def test_the_database_entry_points_refuse_to_start_without_the_opt_in(monkeypatch):
+    from timeglobe_pipeline import migrate, run
+
+    monkeypatch.delenv("TIMEGLOBE_ALLOW_DB", raising=False)
+    with pytest.raises(SystemExit, match="refusing to connect"):
+        migrate.main()
+    for job in ("daily", "weekly", "monthly", "snapshot"):
+        with pytest.raises(SystemExit, match="refusing to connect"):
+            run.main([job])

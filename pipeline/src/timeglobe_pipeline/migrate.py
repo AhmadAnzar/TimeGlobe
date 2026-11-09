@@ -90,6 +90,7 @@ def apply_pending(conn, migrations: list[Migration]) -> list[int]:
 def main() -> int:
     import psycopg
 
+    config.require_db_opt_in()
     config.load_env(REPO_ROOT / ".env")
     url = os.environ.get("DATABASE_URL", "").strip()
     if not url:

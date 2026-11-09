@@ -63,3 +63,14 @@ def user_agent() -> str:
     if not contact:
         raise RuntimeError("TIMEGLOBE_CONTACT is not set; add it to .env (see .env.example)")
     return f"TimeGlobe/{__version__} (+{PROJECT_URL}; contact: {contact})"
+
+
+DB_OPT_IN = "TIMEGLOBE_ALLOW_DB"
+
+
+def require_db_opt_in() -> None:
+    """Refuse to touch a database unless the process was explicitly started with
+    TIMEGLOBE_ALLOW_DB=1. It is read from the process environment only, never from .env, so
+    a database is only reached by a run someone chose to make (the workflow sets it)."""
+    if os.environ.get(DB_OPT_IN) != "1":
+        raise SystemExit(f"refusing to connect to a database: set {DB_OPT_IN}=1 for this run")
