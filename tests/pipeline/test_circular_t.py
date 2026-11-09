@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from timeglobe_pipeline.circular_t import ParseError, parse_section1, series_for_lab
+from timeglobe_pipeline.circular_t import ParseError, issue_by_mjd, parse_section1, series_for_lab
 
 FIXTURES = Path(__file__).resolve().parents[1] / "fixtures"
 
@@ -136,3 +136,12 @@ def test_az_from_issues_454_to_465():
     assert series.value_ns[0] == 239.9 and series.value_ns[-1] == 159.0
     assert 0.0 not in series.value_ns
     assert set(series.unc_ns) == {7.0, 7.1}
+
+
+def test_issue_by_mjd_names_the_issue_each_kept_date_comes_from():
+    sections = [issue(n) for n in range(454, 466)]
+    by_mjd = issue_by_mjd(sections, "AZ")
+    assert sorted(by_mjd) == series_for_lab(sections, "AZ").mjd  # exactly the dates that are kept
+    assert by_mjd[60949] == 454 and by_mjd[61294] == 465
+    assert by_mjd[61009] == 455  # shared with 456: the earlier issue wins
+    assert issue_by_mjd(sections, "NOPE") == {}

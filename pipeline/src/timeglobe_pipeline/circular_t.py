@@ -108,3 +108,17 @@ def series_for_lab(sections: list[Section1], code: str) -> Series:
             by_mjd[date] = (value, row.u)
     mjd = sorted(by_mjd)
     return Series(f"UTC-UTC({code})", mjd, [by_mjd[m][0] for m in mjd], [by_mjd[m][1] for m in mjd])
+
+
+def issue_by_mjd(sections: list[Section1], code: str) -> dict[int, int]:
+    """For each date `series_for_lab` keeps, the issue it comes from (the earlier issue wins on
+    a shared boundary date). The writer stores it as offsets.circular_t_no."""
+    out: dict[int, int] = {}
+    for section in sorted(sections, key=lambda sec: sec.issue):
+        row = next((lab for lab in section.labs if lab.code == code), None)
+        if row is None:
+            continue
+        for date, value in zip(section.mjd, row.values_ns):
+            if value is not None and date not in out:
+                out[date] = section.issue
+    return out
