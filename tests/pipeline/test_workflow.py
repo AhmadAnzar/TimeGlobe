@@ -18,9 +18,29 @@ def step_index(fragment: str) -> int:
     return next(i for i, s in enumerate(STEPS) if fragment in (s.get("name", "") + s.get("run", "")))
 
 
-def test_it_runs_only_when_someone_dispatches_it_by_hand():
-    assert set(TRIGGERS) == {"workflow_dispatch"}  # no schedule, push or pull_request
-    assert "schedule" not in TRIGGERS
+def test_it_runs_on_one_daily_cron_or_by_hand_and_nothing_else():
+    assert set(TRIGGERS) == {"schedule", "workflow_dispatch"}  # no push, no pull_request
+    crons = [entry["cron"] for entry in TRIGGERS["schedule"]]
+    assert len(crons) == 1
+    minute, hour, day_of_month, month, day_of_week = crons[0].split()
+    assert (day_of_month, month, day_of_week) == ("*", "*", "*")  # every day, once
+    assert hour.isdigit() and minute.isdigit()
+    assert minute != "0"  # not on the hour, when everyone else's schedules fire
+
+
+def test_a_scheduled_run_can_only_ever_run_the_daily_job():
+    # A scheduled run has no inputs, so JOB falls back to daily; weekly and monthly need a person.
+    assert WORKFLOW["jobs"]["ingest"]["env"]["JOB"] == "${{ inputs.job || 'daily' }}"
+    run_steps = " ".join(step.get("run", "") for step in STEPS)
+    assert "${{ inputs." not in run_steps  # the job name reaches the shell only through $JOB
+    assert 'timeglobe_pipeline.run "$JOB"' in run_steps
+
+
+def test_repeated_failures_comment_on_one_open_issue_instead_of_opening_new_ones():
+    run = STEPS[-1]["run"]
+    assert 'title="Ingest failed: ${JOB}"' in run  # no run id in the title, so it can be found again
+    assert "gh issue list --state open" in run
+    assert "gh issue comment" in run and "gh issue create" in run
 
 
 def test_the_job_input_is_a_closed_choice_so_it_cannot_inject_commands():
@@ -44,7 +64,7 @@ def test_the_database_opt_in_is_set_only_inside_this_workflow():
 
 
 def test_steps_run_in_a_safe_order():
-    order = [step_index(x) for x in ("migrations", "timeglobe_pipeline.run ${{ inputs.job }}",
+    order = [step_index(x) for x in ("migrations", 'timeglobe_pipeline.run "$JOB"',
                                      "Build the snapshot", "data branch")]
     assert order == sorted(order) and len(set(order)) == 4
 

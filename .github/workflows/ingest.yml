@@ -1,7 +1,11 @@
 name: Ingest
 
-# Manual only. There is deliberately no schedule: a cron is added only when the maintainer says so.
+# The daily job runs by itself once a day; weekly and monthly are started by hand only.
 on:
+  schedule:
+    # 03:47 UTC (04:47 in Paris, off-peak for BIPM), deliberately not on the hour. A scheduled run has
+    # no inputs, so JOB below defaults to daily. GitHub may start it a few minutes late.
+    - cron: "47 3 * * *"
   workflow_dispatch:
     inputs:
       job:
@@ -24,6 +28,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     env:
+      # Which job this run does: the chosen one for a manual run, always daily for a scheduled one.
+      JOB: ${{ inputs.job || 'daily' }}
       # The secrets are the production database and the contact address for the User-Agent.
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
       TIMEGLOBE_CONTACT: ${{ secrets.TIMEGLOBE_CONTACT }}
@@ -46,8 +52,8 @@ jobs:
       - name: Apply pending migrations
         run: python -m timeglobe_pipeline.migrate
 
-      - name: Run the ${{ inputs.job }} job
-        run: python -m timeglobe_pipeline.run ${{ inputs.job }}
+      - name: Run the ${{ env.JOB }} job
+        run: python -m timeglobe_pipeline.run "$JOB"
 
       - name: Build the snapshot from the database
         run: python -m timeglobe_pipeline.run snapshot --out snapshot
@@ -72,15 +78,21 @@ jobs:
           if git diff --cached --quiet; then
             echo "The snapshot is unchanged; nothing to publish."
           else
-            git commit -m "data: ${{ inputs.job }} $(date -u +%F), Circular T ${circular_t}"
+            git commit -m "data: ${JOB} $(date -u +%F), Circular T ${circular_t}"
             git push origin data
           fi
 
+      # One open issue per job: a daily failure that repeats adds a comment instead of a new issue.
       - name: Open an issue when the run failed
         if: failure()
         env:
           GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
-          gh issue create \
-            --title "Ingest failed: ${{ inputs.job }} (run ${{ github.run_id }})" \
-            --body "The ${{ inputs.job }} ingest failed. Logs: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          title="Ingest failed: ${JOB}"
+          existing="$(gh issue list --state open --search "\"${title}\" in:title" --json number --jq '.[0].number // empty')"
+          if [ -n "${existing}" ]; then
+            gh issue comment "${existing}" --body "Failed again. Logs: ${RUN_URL}"
+          else
+            gh issue create --title "${title}" --body "The ${JOB} ingest failed. Logs: ${RUN_URL}"
+          fi
