@@ -135,3 +135,50 @@ def test_failed_responses_are_not_cached(tmp_path):
     with pytest.raises(FetchError):
         client.get(URL)
     assert client.get(URL) == b"ok"
+
+
+def test_monthly_pages_are_served_from_the_saved_copy_for_30_days_whatever_the_default_lifetime(tmp_path):
+    import time
+
+    page = "https://example.test/api/page"
+    rec = Recorder(httpx.Response(200, content=b"first"), httpx.Response(200, content=b"second"))
+    clock = [time.time()]
+    client = make_client(
+        rec, [], clock, cache_dir=tmp_path, cache_ttl=timedelta(days=1),
+        monthly_prefixes=(page,), min_interval=0,
+    )
+    assert client.get(page) == b"first"
+    clock[0] += 29 * 86400  # well past the 1-day default, inside the monthly window
+    assert client.get(page) == b"first" and len(rec.requests) == 1
+    clock[0] += 2 * 86400  # now 31 days old
+    assert client.get(page) == b"second" and len(rec.requests) == 2
+
+
+def test_pages_that_are_not_monthly_keep_the_clients_own_lifetime(tmp_path):
+    import time
+
+    url = "https://example.test/api/other"
+    rec = Recorder(httpx.Response(200, content=b"first"), httpx.Response(200, content=b"second"))
+    clock = [time.time()]
+    client = make_client(
+        rec, [], clock, cache_dir=tmp_path, cache_ttl=timedelta(days=1),
+        monthly_prefixes=("https://example.test/api/page",), min_interval=0,
+    )
+    client.get(url)
+    clock[0] += 2 * 86400
+    assert client.get(url) == b"second"
+
+
+def test_the_scraped_pages_are_the_monthly_ones():
+    from timeglobe_pipeline import config
+
+    assert config.MONTHLY_DAYS == 30
+    for url in (
+        "https://webtai.bipm.org/database/clocklab.html",
+        "https://webtai.bipm.org/database/showlab.html",
+        "https://www.ntppool.org/zone/europe",
+        "https://www.ntppool.org/zone/@",
+    ):
+        assert url.startswith(config.MONTHLY_PAGES), url
+    # the APIs are not scraped pages: they are not under the monthly rule
+    assert not "https://webtai.bipm.org/api/v1.0/get-data.html".startswith(config.MONTHLY_PAGES)

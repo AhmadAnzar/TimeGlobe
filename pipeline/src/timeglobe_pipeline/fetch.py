@@ -20,6 +20,8 @@ def make_client(transport: httpx.BaseTransport | None = None) -> PoliteClient:
         config.user_agent(),
         config.ALLOWED_PREFIXES,
         forbidden_prefixes=config.FORBIDDEN_PREFIXES,
+        monthly_prefixes=config.MONTHLY_PAGES,
+        monthly_days=config.MONTHLY_DAYS,
         cache_dir=REPO_ROOT / "pipeline" / ".cache",
         transport=transport,
     )

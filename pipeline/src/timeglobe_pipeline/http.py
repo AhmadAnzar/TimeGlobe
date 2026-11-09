@@ -33,6 +33,8 @@ class PoliteClient:
         allowed_prefixes: tuple[str, ...],
         *,
         forbidden_prefixes: tuple[str, ...] = (),
+        monthly_prefixes: tuple[str, ...] = (),
+        monthly_days: int = 30,
         cache_dir: Path | None = None,
         cache_ttl: timedelta | None = None,
         min_interval: float = 2.0,
@@ -44,6 +46,8 @@ class PoliteClient:
     ) -> None:
         self._allowed = allowed_prefixes
         self._forbidden = forbidden_prefixes
+        self._monthly = monthly_prefixes
+        self._monthly_ttl = timedelta(days=monthly_days)
         self._cache_dir = cache_dir
         self._ttl = cache_ttl
         self._min_interval = min_interval
@@ -104,6 +108,11 @@ class PoliteClient:
         if not url.startswith(self._allowed):
             raise DisallowedURL(f"not an allowed source: {url}")
 
+    def _ttl_for(self, url: str) -> timedelta | None:
+        """Scraped pages are served from a saved copy for the whole monthly window, whatever the
+        default cache lifetime is; everything else uses the client's own lifetime."""
+        return self._monthly_ttl if url.startswith(self._monthly) else self._ttl
+
     def _respect_interval(self) -> None:
         if self._last_request is not None:
             wait = self._min_interval - (self._now() - self._last_request)
@@ -121,7 +130,8 @@ class PoliteClient:
         path = self._cache_path(url, params)
         if path is None or not path.is_file():
             return None
-        if self._ttl is not None and self._now() - path.stat().st_mtime > self._ttl.total_seconds():
+        ttl = self._ttl_for(url)
+        if ttl is not None and self._now() - path.stat().st_mtime > ttl.total_seconds():
             return None
         return path.read_bytes()
 

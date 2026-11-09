@@ -20,9 +20,22 @@ ALLOWED_PREFIXES: tuple[str, ...] = (
     # Only to sanity-check hand-entered lab coordinates (1 request/s). Results are not stored
     # in the product; attribution: "Geocoding © OpenStreetMap contributors".
     "https://nominatim.openstreetmap.org/search",
+    # robots.txt of the two hosts we scrape, read to check what they ask of automated clients.
+    "https://webtai.bipm.org/robots.txt",
+    "https://www.ntppool.org/robots.txt",
     # Published Circular T issues only. Any other /ftp/ path needs maintainer approval first.
     "https://webtai.bipm.org/ftp/pub/tai/Circular-T/cirt/",
 )
+
+# Scraped HTML pages (as opposed to APIs) are fetched at most once every MONTHLY_DAYS days. The
+# client serves a saved copy younger than that instead of fetching again; the monthly job also keeps
+# its own record in the database, because a CI runner starts without any saved copies.
+MONTHLY_PAGES: tuple[str, ...] = (
+    "https://webtai.bipm.org/database/clocklab.html",
+    "https://webtai.bipm.org/database/showlab.html",
+    "https://www.ntppool.org/zone/",
+)
+MONTHLY_DAYS = 30
 
 # Raw lab data belongs to the labs and is never fetched. Checked before the allowlist.
 FORBIDDEN_PREFIXES: tuple[str, ...] = ("https://webtai.bipm.org/ftp/pub/tai/data/",)
