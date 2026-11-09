@@ -1,0 +1,1247 @@
+<html>
+  <head>
+  <SCRIPT LANGUAGE='javascript' SRC='/webdb/js/hide.js'> </SCRIPT> <br>
+  <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW" http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <TITLE>BIPM Time Dept database</TITLE>
+  <LINK href="/webdb/css/page.css" rel="stylesheet" type="text/css"> 
+  <LINK href="/webdb/css/liste.css" rel="stylesheet" type="text/css"> 
+  <LINK href="/webdb/css/gnss.css" rel="stylesheet" type="text/css"> 
+  <LINK href="/webdb/css/monmenu.css" rel="stylesheet" type="text/css"> 
+  <LINK href="/webdb/css/sitemap.css" rel="stylesheet" type="text/css"> 
+  <link rel="icon" href="https://webtai.bipm.org/img/favicon.png" type="image/png" />
+  <link rel="shortcut icon" href="https://webtai.bipm.org/img/favicon.png" type="image/png" />
+  </head>
+  <body> 
+  <TABLE id=entete border=0>
+  <TR height=90px><TD colspan=6 id='entete' >BIPM Time Department Data Base</TD></TR>
+  <TR>
+    <TD class=monmenu>
+      <ul id=dropdown>
+         <li>
+         <a href=/database/index.html>Participation</a>
+         <ul class=sousmenu>
+         <li>
+         <a href=/database/showlab.html>Laboratories</a>
+         </li>
+         <li>
+         <a href=/database/participant.html>Current status</a>
+         </li>
+         <li>
+         <a href=/database/maps.html>Geographical map</a>
+         </li>
+         <li>
+         <a href=/database/guidelines.html>Rules & guidelines</a>
+         </li>
+         <li>
+         <a href=/database/presentations.html>Tutorials & CBKT</a>
+         </li>
+         <li>
+         <a href=/database/dissemination.html>Dissemination services</a>
+         </li>
+      </ul>
+      </li>
+      </ul>
+   </TD>
+    <TD class=monmenu>
+      <ul id=dropdown>
+         <li>
+         Equipments
+         <ul class=sousmenu>
+         <li>
+         <a href=/database/clocklab.html>Clocks</a>
+         </li>
+         <li>
+         <a href=/database/gnss.html>GNSS</a>
+         </li>
+         <li>
+         <a href=/database/tw.html>TWSTFT</a>
+         </li>
+         <li>
+         <a href=/database/equipment.html>Source of UTC(k)</a>
+         </li>
+         <li>
+         <a href=/database/psfs_access.html>PSFS</a>
+         </li>
+         </ul>
+         </li>
+      </ul>
+   </TD>
+    <TD class=monmenu>
+      <ul id=dropdown>
+         <li>
+         Calibrations
+         <ul class=sousmenu>
+         <li>
+         <a href=/database/calid_gnss.html>GNSS status </a>
+         </li>
+         <li>
+         <a href=/database/calib.html>GNSS results</a>
+         </li>
+         <li>
+         <a href=/database/calid_tw.html>TWSTFT status</a>
+         </li>
+         <li>
+         <a href=/database/readme_clb.html>Documents & guidelines</a>
+         </li>
+         </ul>
+         </li>
+      </ul>
+   </TD>
+    <TD class=monmenu>
+      <ul id=dropdown>
+         <li><a href=/database/readme_clk.html>
+         Resources</a>
+         <ul class=sousmenu>
+         <li>
+         Graphs
+         <ul class=sousmenu3>
+         <li>
+         <a href=/database/canvas.html>UTC-UTC(k)</a>
+         </li>
+         <li>
+         <a href=/database/canvas_gnss.html>UTC and GNSS</a>
+         </li>
+         <li>
+         <a href=/database/show_psfs.html>PSFS contributions</a>
+         </li>
+         <li>
+         <a href=/database/d_plot.html>Fract. deviation <i>d</i></a>
+         </li>
+         </li>
+         </ul>
+         <li>
+         <a href=/database/clock.html>Clock stats & codes</a>
+         </li>
+         <li>
+         <a href=/database/howtoclk.html>Get clock code</a>
+         </li>
+         <li>
+         <a href=/database/timescales.html>Time scales</a>
+         </li>
+         </ul>
+      </li>
+      </ul>
+   </TD>
+    <TD class=monmenu>
+      <ul id=dropdown>
+         <li>
+         Web services
+         <ul class=sousmenu>
+         <li>
+         <a href=/api/>API UTC</a>
+         </li>
+         <li>
+         <a href=/api/ccl-cctf/>API CCL-CCTF</a>
+         </li>
+         <li>
+         <a href=/database/../ftp/pub/tai/>FTP results</a>
+         </li>
+         </ul>
+         </li>
+      </ul>
+   </TD>
+    <TD class=monmenu><ul id=dropdown><li><a href=/database/index.html>Home</a><ul class=sousmenu>
+         <li>
+         <a href=/database/sitemap.html>Site Map</a>
+         </li>
+         <li>
+         <a href=/database/mailing.html>Newsletter</a>
+         </li>
+         <li>
+         <a href="javascript:hidden_email('tai','bipm.org','');">Contact us</a>
+         </li>
+      </ul>
+      </li>
+      </ul>
+   </TD>
+   </TR>
+  </TABLE>
+<br><TABLE border=0><tr><td><h3> Clocks from lab:</h3><i>(participating since 2016)</i></td></tr><tr>
+<td><FORM method='get'><SELECT name="lab" size='1' >
+<option>all</option>
+<option>AGGO</option>
+<option>AOS</option>
+<option>APL</option>
+<option>AUS</option>
+<option>AZ</option>
+<option>BEV</option>
+<option>BFKH</option>
+<option>BIM</option>
+<option>BIRM</option>
+<option>BOM</option>
+<option>BSJ</option>
+<option>BY</option>
+<option>CAO</option>
+<option>CH</option>
+<option>CNES</option>
+<option>CNM</option>
+<option>CNMP</option>
+<option>DFM</option>
+<option>DFNT</option>
+<option>DLR</option>
+<option>DMDM</option>
+<option>DTAG</option>
+<option>EE</option>
+<option>EIM</option>
+<option>ESA</option>
+<option>HKO</option>
+<option>IBM</option>
+<option>ICE</option>
+<option>IDN</option>
+<option>IFAG</option>
+<option>IFZG</option>
+<option>IGNA</option>
+<option>IMBH</option>
+<option>INCP</option>
+<option>INM</option>
+<option>INPL</option>
+<option>INTI</option>
+<option>INXE</option>
+<option>IPQ</option>
+<option>IT</option>
+<option>JATC</option>
+<option>JV</option>
+<option>KEBS</option>
+<option>KRIS</option>
+<option>KZ</option>
+<option>LDS</option>
+<option>LRTE</option>
+<option>LT</option>
+<option>LUX</option>
+<option>LV</option>
+<option>MASM</option>
+<option>MBM</option>
+<option>MIKE</option>
+<option>MSL</option>
+<option>MTC</option>
+<option>NAO</option>
+<option>NICT</option>
+<option>NIM</option>
+<option>NIMB</option>
+<option>NIMT</option>
+<option>NIS</option>
+<option>NIST</option>
+<option>NMIJ</option>
+<option>NMLS</option>
+<option>NPL</option>
+<option>NPLI</option>
+<option>NRC</option>
+<option>NRL</option>
+<option>NSAI</option>
+<option>NTSC</option>
+<option>ONBA</option>
+<option>ONRJ</option>
+<option>OP</option>
+<option>ORB</option>
+<option>PL</option>
+<option>PTB</option>
+<option>ROA</option>
+<option>SASO</option>
+<option>SCL</option>
+<option>SG</option>
+<option>SIQ</option>
+<option>SL</option>
+<option>SMD</option>
+<option>SMU</option>
+<option>SP</option>
+<option>SU</option>
+<option>TL</option>
+<option>TP</option>
+<option>TUG</option>
+<option>UA</option>
+<option>UAE</option>
+<option>UME</option>
+<option>USNO</option>
+<option>UTE</option>
+<option>UZ</option>
+<option>VMI</option>
+<option>VSL</option>
+<option>ZA</option>
+</SELECT>
+<input type="submit" value="See clocks"/></FORM></td></tr></TABLE><hr><h3>ALL participating clocks to UTC :</h3><TABLE border=1><TR class='hd'><td><b>Laboratory</b></td><TD><b>BIPM clock code</b></td><td><b>Clock maker & type</b></td><td><b>Comment</b></td></tr>
+<tr><td>AGGO  </td><td>1350768 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>AGGO  </td><td>1351881 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>AGGO  </td><td>1353540 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>AGGO  </td><td>1408620 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>AGGO  </td><td>1408624 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>APL   </td><td >1350904 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>APL   </td><td >1351791 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>APL   </td><td>1351264 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>APL   </td><td>1353842 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>APL   </td><td>1403107 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>APL   </td><td>1403108 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>APL   </td><td>1403109 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>APL   </td><td>1412174 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2020</td><td>                                   </td></tr>
+<tr><td>AUS   </td><td >1361141 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>AUS   </td><td>1360299 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>AUS   </td><td>1360340 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>AUS   </td><td>1360654 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>AUS   </td><td>1362269 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>AUS   </td><td>1363814 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>AUS   </td><td>1364971 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>AZ    </td><td>1355360 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>AZ    </td><td>1355361 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>BEV   </td><td>1351793 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>BEV   </td><td>1353009 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>BEV   </td><td>1403452 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>BEV   </td><td>1411066 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>BFKH  </td><td >1360849 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>BFKH  </td><td>1353543 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>BIM   </td><td>1188058 </td><td>                  MICROSEMI Cs 4000</td><td>                                   </td></tr>
+<tr><td>BIM   </td><td>1355007 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>BIRM  </td><td >1411093 (stopped)</td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>BIRM  </td><td >1415005 (stopped)</td><td> VREMYA-CH VCH-1003A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>BIRM  </td><td >1415006 (stopped)</td><td> VREMYA-CH VCH-1003A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>BIRM  </td><td>1352761 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>BIRM  </td><td>1352840 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>BIRM  </td><td>1353447 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>BIRM  </td><td>1353689 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>BIRM  </td><td>1407102 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>BIRM  </td><td>1407103 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>BIRM  </td><td>1407107 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>BIRM  </td><td>1407111 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>BIRM  </td><td>1407112 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>BIRM  </td><td>1415301 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>BIRM  </td><td>1415302 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>BIRM  </td><td>1415303 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>BIRM  </td><td>1415304 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>BIRM  </td><td>1415305 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>BOM   </td><td>1352605 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>BOM   </td><td>1352606 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>BSJ   </td><td>1350832 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>BSJ   </td><td>1350833 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>BY    </td><td >1404230 (stopped)</td><td>  VREMYA-CH VCH-1005 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>BY    </td><td>1404222 </td><td>  VREMYA-CH VCH-1005 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>BY    </td><td>1404227 </td><td>  VREMYA-CH VCH-1005 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>BY    </td><td>1404228 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>BY    </td><td>1404229 </td><td>  VREMYA-CH VCH-1005 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>BY    </td><td>1404278 </td><td>  VREMYA-CH VCH-1005 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>BY    </td><td>1415105 </td><td> VREMYA-CH VCH-1033 ACTIVE  H-MASER</td><td>                                   </td></tr>
+<tr><td>BY    </td><td>1415106 </td><td> VREMYA-CH VCH-1033 ACTIVE  H-MASER</td><td>                                   </td></tr>
+<tr><td>BY    </td><td>1415236 </td><td> VREMYA-CH VCH-1008 PASSIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>CAO   </td><td>1350939 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>CAO   </td><td>1351270 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>CH    </td><td >1240105 (stopped)</td><td>                 OSCILLOQUARTZ 3230</td><td>                                   </td></tr>
+<tr><td>CH    </td><td >1352743 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>CH    </td><td >1411181 (stopped)</td><td>   T4S pHMaser 1008 PASSIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>CH    </td><td>1224949 </td><td>      OSCILLOQUARTZ OSA 3230B/3235B</td><td>                  at ROLEX (Geneva)</td></tr>
+<tr><td>CH    </td><td>1224950 </td><td>      OSCILLOQUARTZ OSA 3230B/3235B</td><td>                  at ROLEX (Bienne)</td></tr>
+<tr><td>CH    </td><td>1320258 </td><td>          OSCILLOQUARTZ OSA 3300-HP</td><td>                  at ROLEX (Geneva)</td></tr>
+<tr><td>CH    </td><td>1320297 </td><td>          OSCILLOQUARTZ OSA 3300-HP</td><td>                  at ROLEX (Bienne)</td></tr>
+<tr><td>CH    </td><td>1352117 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>CH    </td><td>1355202 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>CH    </td><td>1373644 </td><td>             OSCILLOQUARTZ OSA 3300</td><td>                                   </td></tr>
+<tr><td>CH    </td><td>1405701 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>CH    </td><td>1405702 </td><td>   T4S pHMaser 1008 PASSIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>CH    </td><td>1411063 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                  at ROLEX (Bienne)</td></tr>
+<tr><td>CH    </td><td>1411064 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                  at ROLEX (Geneva)</td></tr>
+<tr><td>CH    </td><td>1411117 </td><td>   T4S pHMaser 1008 PASSIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>CH    </td><td>1441001 </td><td>ROLEX RUBIDIUM OPTICAL ATOMIC CLOCK</td><td>                  at ROLEX (Geneva)</td></tr>
+<tr><td>CH    </td><td>1441002 </td><td>ROLEX RUBIDIUM OPTICAL ATOMIC CLOCK</td><td>                                   </td></tr>
+<tr><td>CNM   </td><td >1352708 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>CNM   </td><td >1352709 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>CNM   </td><td >1352885 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>CNM   </td><td >1353055 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>CNM   </td><td >1407301 (stopped)</td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>CNM   </td><td>1353612 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>CNM   </td><td>1407302 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>CNM   </td><td>1413211 </td><td>        KVARZ CH1-95 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>CNM   </td><td>1413212 </td><td>        KVARZ CH1-95 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>CNMP  </td><td>1361752 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>CNMP  </td><td>1361806 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>CNMP  </td><td>1362873 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>CNMP  </td><td>1363162 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>CNMP  </td><td>1363179 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>DFM   </td><td>1411109 </td><td>   T4S pHMaser 1008 PASSIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>DFNT  </td><td >1362866 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>DFNT  </td><td >1365811 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>DFNT  </td><td>1361811 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>DFNT  </td><td>1365047 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>DFNT  </td><td>1365141 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>DLR   </td><td >1353523 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>DLR   </td><td >1353524 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>DLR   </td><td >1353536 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>DLR   </td><td >1353537 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>DLR   </td><td >1354323 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>DLR   </td><td >1354324 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>DLR   </td><td >1354337 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>DLR   </td><td >1412166 (stopped)</td><td>  MICROSEMI ACTIVE H-MASER MHM 2020</td><td>                                   </td></tr>
+<tr><td>DLR   </td><td >1412167 (stopped)</td><td>  MICROSEMI ACTIVE H-MASER MHM 2020</td><td>                                   </td></tr>
+<tr><td>DLR   </td><td>1411045 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>DLR   </td><td>1411046 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>DMDM  </td><td>1352191 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>DMDM  </td><td>1362033 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>DTAG  </td><td>1350136 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>DTAG  </td><td>1352635 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>DTAG  </td><td>1352805 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>DTAG  </td><td>1352966 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>DTAG  </td><td>1353053 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>DTAG  </td><td>1353512 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>DTAG  </td><td>1355332 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>EIM   </td><td >1350716 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>EIM   </td><td >1360515 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>EIM   </td><td>1352060 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>ESA   </td><td>1320298 </td><td>          OSCILLOQUARTZ OSA 3300-HP</td><td>                                   </td></tr>
+<tr><td>ESA   </td><td>1351615 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>ESA   </td><td>1352025 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>ESA   </td><td>1352210 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>ESA   </td><td>1352353 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>ESA   </td><td>1402541 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>ESA   </td><td>1402543 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>ESA   </td><td>1402544 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>ESA   </td><td>1402551 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>ESA   </td><td>1411033 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>ESA   </td><td>1411034 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>F     </td><td >1350157 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>        at Marine Nationale (Brest)</td></tr>
+<tr><td>F     </td><td >1350489 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>        at Marine Nationale (Brest)</td></tr>
+<tr><td>F     </td><td >1350609 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                    at OCA (Grasse)</td></tr>
+<tr><td>F     </td><td >1350781 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                 at CNES (Toulouse)</td></tr>
+<tr><td>F     </td><td >1350859 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                at Orange (Lannion)</td></tr>
+<tr><td>F     </td><td >1350909 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                 at CNES (Toulouse)</td></tr>
+<tr><td>F     </td><td >1351068 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                 at CNES (Toulouse)</td></tr>
+<tr><td>F     </td><td >1351177 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                at Orange (Lannion)</td></tr>
+<tr><td>F     </td><td >1351222 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                 at CNES (Toulouse)</td></tr>
+<tr><td>F     </td><td >1351258 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                 at CNES (Toulouse)</td></tr>
+<tr><td>F     </td><td >1351556 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                    at OCA (Grasse)</td></tr>
+<tr><td>F     </td><td >1351644 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>        at Marine Nationale (Brest)</td></tr>
+<tr><td>F     </td><td >1352609 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                 at CNES (Toulouse)</td></tr>
+<tr><td>F     </td><td >1353319 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                 at CNES (Toulouse)</td></tr>
+<tr><td>F     </td><td >1411155 (stopped)</td><td>   T4S pHMaser 1008 PASSIVE H-MASER</td><td>                 at CNES (Toulouse)</td></tr>
+<tr><td>F     </td><td >1412056 (stopped)</td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                 at CNES (Toulouse)</td></tr>
+<tr><td>F     </td><td>1350355 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>           at Spectracom (Les Ulis)</td></tr>
+<tr><td>F     </td><td>1350469 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>        at Marine Nationale (Brest)</td></tr>
+<tr><td>F     </td><td>1351029 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>        at Marine Nationale (Brest)</td></tr>
+<tr><td>F     </td><td>1351178 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                at Orange (Lannion)</td></tr>
+<tr><td>F     </td><td>1351321 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                  at OB (Besancon) </td></tr>
+<tr><td>F     </td><td>1352388 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                  at OB (Besancon) </td></tr>
+<tr><td>F     </td><td>1352647 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                    at DGA (Rennes)</td></tr>
+<tr><td>F     </td><td>1352985 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                  at OB (Besancon) </td></tr>
+<tr><td>F     </td><td>1353054 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>        at Marine Nationale (Brest)</td></tr>
+<tr><td>F     </td><td>1353262 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                    at DGA (Rennes)</td></tr>
+<tr><td>F     </td><td>1353530 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>        at Marine Nationale (Brest)</td></tr>
+<tr><td>F     </td><td>1353532 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>        at Marine Nationale (Brest)</td></tr>
+<tr><td>F     </td><td>1353552 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                at Orange (Lannion)</td></tr>
+<tr><td>F     </td><td>1354802 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>        at Marine Nationale (Brest)</td></tr>
+<tr><td>F     </td><td>1354810 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>        at Marine Nationale (Brest)</td></tr>
+<tr><td>F     </td><td>1355212 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                    at DGA (Rennes)</td></tr>
+<tr><td>F     </td><td>1411002 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                   at OB (Besancon)</td></tr>
+<tr><td>F     </td><td>1411003 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                 at CNES (Toulouse)</td></tr>
+<tr><td>F     </td><td>1411036 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                    at OCA (Grasse)</td></tr>
+<tr><td>F     </td><td>1411077 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                 at CNES (Toulouse)</td></tr>
+<tr><td>F     </td><td>1411082 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                   at OB (Besancon)</td></tr>
+<tr><td>F     </td><td>1411086 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                   at OB (Besancon)</td></tr>
+<tr><td>F     </td><td>1411110 </td><td>   T4S pHMaser 1008 PASSIVE H-MASER</td><td>                 at CNES (Toulouse)</td></tr>
+<tr><td>F     </td><td>1411119 </td><td>   T4S pHMaser 1008 PASSIVE H-MASER</td><td>                    at OCA (Grasse)</td></tr>
+<tr><td>F     </td><td>1411195 </td><td>   T4S pHMaser 1008 PASSIVE H-MASER</td><td>                 at CNES (Toulouse)</td></tr>
+<tr><td>F     </td><td>1415220 </td><td> VREMYA-CH VCH-1008 PASSIVE H-MASER</td><td>                 at CNES (Toulouse)</td></tr>
+<tr><td>HKO   </td><td >1352425 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>HKO   </td><td>1352884 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>HKO   </td><td>1353410 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>HKO   </td><td>1354233 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>HKO   </td><td>1355122 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>IBM   </td><td>1363397 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>ICE   </td><td>1187074 </td><td>                  MICROSEMI Cs 4000</td><td>                                   </td></tr>
+<tr><td>ICE   </td><td>1225185 </td><td>      OSCILLOQUARTZ OSA 3230B/3235B</td><td>                                   </td></tr>
+<tr><td>ICE   </td><td>1363159 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>ICE   </td><td>1363522 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>IDN   </td><td>1364000 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>IFAG  </td><td>1361167 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>IFAG  </td><td>1361173 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>IFAG  </td><td>1361629 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>IFAG  </td><td>1361732 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>IFAG  </td><td>1361798 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>IFAG  </td><td>1404418 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>IFAG  </td><td>1404439 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>IFZG  </td><td >1354785 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>IFZG  </td><td >1354786 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>IFZG  </td><td>1354701 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>IFZG  </td><td>1365015 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>IGNA  </td><td >1353465 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>IGNA  </td><td>1363465 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>IMBH  </td><td >1352909 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>IMBH  </td><td>1320192 </td><td>            OSCILLOQUARTZ OSA 5585B</td><td>                                   </td></tr>
+<tr><td>IMBH  </td><td>1320193 </td><td>            OSCILLOQUARTZ OSA 5585B</td><td>                                   </td></tr>
+<tr><td>IMBH  </td><td>1352685 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>IMBH  </td><td>1362909 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>INM   </td><td >1353327 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>INM   </td><td>1353937 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>INM   </td><td>1355187 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>INM   </td><td>1364550 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>INPL  </td><td >1352480 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>INPL  </td><td>1352481 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>INPL  </td><td>1353333 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>INPL  </td><td>1353351 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>INPL  </td><td>1353806 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>INPL  </td><td>1353807 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>INTI  </td><td>1362377 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>INTI  </td><td>1363270 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>INTI  </td><td>1363511 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>INXE  </td><td >1352393 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>INXE  </td><td>1352967 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>INXE  </td><td>1354619 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>INXE  </td><td>1354641 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>INXE  </td><td>1422016 </td><td>          SpectraDynamics cRb-Clock</td><td>                                   </td></tr>
+<tr><td>INXE  </td><td>1422017 </td><td>          SpectraDynamics cRb-Clock</td><td>                                   </td></tr>
+<tr><td>IPQ   </td><td >1362169 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>IPQ   </td><td>1352890 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>IPQ   </td><td>1353546 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>IT    </td><td >1350505 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>IT    </td><td >1351115 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>IT    </td><td >1351373 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>IT    </td><td >1921101 (stopped)</td><td>GROUND-STATE HYPERFINE TRANSITION OF133 Cs</td><td>                                   </td></tr>
+<tr><td>IT    </td><td >1921102 (stopped)</td><td>GROUND-STATE HYPERFINE TRANSITION OF133 Cs</td><td>                                   </td></tr>
+<tr><td>IT    </td><td>1350219 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>IT    </td><td>1352118 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>IT    </td><td>1352487 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>IT    </td><td>1401101 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>IT    </td><td>1401102 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>IT    </td><td>1401103 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>IT    </td><td>1401104 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>IT    </td><td>1411078 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>IT    </td><td>1411079 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>IT    </td><td>1422012 </td><td>          SpectraDynamics cRb-Clock</td><td>                                   </td></tr>
+<tr><td>JATC  </td><td >1351008 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>JATC  </td><td >1351818 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>JATC  </td><td >1352144 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>JATC  </td><td >1352147 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>JATC  </td><td >1352576 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>JATC  </td><td >1352831 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>JATC  </td><td >1352928 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>JATC  </td><td >1352976 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>JATC  </td><td >1352980 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>JATC  </td><td >1400326 (stopped)</td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>JATC  </td><td >1412097 (stopped)</td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>JATC  </td><td>1352098 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>JATC  </td><td>1352143 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>JATC  </td><td>1352145 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>JATC  </td><td>1352855 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>JATC  </td><td>1352965 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>JATC  </td><td>1353090 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>JATC  </td><td>1353416 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>JATC  </td><td>1353435 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>JATC  </td><td>1353436 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>JATC  </td><td>1386141 </td><td>Chengdu Spaceon Electronics Company TA1000</td><td>                                   </td></tr>
+<tr><td>JATC  </td><td>1387154 </td><td>Chengdu Spaceon Electronics Company TA1000</td><td>                                   </td></tr>
+<tr><td>JATC  </td><td>1387157 </td><td>Chengdu Spaceon Electronics Company TA1000</td><td>                                   </td></tr>
+<tr><td>JATC  </td><td>1387170 </td><td>Chengdu Spaceon Electronics Company TA1000</td><td>                                   </td></tr>
+<tr><td>JATC  </td><td>1406003 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>JATC  </td><td>1412027 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>JATC  </td><td>1414939 </td><td>                     HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>JATC  </td><td>1414941 </td><td>                     HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>JV    </td><td >1408713 (stopped)</td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>JV    </td><td>1361277 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>JV    </td><td>1362617 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>JV    </td><td>1362629 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>JV    </td><td>1411101 </td><td>   T4S pHMaser 1008 PASSIVE H-MASER</td><td>                        private lab</td></tr>
+<tr><td>JV    </td><td>1411122 </td><td>   T4S pHMaser 1008 PASSIVE H-MASER</td><td>               JV timing laboratory</td></tr>
+<tr><td>JV    </td><td>1415218 </td><td> VREMYA-CH VCH-1008 PASSIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>KRIS  </td><td >1350321 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>KRIS  </td><td >1350739 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>KRIS  </td><td >1351135 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>KRIS  </td><td >1351693 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>KRIS  </td><td >1925601 (stopped)</td><td>GROUND-STATE HYPERFINE TRANSITION OF133 Cs</td><td>                                   </td></tr>
+<tr><td>KRIS  </td><td>1351783 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>KRIS  </td><td>1405624 </td><td>       KVARZ CH1-75A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>KRIS  </td><td>1405625 </td><td>       KVARZ CH1-75A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>KRIS  </td><td>1405626 </td><td>       KVARZ CH1-75A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>KRIS  </td><td>1405627 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>KRIS  </td><td>1405628 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>KRIS  </td><td>1405629 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>KRIS  </td><td>1411080 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>KRIS  </td><td>1412195 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2020</td><td>                                   </td></tr>
+<tr><td>KZ    </td><td >1352202 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>KZ    </td><td >1352665 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>KZ    </td><td >1352667 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>KZ    </td><td>1415201 </td><td> VREMYA-CH VCH-1008 PASSIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>KZ    </td><td>1415205 </td><td> VREMYA-CH VCH-1008 PASSIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>KZ    </td><td>1415266 </td><td> VREMYA-CH VCH-1008 PASSIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>LRTE  </td><td >1353028 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>LRTE  </td><td>1352370 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>LT    </td><td>1351362 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>LT    </td><td>1351868 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>LUX   </td><td>1353471 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>LUX   </td><td>1353544 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>LV    </td><td >1352335 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>LV    </td><td >1361953 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>MASM  </td><td>1352900 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>MBM   </td><td >1240125 (stopped)</td><td>                 OSCILLOQUARTZ 3230</td><td>                                   </td></tr>
+<tr><td>MBM   </td><td>1363925 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>MIKE  </td><td >1360986 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>MIKE  </td><td >1404180 (stopped)</td><td>       KVARZ CH1-75A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>MIKE  </td><td>1404108 </td><td>       KVARZ CH1-75A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>MIKE  </td><td>1404113 </td><td>       KVARZ CH1-76 PASSIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>MIKE  </td><td>1404189 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>MIKE  </td><td>1412084 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>MSL   </td><td >1362869 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>MSL   </td><td>1360274 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>MSL   </td><td>1363396 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>MSL   </td><td>1363872 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>MTC   </td><td >1352471 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>MTC   </td><td >1353005 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>MTC   </td><td>1352419 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>MTC   </td><td>1352420 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>MTC   </td><td>1352426 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>MTC   </td><td>1352472 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>MTC   </td><td>1353000 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>MTC   </td><td>1353002 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NAO   </td><td>1350779 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NAO   </td><td>1351206 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NAO   </td><td>1351214 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NAO   </td><td>1351689 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NAO   </td><td>1401301 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>NAO   </td><td>1410102 </td><td>                    ANRITSU H-MASER</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td >1350715 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td >1350732 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td >1350916 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td >1351790 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td >1361217 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td >1402005 (stopped)</td><td>                    ANRITSU H-MASER</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td >1402006 (stopped)</td><td>                    ANRITSU H-MASER</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td >1922001 (stopped)</td><td>GROUND-STATE HYPERFINE TRANSITION OF133 Cs</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td >1922099 (stopped)</td><td>GROUND-STATE HYPERFINE TRANSITION OF133 Cs</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1350112 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1350332 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1350343 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1350907 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1350913 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1351225 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1351226 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1351611 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1351778 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1351789 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1351866 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1351882 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1351887 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1351944 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1352010 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1352011 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1352056 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1352113 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1352116 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1352570 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1352574 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1352620 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1352627 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1352628 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1352784 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1352801 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1352876 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1352903 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1353259 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1353594 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1353716 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1353717 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1353718 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1353720 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1353722 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1353909 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1353912 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1353916 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1353918 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1354230 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1355334 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1355339 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1402002 </td><td>                    ANRITSU H-MASER</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1402003 </td><td>                    ANRITSU H-MASER</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1402004 </td><td>                    ANRITSU H-MASER</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1402012 </td><td>                    ANRITSU H-MASER</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1402013 </td><td>                    ANRITSU H-MASER</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1402014 </td><td>                    ANRITSU H-MASER</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1402015 </td><td>                    ANRITSU H-MASER</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1411041 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1411062 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NICT  </td><td>1412060 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NIM   </td><td >1352256 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIM   </td><td >1924801 (stopped)</td><td>GROUND-STATE HYPERFINE TRANSITION OF133 Cs</td><td>                                   </td></tr>
+<tr><td>NIM   </td><td>1351235 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIM   </td><td>1352483 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIM   </td><td>1352643 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIM   </td><td>1352742 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIM   </td><td>1352744 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIM   </td><td>1352767 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIM   </td><td>1352769 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIM   </td><td>1353954 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIM   </td><td>1404806 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>NIM   </td><td>1404814 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>NIM   </td><td>1404821 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>NIM   </td><td>1404832 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NIM   </td><td>1404835 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NIM   </td><td>1404849 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NIM   </td><td>1404850 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NIM   </td><td>1404856 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NIM   </td><td>1404857 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NIM   </td><td>1404870 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NIM   </td><td>1404871 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NIM   </td><td>1404878 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NIM   </td><td>1404879 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NIM   </td><td>1404880 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NIM   </td><td>1924800 </td><td>GROUND-STATE HYPERFINE TRANSITION OF133 Cs</td><td>                                   </td></tr>
+<tr><td>NIMB  </td><td >1350600 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIMB  </td><td>1353507 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIMT  </td><td >1352246 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIMT  </td><td >1352247 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIMT  </td><td >1361169 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>NIMT  </td><td>1351511 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIMT  </td><td>1353470 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIMT  </td><td>1353472 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIMT  </td><td>1353476 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIMT  </td><td>1413203 </td><td>        KVARZ CH1-95 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NIS   </td><td >1352140 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIS   </td><td >1352181 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIS   </td><td >1352633 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIS   </td><td>1352182 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIS   </td><td>1353654 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIS   </td><td>1353812 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIS   </td><td>1354391 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td >1350282 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td >1350408 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td >1351074 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td >1351519 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td >1352031 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td >1352032 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td >1352034 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td >1352672 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td >1352857 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td >1400014 (stopped)</td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td >1400015 (stopped)</td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td >1400203 (stopped)</td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td >1400206 (stopped)</td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td >1920201 (stopped)</td><td>GROUND-STATE HYPERFINE TRANSITION OF133 Cs</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td >1920202 (stopped)</td><td>GROUND-STATE HYPERFINE TRANSITION OF133 Cs</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td >1920299 (stopped)</td><td>GROUND-STATE HYPERFINE TRANSITION OF133 Cs</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td>1352579 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td>1352792 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td>1352935 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td>1400004 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td>1400205 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td>1400207 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td>1400209 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td>1400210 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td>1400212 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td>1400222 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td>1402205 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td>1412006 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td>1412014 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td>1412015 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td>1412099 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td>1412108 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2020</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td>1412205 </td><td>MICROSEMI ACTIVE H-MASER MHM 2000/2001</td><td>                                   </td></tr>
+<tr><td>NIST  </td><td>1442021 </td><td>         Vector Atomic Evergreen-30</td><td>                                   </td></tr>
+<tr><td>NMIJ  </td><td >1350224 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NMIJ  </td><td >1350459 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NMIJ  </td><td >1350523 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NMIJ  </td><td >1405002 (stopped)</td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>NMIJ  </td><td >1405003 (stopped)</td><td>       KVARZ CH1-75A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NMIJ  </td><td >1405015 (stopped)</td><td>                    ANRITSU H-MASER</td><td>                                   </td></tr>
+<tr><td>NMIJ  </td><td >1925001 (stopped)</td><td>GROUND-STATE HYPERFINE TRANSITION OF133 Cs</td><td>                                   </td></tr>
+<tr><td>NMIJ  </td><td >1925099 (stopped)</td><td>GROUND-STATE HYPERFINE TRANSITION OF133 Cs</td><td>                                   </td></tr>
+<tr><td>NMIJ  </td><td>1320293 </td><td>          OSCILLOQUARTZ OSA 3300-HP</td><td>                                   </td></tr>
+<tr><td>NMIJ  </td><td>1405012 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NMLS  </td><td >1353926 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NMLS  </td><td>1352716 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NMLS  </td><td>1365274 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>NMLS  </td><td>1365275 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>NMLS  </td><td>1538723 </td><td>                   MICROSEMI 4310 B</td><td>                                   </td></tr>
+<tr><td>NPL   </td><td >1351275 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NPL   </td><td >1401701 (stopped)</td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NPL   </td><td >1401708 (stopped)</td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NPL   </td><td >1921701 (stopped)</td><td>GROUND-STATE HYPERFINE TRANSITION OF133 Cs</td><td>                                   </td></tr>
+<tr><td>NPL   </td><td >1921702 (stopped)</td><td>GROUND-STATE HYPERFINE TRANSITION OF133 Cs</td><td>                                   </td></tr>
+<tr><td>NPL   </td><td>1353167 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NPL   </td><td>1353514 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NPL   </td><td>1411004 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NPL   </td><td>1412011 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NPL   </td><td>1412050 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NPL   </td><td>1412153 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2020</td><td>                                   </td></tr>
+<tr><td>NPL   </td><td>1412154 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2020</td><td>                                   </td></tr>
+<tr><td>NPL   </td><td>1412156 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2020</td><td>                                   </td></tr>
+<tr><td>NPL   </td><td>1412157 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2020</td><td>                                   </td></tr>
+<tr><td>NPL   </td><td>1412158 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2020</td><td>                                   </td></tr>
+<tr><td>NPL   </td><td>1412160 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2020</td><td>                                   </td></tr>
+<tr><td>NPL   </td><td>1412161 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2020</td><td>                                   </td></tr>
+<tr><td>NPL   </td><td>1412162 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2020</td><td>                                   </td></tr>
+<tr><td>NPL   </td><td>1412163 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2020</td><td>                                   </td></tr>
+<tr><td>NPL   </td><td>1761703 </td><td>OPTICAL TRANSITION  171 Yb+ (octupole)</td><td>                                   </td></tr>
+<tr><td>NPL   </td><td>1891701 </td><td>          OPTICAL TRANSITION  87 Sr</td><td>                                   </td></tr>
+<tr><td>NPLI  </td><td >1350057 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NPLI  </td><td >1350140 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NPLI  </td><td >1925201 (stopped)</td><td>GROUND-STATE HYPERFINE TRANSITION OF133 Cs</td><td>                                   </td></tr>
+<tr><td>NPLI  </td><td>1351324 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NPLI  </td><td>1352245 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NPLI  </td><td>1352796 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NPLI  </td><td>1353376 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NPLI  </td><td>1353413 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NPLI  </td><td>1353453 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NPLI  </td><td>1353457 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NPLI  </td><td>1405201 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>NPLI  </td><td>1415225 </td><td> VREMYA-CH VCH-1008 PASSIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NPLI  </td><td>1415235 </td><td> VREMYA-CH VCH-1008 PASSIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NPLI  </td><td>1415363 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NPLI  </td><td>1415364 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NPLI  </td><td>1415365 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NRC   </td><td >1352152 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NRC   </td><td >1362219 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>NRC   </td><td >1400304 (stopped)</td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>NRC   </td><td>1352115 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NRC   </td><td>1352148 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NRC   </td><td>1352150 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NRC   </td><td>1362225 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>NRC   </td><td>1400306 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NRC   </td><td>1400307 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NRC   </td><td>1780301 </td><td>         OPTICAL TRANSITION  88 Sr+</td><td>                                   </td></tr>
+<tr><td>NRC   </td><td>1920301 </td><td>GROUND-STATE HYPERFINE TRANSITION OF133 Cs</td><td>                                   </td></tr>
+<tr><td>NRL   </td><td >1350714 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NRL   </td><td >1350719 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NRL   </td><td >1351245 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NRL   </td><td >1352460 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NRL   </td><td >1352464 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NRL   </td><td >1352580 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NRL   </td><td >1360387 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>NRL   </td><td >1362788 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>NRL   </td><td >1362791 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>NRL   </td><td >1362799 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>NRL   </td><td >1362800 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>NRL   </td><td >1362807 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>NRL   </td><td >1362818 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>NRL   </td><td >1362820 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>NRL   </td><td >1362829 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>NRL   </td><td >1362832 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>NRL   </td><td >1362834 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>NRL   </td><td >1401001 (stopped)</td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>NRL   </td><td>1352820 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NRL   </td><td>1401003 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>NRL   </td><td>1401004 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>NRL   </td><td>1401005 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>NRL   </td><td>1401006 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>NRL   </td><td>1401007 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>NRL   </td><td>1401008 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>NRL   </td><td>1401009 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>NRL   </td><td>1401010 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>NRL   </td><td>1401012 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>NSAI  </td><td>1353401 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NSAI  </td><td>1355201 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NSAI  </td><td>1362220 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td >1351016 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td >1351018 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td >1351823 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td >1352573 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td >1352921 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td >1352922 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td >1352933 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td >1352962 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td >1353089 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td >1353091 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td >1353102 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td >1354916 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td >1354935 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td >1400296 (stopped)</td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td >1400297 (stopped)</td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td >1400336 (stopped)</td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td >1404903 (stopped)</td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td >1404926 (stopped)</td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td >1404927 (stopped)</td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td >1404939 (stopped)</td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td >1404940 (stopped)</td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td >1412036 (stopped)</td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1352142 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1352852 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1352924 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1352926 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1352959 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1352964 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1352978 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1352981 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1354936 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1354937 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1382025 </td><td>Chengdu Spaceon Electronics Company TA1000</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1382028 </td><td>Chengdu Spaceon Electronics Company TA1000</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1382031 </td><td>Chengdu Spaceon Electronics Company TA1000</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1382032 </td><td>Chengdu Spaceon Electronics Company TA1000</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1382050 </td><td>Chengdu Spaceon Electronics Company TA1000</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1382059 </td><td>Chengdu Spaceon Electronics Company TA1000</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1404941 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1404967 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1405340 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1405341 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1414922 </td><td>                     HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1415080 </td><td> VREMYA-CH VCH-1003A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1415082 </td><td> VREMYA-CH VCH-1003A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1415085 </td><td> VREMYA-CH VCH-1003A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1415306 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1415308 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1415309 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1415315 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1415316 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1415317 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1415320 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1415322 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1415324 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1415325 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1415326 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1415327 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1415328 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1415340 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1415346 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1415347 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1415348 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1415349 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>NTSC  </td><td>1934901 </td><td>GROUND-STATE HYPERFINETRANSITION OF 87 Rb</td><td>                                   </td></tr>
+<tr><td>ONBA  </td><td>1362228 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>ONRJ  </td><td >1401950 (stopped)</td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>ONRJ  </td><td>1320337 </td><td>         OSCILLOQUARTZ OSA 3300-SHP</td><td>                                   </td></tr>
+<tr><td>ONRJ  </td><td>1350102 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>ONRJ  </td><td>1350103 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>ONRJ  </td><td>1350123 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>ONRJ  </td><td>1350129 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>ONRJ  </td><td>1350147 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>ONRJ  </td><td>1351153 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>ONRJ  </td><td>1351942 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>ONRJ  </td><td>1353364 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>ONRJ  </td><td>1354204 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>ONRJ  </td><td>1401958 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>OP    </td><td >1350396 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>OP    </td><td >1350770 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>OP    </td><td >1350774 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>OP    </td><td >1920801 (stopped)</td><td>GROUND-STATE HYPERFINE TRANSITION OF133 Cs</td><td>                                   </td></tr>
+<tr><td>OP    </td><td >1920899 (stopped)</td><td>GROUND-STATE HYPERFINE TRANSITION OF133 Cs</td><td>                                   </td></tr>
+<tr><td>OP    </td><td>1320269 </td><td>          OSCILLOQUARTZ OSA 3300-HP</td><td>                                   </td></tr>
+<tr><td>OP    </td><td>1352027 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>OP    </td><td>1352804 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>OP    </td><td>1353765 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>OP    </td><td>1400809 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>OP    </td><td>1400810 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>OP    </td><td>1400889 </td><td>       KVARZ CH1-75A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>OP    </td><td>1400890 </td><td>       KVARZ CH1-75A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>OP    </td><td>1411037 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>OP    </td><td>1890801 </td><td>          OPTICAL TRANSITION  87 Sr</td><td>                                   </td></tr>
+<tr><td>OP    </td><td>1890802 </td><td>          OPTICAL TRANSITION  87 Sr</td><td>                                   </td></tr>
+<tr><td>OP    </td><td>1920802 </td><td>GROUND-STATE HYPERFINE TRANSITION OF133 Cs</td><td>                                   </td></tr>
+<tr><td>OP    </td><td>1920803 </td><td>GROUND-STATE HYPERFINE TRANSITION OF133 Cs</td><td>                                   </td></tr>
+<tr><td>OP    </td><td>1920804 </td><td>GROUND-STATE HYPERFINE TRANSITION OF133 Cs</td><td>                                   </td></tr>
+<tr><td>OP    </td><td>1930803 </td><td>GROUND-STATE HYPERFINETRANSITION OF 87 Rb</td><td>                                   </td></tr>
+<tr><td>ORB   </td><td >1360593 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>ORB   </td><td>1352722 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>ORB   </td><td>1352723 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>ORB   </td><td>1352724 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>ORB   </td><td>1402602 </td><td>       KVARZ CH1-75A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>ORB   </td><td>1411030 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>PL    </td><td >1250124 (stopped)</td><td>              HEWLETT-PACKARD 5062C</td><td>                                   </td></tr>
+<tr><td>PL    </td><td >1250125 (stopped)</td><td>              HEWLETT-PACKARD 5062C</td><td>                                   </td></tr>
+<tr><td>PL    </td><td>1350441 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>PL    </td><td>1350745 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>PL    </td><td>1350761 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>PL    </td><td>1351120 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>PL    </td><td>1351660 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                  at AOS (Borowiec)</td></tr>
+<tr><td>PL    </td><td>1351746 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>PL    </td><td>1351934 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>PL    </td><td>1352175 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>PL    </td><td>1352394 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                  at AOS (Borowiec)</td></tr>
+<tr><td>PL    </td><td>1352891 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>PL    </td><td>1354597 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>PL    </td><td>1354603 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>PL    </td><td>1400814 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>PL    </td><td>1404004 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>PL    </td><td>1404601 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                  at AOS (Borowiec)</td></tr>
+<tr><td>PL    </td><td>1404602 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                  at AOS (Borowiec)</td></tr>
+<tr><td>PL    </td><td>1411068 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>at Poznan Supecomputins Network Cen</td></tr>
+<tr><td>PL    </td><td>1412152 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2020</td><td>                                   </td></tr>
+<tr><td>PL    </td><td>1412185 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2020</td><td>                                   </td></tr>
+<tr><td>PL    </td><td>1415318 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>PL    </td><td>1415321 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>PTB   </td><td >1350415 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>PTB   </td><td >1351072 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>PTB   </td><td >1920003 (stopped)</td><td>GROUND-STATE HYPERFINE TRANSITION OF133 Cs</td><td>                                   </td></tr>
+<tr><td>PTB   </td><td >1920501 (stopped)</td><td>GROUND-STATE HYPERFINE TRANSITION OF133 Cs</td><td>                                   </td></tr>
+<tr><td>PTB   </td><td >1920502 (stopped)</td><td>GROUND-STATE HYPERFINE TRANSITION OF133 Cs</td><td>                                   </td></tr>
+<tr><td>PTB   </td><td>1352987 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>PTB   </td><td>1355322 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>PTB   </td><td>1400506 </td><td> VREMYA-CH VCH-1003A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>PTB   </td><td>1400508 </td><td> VREMYA-CH VCH-1003A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>PTB   </td><td>1400509 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>PTB   </td><td>1400510 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>PTB   </td><td>1400512 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>PTB   </td><td>1415221 </td><td> VREMYA-CH VCH-1008 PASSIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>PTB   </td><td>1415245 </td><td> VREMYA-CH VCH-1008 PASSIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>PTB   </td><td>1920001 </td><td>GROUND-STATE HYPERFINE TRANSITION OF133 Cs</td><td>                                   </td></tr>
+<tr><td>PTB   </td><td>1920002 </td><td>GROUND-STATE HYPERFINE TRANSITION OF133 Cs</td><td>                                   </td></tr>
+<tr><td>ROA   </td><td>1350583 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>ROA   </td><td>1350718 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>ROA   </td><td>1351699 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>ROA   </td><td>1352270 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>ROA   </td><td>1361488 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>ROA   </td><td>1361490 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>ROA   </td><td>1401436 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>ROA   </td><td>1412032 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>ROA   </td><td>1412182 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2020</td><td>                                   </td></tr>
+<tr><td>SASO  </td><td >1352923 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SASO  </td><td>1350221 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SASO  </td><td>1351628 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SASO  </td><td>1352931 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SASO  </td><td>1352932 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SCL   </td><td>1352178 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SCL   </td><td>1352525 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SCL   </td><td>1353448 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SCL   </td><td>1415314 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>SG    </td><td >1350475 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SG    </td><td >1350696 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SG    </td><td >1353637 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SG    </td><td >1353638 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SG    </td><td >1360522 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>SG    </td><td>1350188 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SG    </td><td>1351099 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                    same as 1353637</td></tr>
+<tr><td>SG    </td><td>1351103 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                    same as 1353638</td></tr>
+<tr><td>SG    </td><td>1353135 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SG    </td><td>1355420 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SG    </td><td>1407701 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>SG    </td><td>1415345 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>SIQ   </td><td>1361268 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>SIQ   </td><td>1364633 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>SL    </td><td>1365168 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>SMD   </td><td >1351766 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SMD   </td><td >1407909 (stopped)</td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>SMD   </td><td>1352003 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SMD   </td><td>1352543 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SMD   </td><td>1353564 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SMD   </td><td>1411049 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>SMU   </td><td>1351063 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SMU   </td><td>1351193 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SP    </td><td >1350572 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SP    </td><td >1350641 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SP    </td><td >1350767 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SP    </td><td >1351188 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SP    </td><td >1351642 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SP    </td><td >1352166 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SP    </td><td >1352746 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SP    </td><td >1352749 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SP    </td><td >1352956 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SP    </td><td >1360223 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>SP    </td><td >1361175 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>SP    </td><td >1361187 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>SP    </td><td >1361531 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>SP    </td><td >1362068 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>SP    </td><td >1362218 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>SP    </td><td >1362297 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>SP    </td><td >1407203 (stopped)</td><td>       KVARZ CH1-75A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>SP    </td><td >1407210 (stopped)</td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>SP    </td><td >1407212 (stopped)</td><td>       KVARZ CH1-75A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>SP    </td><td >1407221 (stopped)</td><td>       KVARZ CH1-75A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>SP    </td><td >1413204 (stopped)</td><td>        KVARZ CH1-95 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>SP    </td><td >1414008 (stopped)</td><td>OSCILLOQUARTZ OSA 3700 PASSIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>SP    </td><td>1352745 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SP    </td><td>1352750 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SP    </td><td>1352758 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SP    </td><td>1354707 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>SP    </td><td>1362295 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>SP    </td><td>1362746 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>SP    </td><td>1362749 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>SP    </td><td>1362956 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>SP    </td><td>1365149 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>SP    </td><td>1407201 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>SP    </td><td>1407223 </td><td>       KVARZ CH1-75A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>SP    </td><td>1407231 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>SP    </td><td>1407232 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>SP    </td><td>1415319 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>SU    </td><td >1403818 (stopped)</td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>SU    </td><td >1923802 (stopped)</td><td>GROUND-STATE HYPERFINE TRANSITION OF133 Cs</td><td>                                   </td></tr>
+<tr><td>SU    </td><td >1923899 (stopped)</td><td>GROUND-STATE HYPERFINE TRANSITION OF133 Cs</td><td>                                   </td></tr>
+<tr><td>SU    </td><td>1403802 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>SU    </td><td>1403809 </td><td>       KVARZ CH1-75A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>SU    </td><td>1403810 </td><td>       KVARZ CH1-75A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>SU    </td><td>1403811 </td><td>       KVARZ CH1-75A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>SU    </td><td>1403812 </td><td>       KVARZ CH1-75A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>SU    </td><td>1403814 </td><td>       KVARZ CH1-75A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>SU    </td><td>1403815 </td><td>       KVARZ CH1-75A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>SU    </td><td>1403816 </td><td>       KVARZ CH1-75A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>SU    </td><td>1403817 </td><td>       KVARZ CH1-75A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>SU    </td><td>1403833 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>SU    </td><td>1403834 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>SU    </td><td>1403840 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>SU    </td><td>1403841 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>SU    </td><td>1403844 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>SU    </td><td>1403845 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>SU    </td><td>1403846 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>SU    </td><td>1403852 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>SU    </td><td>1403853 </td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>TL    </td><td >1351012 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>TL    </td><td >1351498 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>TL    </td><td >1351500 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>TL    </td><td >1351712 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>TL    </td><td >1352365 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>TL    </td><td >1352366 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>TL    </td><td >1352367 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>TL    </td><td >1352368 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>TL    </td><td >1352630 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>TL    </td><td >1352634 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>TL    </td><td >1352636 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>TL    </td><td>1352853 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>TL    </td><td>1352910 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>TL    </td><td>1353942 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>TL    </td><td>1353947 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>TL    </td><td>1354060 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>TL    </td><td>1400057 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>TL    </td><td>1403011 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>TL    </td><td>1403052 </td><td>       KVARZ CH1-75A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>TL    </td><td>1403053 </td><td>       KVARZ CH1-75A ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>TL    </td><td>1413202 </td><td>        KVARZ CH1-95 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>TP    </td><td >1320212 (stopped)</td><td>          OSCILLOQUARTZ OSA 3300-HP</td><td>                                   </td></tr>
+<tr><td>TP    </td><td >1350154 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>TP    </td><td >1350163 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>TP    </td><td >1352970 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>TP    </td><td >1360803 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>TP    </td><td >1414007 (stopped)</td><td>OSCILLOQUARTZ OSA 3700 PASSIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>TP    </td><td >1415307 (stopped)</td><td> VREMYA-CH VCH-1003M ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>TP    </td><td>1320211 </td><td>          OSCILLOQUARTZ OSA 3300-HP</td><td>                                   </td></tr>
+<tr><td>TP    </td><td>1320247 </td><td>          OSCILLOQUARTZ OSA 3300-HP</td><td>                                   </td></tr>
+<tr><td>TP    </td><td>1351227 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>TP    </td><td>1352179 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>TP    </td><td>1352476 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>TP    </td><td>1353519 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>TP    </td><td>1411076 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>UA    </td><td >1352465 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>UA    </td><td>1352401 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>UA    </td><td>1353441 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>UA    </td><td>1407854 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>UA    </td><td>1407881 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>UA    </td><td>1407882 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>UAE   </td><td>1352938 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>UAE   </td><td>1352939 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>UAE   </td><td>1352940 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>UME   </td><td>1350251 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>UME   </td><td>1350252 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>UME   </td><td>1350710 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>UME   </td><td>1350872 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>UME   </td><td>1352703 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>UME   </td><td>1352710 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>UME   </td><td>1410128 </td><td>                    ANRITSU H-MASER</td><td>                                   </td></tr>
+<tr><td>UME   </td><td>1411028 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1350101 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1350108 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1350114 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1350142 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1350150 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1350166 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1350226 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1350233 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1350244 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1350268 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1350270 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1350394 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1350717 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1350763 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1350765 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1351125 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1351327 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1351328 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1351331 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1351459 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1351462 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1351463 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1351481 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1351560 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1351573 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1351575 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1351580 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1351598 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1351658 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1351692 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1351694 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1351696 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1400734 (stopped)</td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td >1400741 (stopped)</td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1350104 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1350120 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1350161 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1350164 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1350169 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1350173 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1350231 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1350254 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1350256 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1350260 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1350279 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1350389 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1350703 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1350762 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1351096 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1351097 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1351468 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1351543 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1351583 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1351585 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1351655 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1351697 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1353981 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1353986 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1354048 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400701 </td><td>MICROSEMI ACTIVE H-MASER MHM 2000/2001</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400702 </td><td>MICROSEMI ACTIVE H-MASER MHM 2000/2001</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400704 </td><td>MICROSEMI ACTIVE H-MASER MHM 2000/2001</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400705 </td><td>MICROSEMI ACTIVE H-MASER MHM 2000/2001</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400708 </td><td>MICROSEMI ACTIVE H-MASER MHM 2000/2001</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400710 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400711 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400712 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400713 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400714 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400715 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400716 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400717 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400718 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400719 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400720 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400721 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400722 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400723 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400724 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400725 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400726 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400727 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400728 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400729 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400730 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400731 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400732 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400733 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400735 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400736 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400737 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400738 </td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1400740 </td><td>  MICROSEMI ACTIVE H-MASER MHM 2010</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1930002 </td><td>GROUND-STATE HYPERFINETRANSITION OF 87 Rb</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1930003 </td><td>GROUND-STATE HYPERFINETRANSITION OF 87 Rb</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1930004 </td><td>GROUND-STATE HYPERFINETRANSITION OF 87 Rb</td><td>                                   </td></tr>
+<tr><td>USNO  </td><td>1930005 </td><td>GROUND-STATE HYPERFINETRANSITION OF 87 Rb</td><td>                                   </td></tr>
+<tr><td>UTE   </td><td>1362919 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>UZ    </td><td>1354998 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>UZ    </td><td>1355005 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>VMI   </td><td >1352230 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>VMI   </td><td >1362314 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>VMI   </td><td>1353669 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>VMI   </td><td>1353670 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>VMI   </td><td>1361233 </td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>VSL   </td><td >1350179 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>VSL   </td><td >1350456 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>VSL   </td><td >1350548 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>VSL   </td><td >1350731 (stopped)</td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>VSL   </td><td>1354466 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>VSL   </td><td>1355008 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>VSL   </td><td>1355697 </td><td>MICROCHIP 5071A/5071B HIGH PERFORMANCE TUBE.</td><td>                                   </td></tr>
+<tr><td>VSL   </td><td>1411040 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>ZA    </td><td >1361821 (stopped)</td><td>MICROCHIP 5071A/5071B LOW/STANDARD PERFORMANC</td><td>                                   </td></tr>
+<tr><td>ZA    </td><td >1402901 (stopped)</td><td>         UNSPECIFIED HYDROGEN MASER</td><td>                                   </td></tr>
+<tr><td>ZA    </td><td>1411001 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>ZA    </td><td>1411011 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                                   </td></tr>
+<tr><td>ZA    </td><td>1411012 </td><td>     T4S iMaser 3000 ACTIVE H-MASER</td><td>                                   </td></tr>
+</TABLE>
+<a href='/webdb/temp/clocklab.csv' style='margin-left: 100px' download=clocklab.csv><img src='/webdb/img/csv3.gif' width=40px height=40px ></a><br><br><hr><TABLE class='sitemap'>
+ <tr>
+<td class='sitemap'><a href="/database/index.html" class='sitemap'>Home</a></td>
+<td class='sitemap' ><a href="/ftp/pub/tai/" class='sitemap'>FTP results</a></td>
+<td class='sitemap'><a href="/api" class='sitemap'>API UTC</a></td>
+<td class='sitemap'><a href='/database/sitemap.html' class='sitemap'>Sitemap</a></td> 
+<td class='sitemap'><a href="javascript:hidden_email('tai','bipm.org','');" class='sitemap' >Contact us</a></td> 
+<td class='sitemap'><a href="javascript:hidden_email('aharmeg','bipm.org','');" class='sitemap' >Webmaster</a></td> 
+</tr>
+</TABLE>
+</body>
+</html>
