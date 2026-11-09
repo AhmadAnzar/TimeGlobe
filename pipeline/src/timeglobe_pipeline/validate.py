@@ -1,7 +1,7 @@
-"""Validation for a parsed UTC-UTC(k) series (scope: no duplicate dates, values within sane bounds).
+"""Validation for a parsed UTC-UTC(k) series (no duplicate dates, values within sane bounds).
 
-Returns human-readable problems and never repairs anything: what to do with a bad series is the
-owner's call, and silently dropping or deduplicating would hide a data problem from the run log.
+Returns human-readable problems and never repairs anything: what to do with a bad series is a
+maintainer decision, and silently dropping or deduplicating would hide a data problem from the run log.
 """
 
 from timeglobe_pipeline.bipm_api import Series

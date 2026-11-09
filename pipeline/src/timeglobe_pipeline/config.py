@@ -20,7 +20,7 @@ ALLOWED_PREFIXES: tuple[str, ...] = (
     # Only to sanity-check hand-entered lab coordinates (1 request/s). Results are not stored
     # in the product; attribution: "Geocoding © OpenStreetMap contributors".
     "https://nominatim.openstreetmap.org/search",
-    # Published Circular T issues only. Any other /ftp/ path needs the owner's approval first.
+    # Published Circular T issues only. Any other /ftp/ path needs maintainer approval first.
     "https://webtai.bipm.org/ftp/pub/tai/Circular-T/cirt/",
 )
 

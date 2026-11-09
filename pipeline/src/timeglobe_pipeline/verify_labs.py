@@ -1,7 +1,7 @@
 """Check pipeline/data/labs.csv against Nominatim: python -m timeglobe_pipeline.verify_labs
 
 Reports every lab whose point is more than 50 km from where Nominatim puts "city, country", or
-whose country code differs. It never edits labs.csv; the owner reviews the report.
+whose country code differs. It never edits labs.csv; a maintainer reviews the report.
 Policy: at most 1 request/s, our User-Agent, responses cached on disk (see PoliteClient).
 """
 
